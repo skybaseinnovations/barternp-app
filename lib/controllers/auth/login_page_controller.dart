@@ -20,7 +20,7 @@ class LoginPageController extends GetxController {
           phoneNumber: phoneFieldController.text,
           onSuccess: () {
             isLoading.value = false;
-            print("login Success");
+            log("login Success");
             Get.toNamed(VerificationPage.routeName, arguments: phoneFieldController.text);
           },
           onError: (value) {

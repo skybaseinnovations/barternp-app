@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:barter_app_2023/models/access_token.dart';
 import 'package:barter_app_2023/models/user_model.dart';
@@ -24,7 +23,7 @@ class AuthRepo {
       var body = {"phone": phoneNumber};
       var parseUrl = Uri.parse(Api.loginUrl);
 
-      print("=================>>> login Url $parseUrl");
+      log("=================>>> login Url $parseUrl");
 
       http.Response response =
           await BarterRequest.post(parseUrl, headers: headers, body: jsonEncode(body));
@@ -55,12 +54,12 @@ class AuthRepo {
       var body = {"phone": phoneNumber, "otp": otp};
       var parseUrl = Uri.parse(Api.verifyUrl);
 
-      print("=================>>> login Url $parseUrl");
+      log("=================>>> login Url $parseUrl");
 
       http.Response response =
           await BarterRequest.post(parseUrl, headers: headers, body: jsonEncode(body));
       dynamic data = jsonDecode(response.body);
-      print(data);
+      log(data);
       if (data["status"]) {
         User user = User.fromJson(data["data"]["user"]);
         AccessToken accessToken = AccessToken.fromJson(data["data"]["token"]);

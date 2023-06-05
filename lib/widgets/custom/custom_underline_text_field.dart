@@ -77,9 +77,10 @@ class CustomOutlineBorderTextField extends StatelessWidget {
         fontWeight: FontWeight.w400,
       ),
       decoration: InputDecoration(
+          prefixIconConstraints: const BoxConstraints(maxHeight: 48, maxWidth: 48),
           prefixIcon: (preIconPath != null)
               ? Padding(
-                  padding: const EdgeInsets.only(right: 6, bottom: 9, top: 0),
+                  padding: const EdgeInsets.only(right: 6),
                   child: SvgPicture.asset(
                     alignment: Alignment.bottomRight,
                     preIconPath!,

@@ -1,8 +1,7 @@
 import 'dart:developer';
 
 import 'package:barter_app_2023/Repos/auth_repo.dart';
-import 'package:barter_app_2023/models/access_token.dart';
-import 'package:barter_app_2023/models/user_model.dart';
+
 import 'package:barter_app_2023/views/auth/create_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,8 +30,8 @@ class VerificationPageController extends GetxController {
           otp: verificationNumberController.text,
           onSuccess: (user, accessToken) {
             isLoading.value = false;
-            print("================>>> user Details:  ${user.name}");
-            print("================>>> accessToken details: ${accessToken.accessToken}");
+            log("================>>> user Details:  ${user.name}");
+            log("================>>> accessToken details: ${accessToken.accessToken}");
             Get.toNamed(CreateProfilePage.routeName);
           },
           onError: (value) {

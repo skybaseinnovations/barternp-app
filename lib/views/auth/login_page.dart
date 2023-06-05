@@ -134,18 +134,15 @@ class LoginPage extends StatelessWidget {
                                     width: 6,
                                   ),
                                   Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 11),
-                                      child: CustomOutlineBorderTextField(
-                                        controller: lpc.phoneFieldController,
-                                        fillColor: AppColor.backgroundGreyColor,
-                                        textInputAction: TextInputAction.done,
-                                        textInputType: TextInputType.number,
-                                        validator: (String? fieldContent) {
-                                          return Validators.checkPhoneField(
-                                              lpc.phoneFieldController.text);
-                                        },
-                                      ),
+                                    child: CustomOutlineBorderTextField(
+                                      controller: lpc.phoneFieldController,
+                                      fillColor: AppColor.backgroundGreyColor,
+                                      textInputAction: TextInputAction.done,
+                                      textInputType: TextInputType.number,
+                                      validator: (String? fieldContent) {
+                                        return Validators.checkPhoneField(
+                                            lpc.phoneFieldController.text);
+                                      },
                                     ),
                                   )
                                 ],
