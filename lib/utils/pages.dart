@@ -1,10 +1,12 @@
-import 'package:barter_app_2023/controller/auth/create_profile_page_controller.dart';
-import 'package:barter_app_2023/controller/auth/login_page_controller.dart';
-import 'package:barter_app_2023/controller/auth/verification_page_controller.dart';
-import 'package:barter_app_2023/controller/splash_page_controller.dart';
+import 'package:barter_app_2023/controllers/auth/create_profile_page_controller.dart';
+import 'package:barter_app_2023/controllers/auth/login_page_controller.dart';
+import 'package:barter_app_2023/controllers/auth/verification_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart';
+import 'package:barter_app_2023/controllers/splash_page_controller.dart';
 import 'package:barter_app_2023/views/auth/create_profile_page.dart';
 import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/auth/verification_page.dart';
+import 'package:barter_app_2023/views/dashboard/dash_page.dart';
 import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:get/get.dart';
 
@@ -42,6 +44,15 @@ var getPages = [
     binding: BindingsBuilder(
       () {
         Get.lazyReplace(() => CreateProfilePageController());
+      },
+    ),
+  ),
+  GetPage(
+    name: DashPage.routeName,
+    page: () => DashPage(),
+    binding: BindingsBuilder(
+      () {
+        Get.lazyReplace(() => DashPageController());
       },
     ),
   ),

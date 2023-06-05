@@ -83,7 +83,7 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: (preIconPath != null)
             ? SvgPicture.asset(
                 preIconPath!,
-                fit: BoxFit.scaleDown,
+                // fit: BoxFit.scaleDown,
               )
             : null,
         suffixIcon: (suffixIconPath != null)

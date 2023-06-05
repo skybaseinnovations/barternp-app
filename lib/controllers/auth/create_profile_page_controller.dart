@@ -16,4 +16,8 @@ class CreateProfilePageController extends GetxController {
     log("=================>>> create profile page submitted");
     if (formKey.currentState!.validate()) {}
   }
+
+  void onTermsAndConditionSubmit() async {
+    log("=================>>> terms and condition submitted");
+  }
 }

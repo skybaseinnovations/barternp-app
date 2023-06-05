@@ -33,6 +33,7 @@ dependencies:
     sdk: flutter
   flutter_svg: ^2.0.6
   get: ^4.6.5
+  http: ^1.0.0
   pinput: ^2.2.31
 
 dev_dependencies:

@@ -6,6 +6,7 @@ class CustomElevatedButton extends StatelessWidget {
   final VoidCallback onTap;
   final double height;
   final bool isDisabled;
+  final bool isLoading;
   final Color? backGroundColor;
   final Color? textColor;
   const CustomElevatedButton(
@@ -15,6 +16,7 @@ class CustomElevatedButton extends StatelessWidget {
       this.height = 50,
       this.isDisabled = false,
       this.backGroundColor = AppColor.tertiaryTextColor,
+      this.isLoading = false,
       this.textColor});
 
   @override
@@ -27,13 +29,22 @@ class CustomElevatedButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
         onPressed: isDisabled ? null : onTap,
-        child: Text(
-          title,
-          style: TextStyle(
-            color: textColor ?? Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ));
+        child: isLoading
+            ? SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: textColor ?? Colors.white,
+                ),
+              )
+            : Text(
+                title,
+                style: TextStyle(
+                  color: textColor ?? Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../utils/colors.dart';
 
@@ -6,6 +7,7 @@ class CustomOutlineBorderTextField extends StatelessWidget {
   final Function(String)? onValueChange;
   final FocusNode? focusNode;
   final String? hint;
+  final String? preIconPath;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final TextInputAction textInputAction;
@@ -13,7 +15,7 @@ class CustomOutlineBorderTextField extends StatelessWidget {
   final Color? border;
   final Color? fillColor;
   final bool? readOnly;
-  final bool? showError;
+  final bool showError;
   final bool? autofocus;
   final String? labelText;
   final double borderRadius;
@@ -27,6 +29,7 @@ class CustomOutlineBorderTextField extends StatelessWidget {
     super.key,
     this.fillColor,
     this.hint,
+    this.preIconPath,
     this.onValueChange,
     this.controller,
     this.validator,
@@ -62,6 +65,7 @@ class CustomOutlineBorderTextField extends StatelessWidget {
       validator: (validator != null) ? validator : null,
       controller: (controller != null) ? controller : null,
       cursorColor: AppColor.tertiaryTextColor,
+      textAlignVertical: TextAlignVertical.bottom,
       onChanged: (text) {
         if (onValueChange != null) {
           onValueChange!(text);
@@ -73,18 +77,32 @@ class CustomOutlineBorderTextField extends StatelessWidget {
         fontWeight: FontWeight.w400,
       ),
       decoration: InputDecoration(
-        fillColor: fillColor ?? Colors.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        isDense: true,
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.tertiaryTextColor),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.tertiaryTextColor),
-        ),
-        hintText: hint,
-        hintStyle: hintStyle,
-      ),
+          prefixIcon: (preIconPath != null)
+              ? Padding(
+                  padding: const EdgeInsets.only(right: 6, bottom: 9, top: 0),
+                  child: SvgPicture.asset(
+                    alignment: Alignment.bottomRight,
+                    preIconPath!,
+                    fit: BoxFit.scaleDown,
+                  ),
+                )
+              : null,
+          fillColor: fillColor ?? Colors.white,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          isDense: true,
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColor.tertiaryTextColor),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColor.tertiaryTextColor),
+          ),
+          hintText: hint,
+          hintStyle: hintStyle,
+          errorStyle: showError
+              ? null
+              : const TextStyle(
+                  fontSize: 0,
+                )),
     );
   }
 }
