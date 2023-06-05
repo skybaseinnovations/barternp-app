@@ -1,6 +1,7 @@
 import 'package:barter_app_2023/controller/auth/verification_page_controller.dart';
 import 'package:barter_app_2023/utils/colors.dart';
 import 'package:barter_app_2023/widget/custom/custom_elevated_button.dart';
+import 'package:flutter/gestures.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -142,11 +143,35 @@ class VerificationPage extends StatelessWidget {
                           ),
 
                           const SizedBox(
-                            height: 52,
+                            height: 45,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              text: "Didn’t get a code? ",
+                              style: const TextStyle(
+                                fontSize: 13,
+                                color: AppColor.secondaryTextColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: 'Resend',
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                      color: AppColor.primaryTextColor,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    recognizer: TapGestureRecognizer()..onTap = vpc.onResend),
+                              ],
+                            ),
+                          ),
+
+                          const SizedBox(
+                            height: 45,
                           ),
                           CustomElevatedButton(
                             title: "Verify",
-                            onTap: () {},
+                            onTap: vpc.onSubmit,
                           ),
                         ],
                       ),

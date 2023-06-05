@@ -1,6 +1,5 @@
 import 'package:barter_app_2023/controller/auth/login_page_controller.dart';
 import 'package:barter_app_2023/utils/colors.dart';
-import 'package:barter_app_2023/views/auth/verification_page.dart';
 import 'package:barter_app_2023/widget/custom/custom_elevated_button.dart';
 import 'package:barter_app_2023/widget/custom/custom_underline_text_field.dart';
 import 'package:flutter/material.dart';
@@ -179,9 +178,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           CustomElevatedButton(
                             title: "Continue",
-                            onTap: () {
-                              Get.toNamed(VerificationPage.routeName);
-                            },
+                            onTap: lpc.onSubmit,
                           ),
                         ],
                       ),

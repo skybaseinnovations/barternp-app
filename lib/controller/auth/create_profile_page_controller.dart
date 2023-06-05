@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +13,7 @@ class CreateProfilePageController extends GetxController {
   var formKey = GlobalKey<FormState>();
 
   void onSubmit() async {
+    log("=================>>> create profile page submitted");
     if (formKey.currentState!.validate()) {}
   }
 }

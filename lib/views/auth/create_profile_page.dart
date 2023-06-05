@@ -12,8 +12,7 @@ import '../../widget/custom/custom_underline_text_field.dart';
 
 class CreateProfilePage extends StatelessWidget {
   static const String routeName = "/createProfilePage/";
-  // final vpc = Get.find<CreateProfilePageController>();
-  final CreateProfilePageController cppc = Get.put(CreateProfilePageController());
+  final cppc = Get.find<CreateProfilePageController>();
 
   CreateProfilePage({super.key});
 

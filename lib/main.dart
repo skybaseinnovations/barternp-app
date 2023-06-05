@@ -20,7 +20,7 @@ class BarterApp extends StatelessWidget {
         fontFamily: "Open Sans",
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: CreateProfilePage.routeName,
+      initialRoute: SplashPage.routeName,
       getPages: getPages,
     );
   }
