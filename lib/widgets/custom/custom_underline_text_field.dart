@@ -8,6 +8,7 @@ class CustomOutlineBorderTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final String? hint;
   final String? preIconPath;
+  final String? suffixIconPath;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final TextInputAction textInputAction;
@@ -30,6 +31,7 @@ class CustomOutlineBorderTextField extends StatelessWidget {
     this.fillColor,
     this.hint,
     this.preIconPath,
+    this.suffixIconPath,
     this.onValueChange,
     this.controller,
     this.validator,
@@ -84,6 +86,17 @@ class CustomOutlineBorderTextField extends StatelessWidget {
                   child: SvgPicture.asset(
                     alignment: Alignment.bottomRight,
                     preIconPath!,
+                    fit: BoxFit.scaleDown,
+                  ),
+                )
+              : null,
+          suffixIconConstraints: const BoxConstraints(maxHeight: 48, maxWidth: 48),
+          suffixIcon: (suffixIconPath != null)
+              ? Padding(
+                  padding: const EdgeInsets.only(right: 6),
+                  child: SvgPicture.asset(
+                    alignment: Alignment.bottomRight,
+                    suffixIconPath!,
                     fit: BoxFit.scaleDown,
                   ),
                 )

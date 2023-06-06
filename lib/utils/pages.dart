@@ -16,7 +16,7 @@ var getPages = [
     page: () => SplashPage(),
     binding: BindingsBuilder(
       () {
-        Get.lazyReplace(() => SplashPageController());
+        Get.lazyPut(() => SplashPageController());
       },
     ),
   ),
@@ -25,7 +25,7 @@ var getPages = [
     page: () => LoginPage(),
     binding: BindingsBuilder(
       () {
-        Get.lazyReplace(() => LoginPageController());
+        Get.lazyPut(() => LoginPageController());
       },
     ),
   ),
@@ -34,7 +34,7 @@ var getPages = [
     page: () => VerificationPage(),
     binding: BindingsBuilder(
       () {
-        Get.lazyReplace(() => VerificationPageController());
+        Get.lazyPut(() => VerificationPageController());
       },
     ),
   ),
@@ -43,7 +43,7 @@ var getPages = [
     page: () => CreateProfilePage(),
     binding: BindingsBuilder(
       () {
-        Get.lazyReplace(() => CreateProfilePageController());
+        Get.lazyPut(() => CreateProfilePageController());
       },
     ),
   ),
@@ -52,7 +52,7 @@ var getPages = [
     page: () => DashPage(),
     binding: BindingsBuilder(
       () {
-        Get.lazyReplace(() => DashPageController());
+        Get.lazyPut(() => DashPageController());
       },
     ),
   ),
