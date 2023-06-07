@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:barter_app_2023/models/user_model.dart';
 import 'package:barter_app_2023/utils/http_requests.dart';
 import 'package:barter_app_2023/utils/storage_helpers.dart';
 import 'package:barter_app_2023/utils/storage_keys.dart';
