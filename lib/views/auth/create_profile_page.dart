@@ -8,6 +8,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../utils/image_paths.dart';
 import '../../widgets/custom/custom_underline_text_field.dart';
@@ -162,6 +163,14 @@ class CreateProfilePage extends StatelessWidget {
                           if (value.isEmpty) {
                             return 'Please select Date of Birth';
                           }
+
+                          // var selectedDate = DateTime.parse(value.replaceAll("/", "-"));
+                          // print(selectedDate);
+                          // if ((DateTime.now().subtract(const Duration(days: 365 * 13)))
+                          //     .isBefore(selectedDate)) {
+                          //   return 'Age must be greater than 13';
+                          // }
+
                           return null;
                         }),
 

@@ -39,9 +39,9 @@ class CreateProfilePageController extends GetxController {
   selectDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
+      initialDate: DateTime(DateTime.now().year - 13),
+      firstDate: DateTime(DateTime.now().year - 100),
+      lastDate: DateTime(DateTime.now().year - 13),
     );
 
     if (pickedDate != null) {
