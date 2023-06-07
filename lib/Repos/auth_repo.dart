@@ -61,7 +61,6 @@ class AuthRepo {
       http.Response response =
           await BarterRequest.post(parseUrl, headers: headers, body: jsonEncode(body));
       dynamic data = jsonDecode(response.body);
-      log(data);
       if (data["status"]) {
         onSuccess(data["data"]);
       } else {
@@ -92,6 +91,7 @@ class AuthRepo {
         "Content-Type": "application/json",
         "Authorization": "${token.tokenType} ${token.accessToken}"
       };
+      print("=======>> authorization :: ${token.tokenType} ${token.accessToken}");
       // "Authorization": "Bearer $tokens"
 
       var body = {"name": name, "gender": gender, "dob": dob, "email": email};
@@ -103,13 +103,12 @@ class AuthRepo {
       http.Response response =
           await BarterRequest.post(parseUrl, headers: headers, body: jsonEncode(body));
       dynamic data = jsonDecode(response.body);
+
       if (data["status"]) {
         var box = GetStorage();
-        await box.write(StorageKey.user, data["data"]);
+        await box.write(StorageKey.user, jsonEncode(data["data"]));
 
         //for printing the detail of user (not needed)
-        User user = User.fromJson(data["user"]);
-        log("================>>> user Details:  ${user.name}");
 
         onSuccess();
       } else {

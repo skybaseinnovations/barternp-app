@@ -1,5 +1,6 @@
 import 'package:barter_app_2023/controllers/core_controller.dart';
 import 'package:barter_app_2023/utils/pages.dart';
+import 'package:barter_app_2023/views/auth/verification_page.dart';
 import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

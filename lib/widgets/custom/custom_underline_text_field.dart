@@ -74,7 +74,7 @@ class CustomOutlineBorderTextField extends StatelessWidget {
         }
       },
       style: const TextStyle(
-        fontSize: 16,
+        fontSize: 14,
         color: AppColor.primaryTextColor,
         fontWeight: FontWeight.w400,
       ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -16,18 +17,43 @@ import '../../widgets/custom/custom_snackbar.dart';
 
 class VerificationPageController extends GetxController {
   TextEditingController verificationNumberController = TextEditingController();
+
+  //for circular progress field
   var isLoading = false.obs;
+  var isResendLoading = false.obs;
+  //for argumented phone number
   String? phoneNumber;
   dynamic argumentData;
+
+  //for resend timer
+  var timerDuration = 180.obs;
+  Timer? resendCountdownTimer;
+  var resetTime = 0.obs;
+  // Duration resendDuration = const Duration(seconds: 2 * 60);
   @override
   void onInit() {
+    startTimer(timerDuration.value);
     argumentData = Get.arguments;
     phoneNumber = argumentData;
     super.onInit();
   }
 
+  void startTimer(int time) {
+    resendCountdownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (time < 0) {
+        resendCountdownTimer!.cancel();
+      } else {
+        resetTime.value = time--;
+        // print(resetTime);
+      }
+    });
+  }
+
   var formKey = GlobalKey<FormState>();
+
   void onSubmit() {
+    BuildContext focusContext = Get.context!;
+    FocusScope.of(focusContext).unfocus();
     log("=================>>> verification page submitted");
     if (formKey.currentState!.validate()) {
       isLoading.value = true;
@@ -35,12 +61,13 @@ class VerificationPageController extends GetxController {
           phoneNumber: phoneNumber!,
           otp: verificationNumberController.text,
           onSuccess: (data) async {
+            print(data);
             isLoading.value = false;
             var box = GetStorage();
             if (data["is_profile_completed"]) {
               log("================>>> profile is completed(already user)");
               await box.write(StorageKey.accessToken, jsonEncode(data["token"]));
-              await box.write(StorageKey.user, data["user"]);
+              await box.write(StorageKey.user, jsonEncode(data["user"]));
 
               //for printing the detail of acess token and user (not needed)
               User user = User.fromJson(data["user"]);
@@ -69,6 +96,21 @@ class VerificationPageController extends GetxController {
   }
 
   void onResend() {
-    log("=================>>> resend");
+    log("=================>>> resend clicked");
+    isResendLoading.value = true;
+    AuthRepo.loginUser(
+        phoneNumber: phoneNumber!,
+        // phoneNumber: "1234567890",
+        onSuccess: () {
+          isResendLoading.value = false;
+          BartarSnackBar.success(
+              title: "Resend successful",
+              message: "An One Time Password (OTP) is sent to your phone number");
+          startTimer(timerDuration.value);
+        },
+        onError: (value) {
+          isResendLoading.value = false;
+          BartarSnackBar.error(title: "Resend Error", message: value);
+        });
   }
 }

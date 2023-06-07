@@ -2,7 +2,6 @@ import 'package:barter_app_2023/controllers/auth/verification_page_controller.da
 import 'package:barter_app_2023/utils/colors.dart';
 import 'package:barter_app_2023/utils/validators.dart';
 import 'package:barter_app_2023/widgets/custom/custom_elevated_button.dart';
-import 'package:flutter/gestures.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -120,6 +119,7 @@ class VerificationPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                    onCompleted: (value) => vpc.onSubmit(),
                                     controller: vpc.verificationNumberController,
                                     // autofocus: true,
                                     length: 5,
@@ -148,32 +148,63 @@ class VerificationPage extends StatelessWidget {
                             ),
 
                             const SizedBox(
-                              height: 45,
+                              height: 49,
                             ),
-                            RichText(
-                              text: TextSpan(
-                                text: "Didn’t get a code? ",
-                                style: const TextStyle(
-                                  fontSize: 13,
+
+                            const Center(
+                              child: Text(
+                                textAlign: TextAlign.center,
+                                "Didn’t get a code? ",
+                                style: TextStyle(
+                                  fontSize: 11,
                                   color: AppColor.secondaryTextColor,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: 'Resend',
-                                      style: const TextStyle(
-                                        fontSize: 13,
-                                        color: AppColor.primaryTextColor,
-                                        fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 11,
+                            ),
+                            Center(
+                              child: Obx(
+                                () => vpc.resetTime.value == 0
+                                    ? vpc.isResendLoading.value
+                                        ? const SizedBox(
+                                            height: 18,
+                                            width: 18,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              color: AppColor.secondaryTextColor,
+                                            ),
+                                          )
+                                        : GestureDetector(
+                                            onTap: vpc.onResend,
+                                            child: const Text(
+                                              textAlign: TextAlign.center,
+                                              "Resend",
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                color: AppColor.primaryTextColor,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          )
+                                    : Text(
+                                        textAlign: TextAlign.center,
+                                        "Resend (${vpc.resetTime.value} secs)",
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          color: AppColor.secondaryTextColor,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                      recognizer: TapGestureRecognizer()..onTap = vpc.onResend),
-                                ],
                               ),
                             ),
 
                             const SizedBox(
-                              height: 45,
+                              height: 33,
                             ),
+
                             Obx(
                               () => CustomElevatedButton(
                                 isLoading: vpc.isLoading.value,

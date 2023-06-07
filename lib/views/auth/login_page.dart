@@ -88,7 +88,8 @@ class LoginPage extends StatelessWidget {
                                 const Text(
                                   "Nepal",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 14,
+                                    color: AppColor.primaryTextColor,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 )
@@ -126,6 +127,11 @@ class LoginPage extends StatelessWidget {
                                       fillColor: AppColor.backgroundGreyColor,
                                       textInputAction: TextInputAction.done,
                                       hint: "+977",
+                                      hintStyle: TextStyle(
+                                        fontSize: 14,
+                                        color: AppColor.primaryTextColor,
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                       readOnly: true,
                                       textInputType: TextInputType.number,
                                     ),
@@ -153,7 +159,8 @@ class LoginPage extends StatelessWidget {
                             ),
                             const Center(
                               child: Text(
-                                "A OTP will be sent to your phone number",
+                                textAlign: TextAlign.center,
+                                "An One Time Password (OTP) will be sent to your phone number",
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: AppColor.secondaryTextColor,
@@ -162,7 +169,7 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(
-                              height: 52,
+                              height: 36,
                             ),
                             Obx(() => CustomElevatedButton(
                                   isLoading: lpc.isLoading.value,

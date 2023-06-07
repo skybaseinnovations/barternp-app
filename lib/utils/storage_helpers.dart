@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:barter_app_2023/models/access_token.dart';
 import 'package:barter_app_2023/models/user_model.dart';
