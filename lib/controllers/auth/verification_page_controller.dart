@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:barter_app_2023/Repos/auth_repo.dart';
-import 'package:barter_app_2023/models/access_token.dart';
+import 'package:barter_app_2023/models/access_token_model.dart';
 import 'package:barter_app_2023/models/user_model.dart';
 import 'package:barter_app_2023/utils/storage_keys.dart';
 

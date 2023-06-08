@@ -73,9 +73,6 @@ class CustomTextField extends StatelessWidget {
         label: labelText != null
             ? Text(
                 labelText ?? "",
-                // style: CustomTextStyles.f16W400(
-                //   color: AppColors.primaryColor,
-                // ),
               )
             : null,
         fillColor: fillColor ?? Colors.white,
