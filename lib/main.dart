@@ -1,6 +1,6 @@
 import 'package:barter_app_2023/utils/pages.dart';
+import 'package:barter_app_2023/views/dashboard/dash_page.dart';
 
-import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -15,10 +15,10 @@ class BarterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        fontFamily: "Open Sans",
+        fontFamily: "Libre Franklin",
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: SplashPage.routeName,
+      initialRoute: DashPage.routeName,
       getPages: getPages,
     );
   }

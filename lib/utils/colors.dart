@@ -7,4 +7,5 @@ class AppColor {
   static const Color secondaryTextColor = Color(0xFF6B6B6B);
   static const Color tertiaryTextColor = Color(0xFFA8A8A8);
   static const Color backgroundGreyColor = Color(0xFFF9F9F9);
+  static const Color searchFieldColor = Color(0xffEBEDF1);
 }
