@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class DashPageController extends GetxController {
   RxInt currentIndex = RxInt(0);
   final pages = [
-    const HomePage(),
+    HomePage(),
     const ChatPage(),
     const MyAdsPage(),
     const ProfilePage(),

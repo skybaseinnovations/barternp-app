@@ -1,16 +1,24 @@
+import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
 import 'package:barter_app_2023/utils/colors.dart';
 import 'package:barter_app_2023/utils/image_paths.dart';
+import 'package:barter_app_2023/widgets/custom/custom_tab_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custome_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import '../../controllers/dashboard/tab_bar_controller.dart';
 import '../../widgets/custom/custom_categories_item.dart';
 import '../../widgets/custom/custom_items_tile.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  static const String routename = "/homePage";
+
+  HomePage({super.key});
+  final hpc = Get.find<HomePageController>();
+  final c = Get.find<TabBarController>();
+  //  final TabController _tabController = TabController(length: 2, vsync: this);
 
   @override
   Widget build(BuildContext context) {
@@ -88,19 +96,19 @@ class HomePage extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: CarouselSlider.builder(
-                  itemCount: 3,
+                  itemCount: hpc.bannerImageUrl.length,
                   itemBuilder: (context, index, realIndex) {
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
-                        imageUrl: "https://img-9gag-fun.9cache.com/photo/am5jqv9_700bwp.webp",
-                        fit: BoxFit.fill,
+                        imageUrl: hpc.bannerImageUrl[index],
+                        fit: BoxFit.cover,
                         width: Get.width - 60,
                       ),
                     );
                   },
                   options: CarouselOptions(
-                    height: 100,
+                    height: 114,
                     aspectRatio: 16 / 9,
                     viewportFraction: 0.8,
                     initialPage: 0,
@@ -133,19 +141,9 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              Container(
+              SizedBox(
                 height: 152,
                 width: 342,
-                // decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(16),
-                //     color: Colors.white,
-                //     boxShadow: [
-                //       BoxShadow(
-                //           spreadRadius: 4, // Spread radius
-                //           blurRadius: 14, // Blur radius
-                //           offset: const Offset(-1, 2),
-                //           color: const Color(0xff9f9f9f).withOpacity(0.25))
-                //     ]),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
@@ -199,41 +197,46 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 34,
               ),
-              const Row(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    flex: 7,
-                    child: Row(
-                      children: [
-                        Expanded(
-                            flex: 1,
-                            child: Text("Featured",
-                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600))),
-                        Expanded(
-                          flex: 2,
-                          child: Text("Nearby Ads",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColor.secondaryTextColor)),
-                        )
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text(
-                      "View All",
-                      style: TextStyle(
-                          fontSize: 11,
-                          color: AppColor.secondaryColor,
-                          fontWeight: FontWeight.w400),
-                    ),
+                  CustomTabBar(),
+                  const Text(
+                    "View All",
+                    style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
                   )
                 ],
               ),
               const SizedBox(
                 height: 24,
+              ),
+              Obx(
+                () => SizedBox(
+                  height: 400,
+                  child: PageView(
+                    controller: c.pageController.value,
+                    children: [
+                      Container(
+                        color: Colors.green,
+                        child: const Center(
+                          child: Text(
+                            'On Container',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        color: Colors.red,
+                        child: const Center(
+                          child: Text(
+                            'Off Container',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Container(
                 color: Colors.white,
@@ -241,11 +244,12 @@ class HomePage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) => const CustomItemTile(),
+                    itemBuilder: (context, index) =>
+                        CustomItemTile(ImageUrl: hpc.itemImageUrl[index]),
                     separatorBuilder: (context, index) => const SizedBox(
                           height: 20,
                         ),
-                    itemCount: 7),
+                    itemCount: 2),
               )
             ],
           ),

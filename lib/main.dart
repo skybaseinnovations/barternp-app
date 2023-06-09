@@ -2,7 +2,10 @@ import 'package:barter_app_2023/utils/pages.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+
+import 'controllers/dashboard/home_page_controller.dart';
 
 void main() {
   runApp(const BarterApp());

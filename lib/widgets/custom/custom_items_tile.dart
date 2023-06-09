@@ -5,7 +5,9 @@ import '../../utils/colors.dart';
 import '../../utils/image_paths.dart';
 
 class CustomItemTile extends StatelessWidget {
-  const CustomItemTile({
+  var ImageUrl;
+  CustomItemTile({
+    required this.ImageUrl,
     super.key,
   });
 
@@ -32,8 +34,7 @@ class CustomItemTile extends StatelessWidget {
                 height: 123,
                 width: 112,
                 errorWidget: (context, url, error) => Image.asset(ImagePath.placeHolderPath),
-                imageUrl:
-                    'https://th.bing.com/th/id/R.755b3ccf4906b01fec7886eed3b1c9b0?rik=MUh7BlXmTwbSEA&pid=ImgRaw&r=0'),
+                imageUrl: ImageUrl),
             const Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
