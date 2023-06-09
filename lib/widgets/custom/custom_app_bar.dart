@@ -2,7 +2,7 @@ import 'package:barter_app_2023/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class BartarAppBar extends StatelessWidget {
-  BartarAppBar({
+  const BartarAppBar({
     super.key,
     this.hasLeading = true,
     this.automaticallyImplyLeading = true,
@@ -15,16 +15,16 @@ class BartarAppBar extends StatelessWidget {
     this.leadingWidth,
     this.titleTextStyle,
   });
-  bool hasLeading;
-  bool automaticallyImplyLeading = true;
-  Widget? title;
-  List<Widget>? actions;
-  double? elevation;
-  Color? backgroundColor;
-  Color? foregroundColor;
-  bool? centerTitle;
-  double? leadingWidth;
-  TextStyle? titleTextStyle;
+  final bool hasLeading;
+  final bool automaticallyImplyLeading;
+  final Widget? title;
+  final List<Widget>? actions;
+  final double? elevation;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final bool? centerTitle;
+  final double? leadingWidth;
+  final TextStyle? titleTextStyle;
   @override
   Widget build(BuildContext context) {
     return AppBar(

@@ -4,7 +4,6 @@ import 'package:barter_app_2023/controllers/auth/verification_page_controller.da
 import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart';
 import 'package:barter_app_2023/controllers/product/product_details_controller.dart';
 import 'package:barter_app_2023/controllers/splash_page_controller.dart';
-import 'package:barter_app_2023/models/product_detail_model.dart';
 import 'package:barter_app_2023/views/auth/create_profile_page.dart';
 import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/auth/verification_page.dart';
