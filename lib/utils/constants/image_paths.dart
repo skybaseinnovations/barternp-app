@@ -7,6 +7,14 @@ class ImagePath {
   static const String contactIconPath = "assets/images/textPhone.svg";
   static const String locationIconPath = "assets/images/location.svg";
   static const String chatIconPath = "assets/images/chat_icon.svg";
-  static const String defaultAvatar = "assets/images/default_avatar.jpg";
+  static const String defaultAvatar = "assets/images/default_avatar.png";
   static const String placeHolderPath = "assets/images/placeholder_barter.jpg";
+  static const String myProfileIconPath = "assets/images/profileIcons/my_profile.svg";
+  static const String myAdsIconPath = "assets/images/profileIcons/my_ads.svg";
+  static const String likedAdsIconPath = "assets/images/profileIcons/like_ads.svg";
+  static const String notificationIconPath = "assets/images/profileIcons/notifications.svg";
+  static const String aboutIconPath = "assets/images/profileIcons/about.svg";
+  static const String termsAndConditionIconPath = "assets/images/profileIcons/term_condition.svg";
+  static const String logoutIconPath = "assets/images/profileIcons/logout.svg";
+  static const String editImageIconPath = "assets/images/profileIcons/edit_image.svg";
 }

@@ -32,37 +32,34 @@ class DashPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: SizedBox(
-        height: 66,
-        child: Obx(() => BottomNavigationBar(
-              unselectedItemColor: AppColor.tertiaryTextColor,
-              selectedItemColor: AppColor.primaryColor,
-              // unselectedIconTheme: const IconThemeData(color: AppColor.tertiaryTextColor),
-              // selectedItemColor: ,
-              // selectedIconTheme: const IconThemeData(color: AppColor.secondaryColor),
-              type: BottomNavigationBarType.fixed,
-              currentIndex: dpc.currentIndex.value,
-              onTap: dpc.onItemTapped,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined),
-                  label: "Home",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.chat_bubble_outline_rounded),
-                  label: "Chat",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.campaign_outlined),
-                  label: "My ads",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person_2_outlined),
-                  label: "Profile",
-                ),
-              ],
-            )),
-      ),
+      bottomNavigationBar: Obx(() => BottomNavigationBar(
+            unselectedItemColor: AppColor.tertiaryTextColor,
+            selectedItemColor: AppColor.primaryColor,
+            // unselectedIconTheme: const IconThemeData(color: AppColor.tertiaryTextColor),
+            // selectedItemColor: ,
+            // selectedIconTheme: const IconThemeData(color: AppColor.secondaryColor),
+            type: BottomNavigationBarType.fixed,
+            currentIndex: dpc.currentIndex.value,
+            onTap: dpc.onItemTapped,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                label: "Home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.chat_bubble_outline_rounded),
+                label: "Chat",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.campaign_outlined),
+                label: "My ads",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_2_outlined),
+                label: "Profile",
+              ),
+            ],
+          )),
       extendBody: true,
       body: SafeArea(child: Obx(() => dpc.pages[dpc.currentIndex.value])),
     );

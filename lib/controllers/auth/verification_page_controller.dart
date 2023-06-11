@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:barter_app_2023/Repos/auth_repo.dart';
+import 'package:barter_app_2023/controllers/core_controller.dart';
 import 'package:barter_app_2023/models/access_token_model.dart';
 import 'package:barter_app_2023/models/user_model.dart';
 import 'package:barter_app_2023/utils/constants/storage_keys.dart';
@@ -16,6 +17,7 @@ import 'package:get_storage/get_storage.dart';
 import '../../widgets/custom/custom_snackbar.dart';
 
 class VerificationPageController extends GetxController {
+  CoreController cc = Get.find<CoreController>();
   TextEditingController verificationNumberController = TextEditingController();
 
   //for circular progress field
@@ -74,9 +76,10 @@ class VerificationPageController extends GetxController {
               AccessToken accessToken = AccessToken.fromJson(data["token"]);
               log("================>>> user Details:  ${user.name}");
               log("================>>> accessToken details: ${accessToken.accessToken}");
+              cc.loadCurrentUser();
 
               //get to dashpage if user is prsent
-              Get.toNamed(DashPage.routeName);
+              Get.offAllNamed(DashPage.routeName);
             } else {
               log("================>>> profile is completed(already user)");
               await box.write(StorageKey.accessToken, jsonEncode(data["token"]));

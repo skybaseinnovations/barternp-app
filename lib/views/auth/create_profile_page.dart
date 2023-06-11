@@ -14,8 +14,8 @@ import '../../widgets/custom/custom_underline_text_field.dart';
 
 class CreateProfilePage extends StatelessWidget {
   static const String routeName = "/createProfilePage/";
-  final cppc = Get.find<CreateProfilePageController>();
-  // final CreateProfilePageController cppc = Get.put(CreateProfilePageController());
+  final c = Get.find<CreateProfilePageController>();
+  // final CreateProfilePageController c = Get.put(CreateProfilePageController());
 
   CreateProfilePage({super.key});
 
@@ -31,7 +31,7 @@ class CreateProfilePage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
             child: Form(
-              key: cppc.formKey,
+              key: c.formKey,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +82,7 @@ class CreateProfilePage extends StatelessWidget {
                       height: 5,
                     ),
                     CustomOutlineBorderTextField(
-                      controller: cppc.nameController,
+                      controller: c.nameController,
                       fillColor: AppColor.backgroundGreyColor,
                       textInputAction: TextInputAction.done,
                       textInputType: TextInputType.text,
@@ -105,7 +105,7 @@ class CreateProfilePage extends StatelessWidget {
                       height: 5,
                     ),
                     CustomOutlineBorderTextField(
-                      controller: cppc.emailController,
+                      controller: c.emailController,
                       fillColor: AppColor.backgroundGreyColor,
                       textInputAction: TextInputAction.done,
                       textInputType: TextInputType.emailAddress,
@@ -128,7 +128,7 @@ class CreateProfilePage extends StatelessWidget {
                     //   height: 5,
                     // ),
                     // CustomOutlineBorderTextField(
-                    //   controller: cppc.phoneNumberController,
+                    //   controller: c.phoneNumberController,
                     //   fillColor: AppColor.backgroundGreyColor,
                     //   textInputAction: TextInputAction.done,
                     //   textInputType: TextInputType.number,
@@ -151,9 +151,9 @@ class CreateProfilePage extends StatelessWidget {
                       height: 5,
                     ),
                     CustomOutlineBorderTextField(
-                        onTap: () => cppc.selectDate(context),
+                        onTap: () => c.selectDate(context),
                         readOnly: true,
-                        controller: cppc.dateController,
+                        controller: c.dateController,
                         fillColor: AppColor.backgroundGreyColor,
                         textInputAction: TextInputAction.done,
                         textInputType: TextInputType.datetime,
@@ -189,13 +189,13 @@ class CreateProfilePage extends StatelessWidget {
                       height: 5,
                     ),
                     Obx(() => DropDownTextField(
-                          clearOption: cppc.clearOption.value,
-                          controller: cppc.genderController,
+                          clearOption: c.clearOption.value,
+                          controller: c.genderController,
                           readOnly: true,
                           dropdownRadius: 4,
-                          textFieldFocusNode: cppc.dropdownFieldFocusNode,
+                          textFieldFocusNode: c.dropdownFieldFocusNode,
                           dropDownIconProperty: IconProperty(
-                              icon: cppc.hasFocus.value
+                              icon: c.hasFocus.value
                                   ? Icons.keyboard_arrow_up_sharp
                                   : Icons.keyboard_arrow_down_outlined),
                           dropDownList: const [
@@ -213,7 +213,7 @@ class CreateProfilePage extends StatelessWidget {
                     //   ),
 
                     // CustomOutlineBorderTextField(
-                    //     controller: cppc.dateController,
+                    //     controller: c.dateController,
                     //     fillColor: AppColor.backgroundGreyColor,
                     //     suffixIconPath: ImagePath.downArrowconPath,
                     //     textInputAction: TextInputAction.done,
@@ -238,7 +238,7 @@ class CreateProfilePage extends StatelessWidget {
                     //           color: AppColor.secondaryTextColor,
                     //           fontWeight: FontWeight.w400,
                     //         ),
-                    //         controller: cppc.yearController,
+                    //         controller: c.yearController,
                     //         fillColor: AppColor.backgroundGreyColor,
                     //         textInputAction: TextInputAction.done,
                     //         textInputType: TextInputType.datetime,
@@ -257,7 +257,7 @@ class CreateProfilePage extends StatelessWidget {
                     //           color: AppColor.secondaryTextColor,
                     //           fontWeight: FontWeight.w400,
                     //         ),
-                    //         controller: cppc.monthController,
+                    //         controller: c.monthController,
                     //         fillColor: AppColor.backgroundGreyColor,
                     //         textInputAction: TextInputAction.done,
                     //         textInputType: TextInputType.datetime,
@@ -276,7 +276,7 @@ class CreateProfilePage extends StatelessWidget {
                     //           color: AppColor.secondaryTextColor,
                     //           fontWeight: FontWeight.w400,
                     //         ),
-                    //         controller: cppc.dayController,
+                    //         controller: c.dayController,
                     //         fillColor: AppColor.backgroundGreyColor,
                     //         textInputAction: TextInputAction.done,
                     //         textInputType: TextInputType.datetime,
@@ -290,9 +290,9 @@ class CreateProfilePage extends StatelessWidget {
                       height: 65,
                     ),
                     Obx(() => CustomElevatedButton(
-                          isLoading: cppc.isLoading.value,
+                          isLoading: c.isLoading.value,
                           title: "Continue",
-                          onTap: cppc.onSubmit,
+                          onTap: c.onSubmit,
                         )),
 
                     const SizedBox(
@@ -316,7 +316,7 @@ class CreateProfilePage extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                               recognizer: TapGestureRecognizer()
-                                ..onTap = cppc.onTermsAndConditionSubmit,
+                                ..onTap = c.onTermsAndConditionSubmit,
                             ),
                           ],
                         ),

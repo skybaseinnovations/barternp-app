@@ -10,7 +10,7 @@ class DashPageController extends GetxController {
     HomePage(),
     const ChatPage(),
     const MyAdsPage(),
-    const ProfilePage(),
+    ProfilePage(),
   ];
   void onItemTapped(int index) {
     currentIndex.value = index;

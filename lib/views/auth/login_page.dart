@@ -8,10 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-
 class LoginPage extends StatelessWidget {
   static const String routeName = "/loginPage/";
-  final lpc = Get.find<LoginPageController>();
+  final c = Get.find<LoginPageController>();
   LoginPage({super.key});
 
   @override
@@ -116,7 +115,7 @@ class LoginPage extends StatelessWidget {
                               height: 12,
                             ),
                             Form(
-                              key: lpc.formKey,
+                              key: c.formKey,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -141,13 +140,13 @@ class LoginPage extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: CustomOutlineBorderTextField(
-                                      controller: lpc.phoneFieldController,
+                                      controller: c.phoneFieldController,
                                       fillColor: AppColor.backgroundGreyColor,
                                       textInputAction: TextInputAction.done,
                                       textInputType: TextInputType.number,
                                       validator: (String? fieldContent) {
                                         return Validators.checkPhoneField(
-                                            lpc.phoneFieldController.text);
+                                            c.phoneFieldController.text);
                                       },
                                     ),
                                   )
@@ -172,9 +171,9 @@ class LoginPage extends StatelessWidget {
                               height: 36,
                             ),
                             Obx(() => CustomElevatedButton(
-                                  isLoading: lpc.isLoading.value,
+                                  isLoading: c.isLoading.value,
                                   title: "Continue",
-                                  onTap: lpc.onSubmit,
+                                  onTap: c.onSubmit,
                                 )),
                           ],
                         ),

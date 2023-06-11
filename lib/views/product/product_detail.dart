@@ -2,6 +2,7 @@ import 'package:barter_app_2023/controllers/product/product_details_controller.d
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,7 +10,7 @@ import 'package:get/get.dart';
 
 class ProductDetailPage extends StatelessWidget {
   static const String routeName = "/productDetailPage";
-  final pdpc = Get.find<ProductDetailPageController>();
+  final c = Get.find<ProductDetailPageController>();
   ProductDetailPage({super.key});
 
   @override
@@ -42,17 +43,19 @@ class ProductDetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                     child: CarouselSlider.builder(
-                      itemCount: pdpc.productImage.length,
+                      itemCount: c.productImage.length,
                       itemBuilder: (context, index, realIndex) {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            pdpc.productImage[index],
+                          child: CachedNetworkImage(
                             fit: BoxFit.cover,
+                            errorWidget: (context, url, error) =>
+                                Image.network(ImagePath.defaultAvatar),
+                            imageUrl: c.productImage[index],
                           ),
                         );
                       },
-                      carouselController: pdpc.buttonCarouselController,
+                      carouselController: c.buttonCarouselController,
                       options: CarouselOptions(
                         height: 290,
                         pageSnapping: true,
@@ -62,7 +65,7 @@ class ProductDetailPage extends StatelessWidget {
                         reverse: false,
                         autoPlayCurve: Curves.fastOutSlowIn,
                         onPageChanged: (index, reason) {
-                          pdpc.photoIndex.value = index + 1;
+                          c.photoIndex.value = index + 1;
                         },
                         scrollDirection: Axis.horizontal,
                       ),
@@ -78,7 +81,7 @@ class ProductDetailPage extends StatelessWidget {
                         color: AppColor.primaryTextColor,
                       ),
                       child: Obx(() => Text(
-                            "${pdpc.photoIndex.value}/${pdpc.productImage.length}",
+                            "${c.photoIndex.value}/${c.productImage.length}",
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
@@ -292,6 +295,7 @@ class ProductDetailPage extends StatelessWidget {
       )),
       floatingActionButton: PopupMenuButton(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 19),
+
         // elevation: 0,
         color: Colors.white,
         shape: const RoundedRectangleBorder(
@@ -304,9 +308,9 @@ class ProductDetailPage extends StatelessWidget {
 
         onSelected: (item) {
           if (item == "Call") {
-            pdpc.onCallTap();
+            c.onCallTap();
           } else if (item == "Chat") {
-            pdpc.onChatTap();
+            c.onChatTap();
           }
         },
         itemBuilder: (BuildContext context) => [

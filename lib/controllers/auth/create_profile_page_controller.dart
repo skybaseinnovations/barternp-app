@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:barter_app_2023/Repos/auth_repo.dart';
+import 'package:barter_app_2023/controllers/core_controller.dart';
 
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
 import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
@@ -10,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class CreateProfilePageController extends GetxController {
+  CoreController cc = Get.find<CoreController>();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
@@ -63,8 +65,9 @@ class CreateProfilePageController extends GetxController {
           dob: dateController.text,
           email: emailController.text,
           onSuccess: () {
+            cc.loadCurrentUser();
             BartarSnackBar.success(title: "Successful");
-            Get.toNamed(DashPage.routeName);
+            Get.offAllNamed(DashPage.routeName);
             isLoading.value = false;
           },
           onError: (errorMessage) {

@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
-
 class AuthRepo {
   static Future<void> loginUser({
     required String phoneNumber,
@@ -89,7 +88,7 @@ class AuthRepo {
         "Content-Type": "application/json",
         "Authorization": "${token.tokenType} ${token.accessToken}"
       };
-      print("=======>> authorization :: ${token.tokenType} ${token.accessToken}");
+      // print("=======>> authorization :: ${token.tokenType} ${token.accessToken}");
       // "Authorization": "Bearer $tokens"
 
       var body = {"name": name, "gender": gender, "dob": dob, "email": email};

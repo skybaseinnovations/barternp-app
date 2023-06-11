@@ -9,10 +9,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
-
 class VerificationPage extends StatelessWidget {
   static const String routeName = "/verificationPage/";
-  final vpc = Get.find<VerificationPageController>();
+  final c = Get.find<VerificationPageController>();
 
   VerificationPage({super.key});
 
@@ -96,7 +95,7 @@ class VerificationPage extends StatelessWidget {
                               height: 45,
                             ),
                             Form(
-                              key: vpc.formKey,
+                              key: c.formKey,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 50),
                                 child: Pinput(
@@ -119,8 +118,8 @@ class VerificationPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    onCompleted: (value) => vpc.onSubmit(),
-                                    controller: vpc.verificationNumberController,
+                                    onCompleted: (value) => c.onSubmit(),
+                                    controller: c.verificationNumberController,
                                     // autofocus: true,
                                     length: 5,
                                     defaultPinTheme: const PinTheme(
@@ -167,8 +166,8 @@ class VerificationPage extends StatelessWidget {
                             ),
                             Center(
                               child: Obx(
-                                () => vpc.resetTime.value == 0
-                                    ? vpc.isResendLoading.value
+                                () => c.resetTime.value == 0
+                                    ? c.isResendLoading.value
                                         ? const SizedBox(
                                             height: 18,
                                             width: 18,
@@ -178,7 +177,7 @@ class VerificationPage extends StatelessWidget {
                                             ),
                                           )
                                         : GestureDetector(
-                                            onTap: vpc.onResend,
+                                            onTap: c.onResend,
                                             child: const Text(
                                               textAlign: TextAlign.center,
                                               "Resend",
@@ -191,7 +190,7 @@ class VerificationPage extends StatelessWidget {
                                           )
                                     : Text(
                                         textAlign: TextAlign.center,
-                                        "Resend (${vpc.resetTime.value} secs)",
+                                        "Resend (${c.resetTime.value} secs)",
                                         style: const TextStyle(
                                           fontSize: 13,
                                           color: AppColor.secondaryTextColor,
@@ -207,9 +206,9 @@ class VerificationPage extends StatelessWidget {
 
                             Obx(
                               () => CustomElevatedButton(
-                                isLoading: vpc.isLoading.value,
+                                isLoading: c.isLoading.value,
                                 title: "Verify",
-                                onTap: vpc.onSubmit,
+                                onTap: c.onSubmit,
                               ),
                             ),
                           ],
