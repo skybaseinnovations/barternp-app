@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 
-import 'controllers/dashboard/home_page_controller.dart';
 
 void main() {
   runApp(const BarterApp());

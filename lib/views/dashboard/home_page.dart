@@ -1,3 +1,4 @@
+import 'package:barter_app_2023/controllers/animation/line_animation_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
 import 'package:barter_app_2023/utils/colors.dart';
 import 'package:barter_app_2023/utils/image_paths.dart';
@@ -8,7 +9,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '../../controllers/dashboard/tab_bar_controller.dart';
+
 import '../../widgets/custom/custom_categories_item.dart';
 import '../../widgets/custom/custom_items_tile.dart';
 
@@ -17,7 +18,8 @@ class HomePage extends StatelessWidget {
 
   HomePage({super.key});
   final hpc = Get.find<HomePageController>();
-  final c = Get.find<TabBarController>();
+
+  // final c = Get.find<TabBarController>();
   //  final TabController _tabController = TabController(length: 2, vsync: this);
 
   @override
@@ -200,7 +202,26 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomTabBar(),
+                  CustomTabBar(
+                    animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
+                        .animate(hpc.tabAnimationController.animationController),
+                    title: 'Featured',
+                    onTap: () {
+                      hpc.tabAnimationController.animationController.reverse();
+                      hpc.showFeaturedPage();
+                    },
+                    tabIndex: 0,
+                  ),
+                  CustomTabBar(
+                    animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+                        .animate(hpc.tabAnimationController.animationController),
+                    title: 'Nearby Ads',
+                    onTap: () {
+                      hpc.tabAnimationController.animationController.forward();
+                      hpc.showNearbyAds();
+                    },
+                    tabIndex: 1,
+                  ),
                   const Text(
                     "View All",
                     style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
@@ -214,43 +235,39 @@ class HomePage extends StatelessWidget {
                 () => SizedBox(
                   height: 400,
                   child: PageView(
-                    controller: c.pageController.value,
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: hpc.pageController.value,
                     children: [
                       Container(
-                        color: Colors.green,
-                        child: const Center(
-                          child: Text(
-                            'On Container',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ),
+                        color: Colors.white,
+                        child: ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) =>
+                                CustomItemTile(ImageUrl: hpc.featuredImageUrl[index]),
+                            separatorBuilder: (context, index) => const SizedBox(
+                                  height: 20,
+                                ),
+                            itemCount: 2),
                       ),
                       Container(
-                        color: Colors.red,
-                        child: const Center(
-                          child: Text(
-                            'Off Container',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ),
+                        color: Colors.white,
+                        child: ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) =>
+                                CustomItemTile(ImageUrl: hpc.nearbyAdsImageUrl[index]),
+                            separatorBuilder: (context, index) => const SizedBox(
+                                  height: 20,
+                                ),
+                            itemCount: 2),
                       ),
                     ],
                   ),
                 ),
               ),
-              Container(
-                color: Colors.white,
-                child: ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) =>
-                        CustomItemTile(ImageUrl: hpc.itemImageUrl[index]),
-                    separatorBuilder: (context, index) => const SizedBox(
-                          height: 20,
-                        ),
-                    itemCount: 2),
-              )
             ],
           ),
         ),

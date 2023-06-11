@@ -2,7 +2,6 @@ import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart'
 import 'package:barter_app_2023/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class DashPage extends StatelessWidget {
   static const String routeName = "/dashPage/";
