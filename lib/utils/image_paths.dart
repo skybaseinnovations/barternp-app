@@ -7,4 +7,6 @@ class ImagePath {
   static const String contactIconPath = "assets/images/textPhone.svg";
   static const String locationIconPath = "assets/images/location.svg";
   static const String chatIconPath = "assets/images/chat_icon.svg";
+  static const String defaultAvatar = "assets/images/default_avatar.jpg";
+  static const String placeHolderPath = "assets/images/placeholder_barter.jpg";
 }

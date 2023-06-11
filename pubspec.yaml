@@ -36,9 +36,12 @@ dependencies:
   flutter_svg: ^2.0.6
   get: ^4.6.5
   get_storage: ^2.1.1
-  http: ^1.0.0
   intl: ^0.18.1
+  http: ^0.13.5
   pinput: ^2.2.31
+  cached_network_image: ^3.2.3
+  badges: ^3.1.1
+
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -68,10 +71,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Open Sans
+    - family: Libre_Franklin
       fonts:
-        - asset: assets/fonts/Open_Sans/OpenSans-Italic-VariableFont_wdth,wght.ttf
-        - asset: assets/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf
+        - asset: assets/fonts/Libre_Franklin/LibreFranklin-Italic-VariableFont_wght.ttf
+        - asset: assets/fonts/Libre_Franklin/LibreFranklin-VariableFont_wght.ttf
           style: italic
   #   - family: Trajan Pro
   #     fonts:

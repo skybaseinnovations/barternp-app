@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../utils/colors.dart';
+
 class CustomTextField extends StatelessWidget {
   final Function(String)? onValueChange;
   final FocusNode? focusNode;
@@ -22,6 +24,7 @@ class CustomTextField extends StatelessWidget {
   final Function(String)? onSubmitted;
   final int? maxCharacters;
   final TextCapitalization textCapitalization;
+  final prefixicon;
 
   const CustomTextField({
     Key? key,
@@ -44,7 +47,8 @@ class CustomTextField extends StatelessWidget {
     this.maxCharacters,
     this.focusNode,
     this.labelText,
-    this.borderRadius = 30,
+    this.borderRadius = 8,
+    this.prefixicon,
   }) : super(key: key);
 
   @override
@@ -69,51 +73,57 @@ class CustomTextField extends StatelessWidget {
         }
       },
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-        label: labelText != null
-            ? Text(
-                labelText ?? "",
-              )
-            : null,
-        fillColor: fillColor ?? Colors.white,
-        filled: true,
-        prefixIcon: (preIconPath != null)
-            ? SvgPicture.asset(
-                preIconPath!,
-                // fit: BoxFit.scaleDown,
-              )
-            : null,
-        suffixIcon: (suffixIconPath != null)
-            ? SvgPicture.asset(suffixIconPath!, fit: BoxFit.scaleDown)
-            : null,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-          borderSide: const BorderSide(
-            width: 1,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+          label: labelText != null
+              ? Text(
+                  labelText ?? "",
+                  // style: CustomTextStyles.f16W400(
+                  //   color: AppColors.primaryColor,
+                  // ),
+                )
+              : null,
+          fillColor: fillColor ?? Colors.white,
+          filled: true,
+          // prefixIcon: (preIconPath != null)
+          //     ? SvgPicture.asset(
+          //         preIconPath!,
+          //         // fit: BoxFit.scaleDown,
+          //       )
+          //     : null,
+          prefixIcon: prefixicon,
+          suffixIcon: (suffixIconPath != null)
+              ? SvgPicture.asset(suffixIconPath!, fit: BoxFit.scaleDown)
+              : null,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+            borderSide: const BorderSide(
+              color: Colors.transparent,
+              width: 1,
+            ),
           ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-          borderSide: const BorderSide(
-            width: 1,
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+            borderSide: const BorderSide(
+              width: 1,
+            ),
           ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-          borderSide: const BorderSide(
-            width: 1,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+            borderSide: const BorderSide(
+              width: 1,
+            ),
           ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-          borderSide: const BorderSide(
-            width: 1,
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+            borderSide: const BorderSide(
+              width: 1,
+            ),
           ),
-        ),
-        errorStyle: const TextStyle(fontSize: 12),
-        hintText: hint,
-        // hintStyle: CustomTextStyles.f16W400(color: AppColors.hintTextColor),
-      ),
+          errorStyle: const TextStyle(fontSize: 12),
+          hintText: hint,
+          hintStyle: const TextStyle(color: AppColor.tertiaryTextColor)
+          // hintStyle: CustomTextStyles.f16W400(color: AppColors.hintTextColor),
+          ),
       // style: CustomTextStyles.f16W400(
       //     color: (readOnly ?? false) ? AppColors.hintTextColor : AppColors.backGroundColor),
     );
