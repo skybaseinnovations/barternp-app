@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:barter_app_2023/utils/http_requests.dart';
-import 'package:barter_app_2023/utils/storage_helpers.dart';
-import 'package:barter_app_2023/utils/storage_keys.dart';
+import 'package:barter_app_2023/utils/constants/apis.dart';
+import 'package:barter_app_2023/utils/constants/storage_keys.dart';
+import 'package:barter_app_2023/utils/helpers/http_requests.dart';
+import 'package:barter_app_2023/utils/helpers/storage_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
-import '../utils/apis.dart';
 
 class AuthRepo {
   static Future<void> loginUser({

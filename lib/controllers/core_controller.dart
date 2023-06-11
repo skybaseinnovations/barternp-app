@@ -1,5 +1,5 @@
 import 'package:barter_app_2023/models/user_model.dart';
-import 'package:barter_app_2023/utils/storage_helpers.dart';
+import 'package:barter_app_2023/utils/helpers/storage_helpers.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

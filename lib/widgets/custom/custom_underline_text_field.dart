@@ -1,7 +1,6 @@
+import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../utils/colors.dart';
 
 class CustomOutlineBorderTextField extends StatelessWidget {
   final Function(String)? onValueChange;
@@ -79,7 +78,8 @@ class CustomOutlineBorderTextField extends StatelessWidget {
         fontWeight: FontWeight.w400,
       ),
       decoration: InputDecoration(
-          prefixIconConstraints: const BoxConstraints(maxHeight: 48, maxWidth: 48),
+          prefixIconConstraints:
+              const BoxConstraints(maxHeight: 48, maxWidth: 48),
           prefixIcon: (preIconPath != null)
               ? Padding(
                   padding: const EdgeInsets.only(right: 6),
@@ -90,7 +90,8 @@ class CustomOutlineBorderTextField extends StatelessWidget {
                   ),
                 )
               : null,
-          suffixIconConstraints: const BoxConstraints(maxHeight: 48, maxWidth: 48),
+          suffixIconConstraints:
+              const BoxConstraints(maxHeight: 48, maxWidth: 48),
           suffixIcon: (suffixIconPath != null)
               ? Padding(
                   padding: const EdgeInsets.only(right: 6),
@@ -102,7 +103,8 @@ class CustomOutlineBorderTextField extends StatelessWidget {
                 )
               : null,
           fillColor: fillColor ?? Colors.white,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           isDense: true,
           enabledBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: AppColor.tertiaryTextColor),

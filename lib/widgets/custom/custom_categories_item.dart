@@ -1,7 +1,7 @@
+import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/image_paths.dart';
 
 class CustomCategoriesItem extends StatelessWidget {
   final String imageName;

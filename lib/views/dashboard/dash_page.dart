@@ -1,11 +1,11 @@
 import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart';
-import 'package:barter_app_2023/utils/colors.dart';
+import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DashPage extends StatelessWidget {
   static const String routeName = "/dashPage/";
-  DashPage({super.key, Key});
+  DashPage({super.key});
   final dpc = Get.find<DashPageController>();
 
   @override

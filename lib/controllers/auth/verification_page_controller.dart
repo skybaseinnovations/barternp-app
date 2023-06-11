@@ -5,7 +5,7 @@ import 'dart:developer';
 import 'package:barter_app_2023/Repos/auth_repo.dart';
 import 'package:barter_app_2023/models/access_token_model.dart';
 import 'package:barter_app_2023/models/user_model.dart';
-import 'package:barter_app_2023/utils/storage_keys.dart';
+import 'package:barter_app_2023/utils/constants/storage_keys.dart';
 
 import 'package:barter_app_2023/views/auth/create_profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';

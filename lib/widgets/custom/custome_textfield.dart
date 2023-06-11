@@ -1,7 +1,6 @@
+import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../utils/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final Function(String)? onValueChange;
@@ -24,7 +23,7 @@ class CustomTextField extends StatelessWidget {
   final Function(String)? onSubmitted;
   final int? maxCharacters;
   final TextCapitalization textCapitalization;
-  final prefixicon;
+  final prefixIcon;
 
   const CustomTextField({
     Key? key,
@@ -48,7 +47,7 @@ class CustomTextField extends StatelessWidget {
     this.focusNode,
     this.labelText,
     this.borderRadius = 8,
-    this.prefixicon,
+    this.prefixIcon,
   }) : super(key: key);
 
   @override
@@ -90,7 +89,7 @@ class CustomTextField extends StatelessWidget {
           //         // fit: BoxFit.scaleDown,
           //       )
           //     : null,
-          prefixIcon: prefixicon,
+          prefixIcon: prefixIcon,
           suffixIcon: (suffixIconPath != null)
               ? SvgPicture.asset(suffixIconPath!, fit: BoxFit.scaleDown)
               : null,

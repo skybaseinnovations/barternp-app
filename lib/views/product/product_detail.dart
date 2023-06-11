@@ -1,6 +1,6 @@
 import 'package:barter_app_2023/controllers/product/product_details_controller.dart';
-import 'package:barter_app_2023/utils/colors.dart';
-import 'package:barter_app_2023/utils/image_paths.dart';
+import 'package:barter_app_2023/utils/constants/colors.dart';
+import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -300,7 +300,7 @@ class ProductDetailPage extends StatelessWidget {
           ),
         ),
         // position: PopupMenuPosition.under,
-        offset: Offset(0, -120),
+        offset: const Offset(0, -120),
 
         onSelected: (item) {
           if (item == "Call") {

@@ -1,13 +1,13 @@
 import 'package:barter_app_2023/controllers/auth/login_page_controller.dart';
-import 'package:barter_app_2023/utils/colors.dart';
-import 'package:barter_app_2023/utils/validators.dart';
+import 'package:barter_app_2023/utils/constants/colors.dart';
+import 'package:barter_app_2023/utils/constants/image_paths.dart';
+import 'package:barter_app_2023/utils/helpers/validators.dart';
 import 'package:barter_app_2023/widgets/custom/custom_elevated_button.dart';
 import 'package:barter_app_2023/widgets/custom/custom_underline_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../utils/image_paths.dart';
 
 class LoginPage extends StatelessWidget {
   static const String routeName = "/loginPage/";

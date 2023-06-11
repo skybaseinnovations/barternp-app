@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:barter_app_2023/models/access_token_model.dart';
 import 'package:barter_app_2023/models/user_model.dart';
-import 'package:barter_app_2023/utils/storage_keys.dart';
+import 'package:barter_app_2023/utils/constants/storage_keys.dart';
 import 'package:get_storage/get_storage.dart';
 
 class StorageHelper {

@@ -1,6 +1,6 @@
 import 'package:barter_app_2023/controllers/splash_page_controller.dart';
-import 'package:barter_app_2023/utils/colors.dart';
-import 'package:barter_app_2023/utils/image_paths.dart';
+import 'package:barter_app_2023/utils/constants/colors.dart';
+import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

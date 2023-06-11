@@ -1,4 +1,5 @@
-import 'package:barter_app_2023/utils/colors.dart';
+
+import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class BartarAppBar extends StatelessWidget {
