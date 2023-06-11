@@ -26,7 +26,7 @@ class BarterApp extends StatelessWidget {
         },
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: ProductDetailPage.routeName,
+      initialRoute: SplashPage.routeName,
       getPages: getPages,
     );
   }

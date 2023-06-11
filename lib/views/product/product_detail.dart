@@ -23,9 +23,9 @@ class ProductDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BartarAppBar(
+              const BartarAppBar(
                 hasLeading: true,
-                actions: const [
+                actions: [
                   Icon(
                     Icons.favorite_border_sharp,
                     color: AppColor.primaryTextColor,
@@ -224,6 +224,8 @@ class ProductDetailPage extends StatelessWidget {
               const SizedBox(
                 height: 38,
               ),
+
+              //
               const Text(
                 "Comments",
                 style: TextStyle(
@@ -254,7 +256,7 @@ class ProductDetailPage extends StatelessWidget {
                 height: 38,
               ),
               const Text(
-                "Similar ads",
+                "Similar Ads",
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -288,7 +290,71 @@ class ProductDetailPage extends StatelessWidget {
           ),
         ),
       )),
-      floatingActionButton: GestureDetector(
+      floatingActionButton: PopupMenuButton(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 19),
+        // elevation: 0,
+        color: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(4.0),
+          ),
+        ),
+        // position: PopupMenuPosition.under,
+        offset: Offset(0, -120),
+
+        onSelected: (item) {
+          if (item == "Call") {
+            pdpc.onCallTap();
+          } else if (item == "Chat") {
+            pdpc.onChatTap();
+          }
+        },
+        itemBuilder: (BuildContext context) => [
+          PopupMenuItem(
+            value: "Call",
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  ImagePath.contactIconPath,
+                  height: 10,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                const Text(
+                  "Call",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.secondaryColor,
+                  ),
+                )
+              ],
+            ),
+          ),
+          PopupMenuItem(
+            value: "Chat",
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  ImagePath.chatIconPath,
+                  height: 10,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                const Text(
+                  "Chat",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.secondaryColor,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
         child: Container(
           height: 45,
           width: 45,
@@ -359,36 +425,6 @@ class SimilarAdsWidget extends StatelessWidget {
           )
         ],
       ),
-      // child: const ListTile(
-      //   leading: CircleAvatar(
-      //     backgroundColor: Color(0xffD9D9D9),
-      //     radius: 26,
-      //   ),
-      //   title: Text(
-      //     "Person Name",
-      //     style: TextStyle(
-      //       fontSize: 12,
-      //       fontWeight: FontWeight.w400,
-      //       color: AppColor.primaryTextColor,
-      //     ),
-      //   ),
-      //   subtitle: Text(
-      //     "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      //     style: TextStyle(
-      //       fontSize: 11,
-      //       fontWeight: FontWeight.w400,
-      //       color: AppColor.secondaryTextColor,
-      //     ),
-      //   ),
-      //   trailing: Text(
-      //     "2 days ago",
-      //     style: TextStyle(
-      //       fontSize: 10,
-      //       fontWeight: FontWeight.w400,
-      //       color: AppColor.tertiaryTextColor,
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
@@ -401,51 +437,74 @@ class CommentListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.symmetric(vertical: 9),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 14,
-            color: const Color(0xff9F9F9F).withOpacity(.25),
-            offset: const Offset(-1, 2),
-            spreadRadius: 4,
-          ),
-        ],
-      ),
-      child: const ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Color(0xffD9D9D9),
-          radius: 26,
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 11),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 14,
+              color: const Color(0xff9F9F9F).withOpacity(.25),
+              offset: const Offset(-1, 2),
+              spreadRadius: 4,
+            ),
+          ],
         ),
-        title: Text(
-          "Person Name",
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: AppColor.primaryTextColor,
-          ),
-        ),
-        subtitle: Text(
-          "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-          style: TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w400,
-            color: AppColor.secondaryTextColor,
-          ),
-        ),
-        trailing: Text(
-          "2 days ago",
-          style: TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w400,
-            color: AppColor.tertiaryTextColor,
-          ),
-        ),
-      ),
-    );
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Color(0xffD9D9D9),
+                    radius: 26,
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Flexible(
+                    // width: 209,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Person Name",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: AppColor.primaryTextColor,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Text(
+                          "Lorem ipsum dolor sit amet consectetur adipiscing elit",
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w400,
+                            color: AppColor.secondaryTextColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Text(
+              "2 days ago",
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w400,
+                color: AppColor.tertiaryTextColor,
+              ),
+            ),
+          ],
+        ));
   }
 }
 
