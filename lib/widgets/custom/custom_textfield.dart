@@ -1,4 +1,3 @@
-import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -23,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final Function(String)? onSubmitted;
   final int? maxCharacters;
   final TextCapitalization textCapitalization;
+  final TextStyle? hintStyle;
   final Icon? prefixIcon;
   final VoidCallback? onEditing;
 
@@ -69,63 +69,53 @@ class CustomTextField extends StatelessWidget {
       controller: (controller != null) ? controller : null,
       onEditingComplete: onEditing,
       // cursorColor: AppColors.backGroundColor,
+      cursorColor: AppColor.secondaryTextColor,
+      cursorHeight: 12,
       onChanged: (text) {
         if (onValueChange != null) {
           onValueChange!(text);
         }
       },
       decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-          label: labelText != null
-              ? Text(
-                  labelText ?? "",
-                  // style: CustomTextStyles.f16W400(
-                  //   color: AppColors.primaryColor,
-                  // ),
-                )
-              : null,
-          fillColor: fillColor ?? Colors.white,
-          filled: true,
-          // prefixIcon: (preIconPath != null)
-          //     ? SvgPicture.asset(
-          //         preIconPath!,
-          //         // fit: BoxFit.scaleDown,
-          //       )
-          //     : null,
-          prefixIcon: prefixIcon,
-          suffixIcon: (suffixIconPath != null)
-              ? SvgPicture.asset(suffixIconPath!, fit: BoxFit.scaleDown)
-              : null,
-          enabledBorder: OutlineInputBorder(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+
+        label: labelText != null
+            ? Text(
+                labelText ?? "",
+                // style: CustomTextStyles.f16W400(
+                //   color: AppColors.primaryColor,
+                // ),
+              )
+            : null,
+        fillColor: fillColor ?? Colors.white,
+        filled: true,
+        // prefixIcon: (preIconPath != null)
+        //     ? SvgPicture.asset(
+        //         preIconPath!,
+        //         // fit: BoxFit.scaleDown,
+        //       )
+        //     : null,
+        prefixIcon: prefixIcon,
+        suffixIcon: (suffixIconPath != null)
+            ? SvgPicture.asset(suffixIconPath!, fit: BoxFit.scaleDown)
+            : null,
+        enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            borderSide: const BorderSide(
-              color: Colors.transparent,
-              width: 1,
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide.none),
+        focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            borderSide: const BorderSide(
-              width: 1,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide.none),
+        focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            borderSide: const BorderSide(
-              width: 1,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide.none),
+        errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            borderSide: const BorderSide(
-              width: 1,
-            ),
-          ),
-          errorStyle: const TextStyle(fontSize: 12),
-          hintText: hint,
-          hintStyle: const TextStyle(color: AppColor.tertiaryTextColor)
-          // hintStyle: CustomTextStyles.f16W400(color: AppColors.hintTextColor),
-          ),
+            borderSide: BorderSide.none),
+        errorStyle: const TextStyle(fontSize: 12),
+        hintText: hint,
+        hintStyle: hintStyle ?? TextStyle(color: AppColor.tertiaryTextColor),
+        // hintStyle: CustomTextStyles.f16W400(color: AppColors.hintTextColor),
+      ),
       // style: CustomTextStyles.f16W400(
       //     color: (readOnly ?? false) ? AppColors.hintTextColor : AppColors.backGroundColor),
     );
