@@ -1,6 +1,7 @@
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
+import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/search_page.dart';
 import 'package:barter_app_2023/widgets/custom/custom_tab_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
@@ -137,16 +138,22 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 36,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Categories", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                    Text(
-                      "View All",
-                      style: TextStyle(
-                          fontSize: 11,
-                          color: AppColor.secondaryColor,
-                          fontWeight: FontWeight.w400),
+                    const Text("Categories",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed(CategoriesPage.routeName);
+                      },
+                      child: const Text(
+                        "View All",
+                        style: TextStyle(
+                            fontSize: 11,
+                            color: AppColor.secondaryColor,
+                            fontWeight: FontWeight.w400),
+                      ),
                     )
                   ],
                 ),
@@ -249,9 +256,21 @@ class HomePage extends StatelessWidget {
                       controller: hpc.pageController.value,
                       children: [
                         Container(
+                          height: Get.height,
                           color: Colors.white,
                           child: ListView.separated(
-                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) =>
+                                  CustomItemTile(imageUrl: hpc.featuredImageUrl[index]),
+                              separatorBuilder: (context, index) => const SizedBox(
+                                    height: 20,
+                                  ),
+                              itemCount: hpc.featuredImageUrl.length),
+                        ),
+                        Container(
+                          color: Colors.white,
+                          child: ListView.separated(
+                              // physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) =>
@@ -259,20 +278,7 @@ class HomePage extends StatelessWidget {
                               separatorBuilder: (context, index) => const SizedBox(
                                     height: 20,
                                   ),
-                              itemCount: 2),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          child: ListView.separated(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (context, index) =>
-                                  CustomItemTile(imageUrl: hpc.nearbyAdsImageUrl[index]),
-                              separatorBuilder: (context, index) => const SizedBox(
-                                    height: 20,
-                                  ),
-                              itemCount: 2),
+                              itemCount: hpc.featuredImageUrl.length),
                         ),
                       ],
                     ),

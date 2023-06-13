@@ -11,6 +11,8 @@ import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/auth/verification_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
 import 'package:barter_app_2023/views/dashboard/edit_profile_page.dart';
+import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
+import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/search_page.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
@@ -96,5 +98,13 @@ var getPages = [
         Get.lazyPut(() => EditProfilePageController());
       },
     ),
+  ),
+  GetPage(
+    name: CategoriesPage.routeName,
+    page: () => CategoriesPage(),
+  ),
+  GetPage(
+    name: SingleCategory.routeName,
+    page: () => SingleCategory(),
   ),
 ];

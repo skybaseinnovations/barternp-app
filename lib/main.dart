@@ -1,10 +1,7 @@
 import 'package:barter_app_2023/controllers/core_controller.dart';
 import 'package:barter_app_2023/utils/pages.dart';
-import 'package:barter_app_2023/views/auth/create_profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
-import 'package:barter_app_2023/views/dashboard/home/home_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/search_page.dart';
-import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -30,7 +27,7 @@ class BarterApp extends StatelessWidget {
         },
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: SearchPage.routeName,
+      initialRoute: DashPage.routeName,
       getPages: getPages,
     );
   }
