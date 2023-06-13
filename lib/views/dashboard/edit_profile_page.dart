@@ -65,8 +65,15 @@ class EditProfilePage extends StatelessWidget {
                                 : CachedNetworkImage(
                                     height: 122,
                                     width: 122,
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
+                                    placeholder: (context, url) => const Center(
+                                            child: SizedBox(
+                                          width: 20,
+                                          height: 20,
+                                          child: CircularProgressIndicator(
+                                            color: AppColor.primaryColor,
+                                            strokeWidth: 2,
+                                          ),
+                                        )),
                                     errorWidget: (context, url, error) =>
                                         Image.network(ImagePath.defaultAvatar),
                                     imageUrl: 'https://picsum.photos/200')),

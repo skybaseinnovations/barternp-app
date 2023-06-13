@@ -47,10 +47,4 @@ class HomePageController extends GetxController {
         .animateToPage(1, duration: const Duration(milliseconds: 300), curve: Curves.ease);
     currentIndex.value = 1;
   }
-
-  final RxInt activeTabIndex = RxInt(0);
-
-  void toggleActiveState(int index) {
-    activeTabIndex.value = index;
-  }
 }
