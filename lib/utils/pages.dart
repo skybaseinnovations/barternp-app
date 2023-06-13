@@ -9,6 +9,7 @@ import 'package:barter_app_2023/views/auth/create_profile_page.dart';
 import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/auth/verification_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
+import 'package:barter_app_2023/views/dashboard/home/search_page.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:get/get.dart';
@@ -78,4 +79,10 @@ var getPages = [
       },
     ),
   ),
+  GetPage(
+      name: SearchPage.routeName,
+      page: () => SearchPage(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => HomePageController());
+      })),
 ];
