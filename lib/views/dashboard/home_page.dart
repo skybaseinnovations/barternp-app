@@ -13,7 +13,7 @@ import '../../widgets/custom/custom_categories_item.dart';
 import '../../widgets/custom/custom_items_tile.dart';
 
 class HomePage extends StatelessWidget {
-  static const String routename = "/homePage";
+  static const String routeName = "/homePage";
 
   HomePage({super.key});
   final hpc = Get.find<HomePageController>();
