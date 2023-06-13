@@ -3,7 +3,7 @@ import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
-import 'package:barter_app_2023/widgets/custom/custome_textfield.dart';
+import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
@@ -72,7 +72,6 @@ class MyAdsPage extends StatelessWidget {
                     indicatorColor: AppColor.primaryTextColor,
                     indicatorWeight: 3,
                     controller: c.tabController,
-                    tabAlignment: TabAlignment.fill,
                     tabs: const [
                       Tab(
                         text: "Active Ads",

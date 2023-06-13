@@ -1,3 +1,4 @@
+import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -50,6 +51,7 @@ class CustomTextField extends StatelessWidget {
     this.borderRadius = 8,
     this.prefixIcon,
     this.onEditing,
+    this.hintStyle,
   }) : super(key: key);
 
   @override
@@ -113,7 +115,7 @@ class CustomTextField extends StatelessWidget {
             borderSide: BorderSide.none),
         errorStyle: const TextStyle(fontSize: 12),
         hintText: hint,
-        hintStyle: hintStyle ?? TextStyle(color: AppColor.tertiaryTextColor),
+        hintStyle: hintStyle ?? const TextStyle(color: AppColor.tertiaryTextColor),
         // hintStyle: CustomTextStyles.f16W400(color: AppColors.hintTextColor),
       ),
       // style: CustomTextStyles.f16W400(

@@ -20,8 +20,8 @@ class CustomItemTile extends StatelessWidget {
         Get.toNamed(ProductDetailPage.routeName);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 5),
-        margin: EdgeInsets.only(bottom: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        margin: const EdgeInsets.only(bottom: 20),
         height: 152,
         width: 342,
         decoration:

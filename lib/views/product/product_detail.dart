@@ -1,8 +1,8 @@
 import 'package:barter_app_2023/controllers/product/product_details_controller.dart';
-import 'package:barter_app_2023/utils/colors.dart';
+import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/image_paths.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
-import 'package:barter_app_2023/widgets/custom/custome_textfield.dart';
+import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

@@ -220,7 +220,6 @@ class HomePage extends StatelessWidget {
                         hpc.tabAnimationController.animationController.reverse();
                         hpc.showFeaturedPage();
                       },
-                      tabIndex: 0,
                     ),
                     CustomTabBar(
                       animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
@@ -230,7 +229,6 @@ class HomePage extends StatelessWidget {
                         hpc.tabAnimationController.animationController.forward();
                         hpc.showNearbyAds();
                       },
-                      tabIndex: 1,
                     ),
                     const Text(
                       "View All",
