@@ -11,7 +11,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final TextInputAction textInputAction;
-  final TextInputType textInputType;
+  final TextInputType? textInputType;
   final Color? border;
   final Color? fillColor;
   final bool? readOnly;
@@ -23,7 +23,8 @@ class CustomTextField extends StatelessWidget {
   final Function(String)? onSubmitted;
   final int? maxCharacters;
   final TextCapitalization textCapitalization;
-  final prefixIcon;
+  final Icon? prefixIcon;
+  final VoidCallback? onEditing;
 
   const CustomTextField({
     Key? key,
@@ -35,7 +36,7 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.validator,
     required this.textInputAction,
-    required this.textInputType,
+    this.textInputType,
     this.border,
     this.readOnly = false,
     this.showError = true,
@@ -48,6 +49,7 @@ class CustomTextField extends StatelessWidget {
     this.labelText,
     this.borderRadius = 8,
     this.prefixIcon,
+    this.onEditing,
   }) : super(key: key);
 
   @override
@@ -65,6 +67,7 @@ class CustomTextField extends StatelessWidget {
       maxLines: 1,
       validator: (validator != null) ? validator : null,
       controller: (controller != null) ? controller : null,
+      onEditingComplete: onEditing,
       // cursorColor: AppColors.backGroundColor,
       onChanged: (text) {
         if (onValueChange != null) {

@@ -1,3 +1,4 @@
+
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,13 +31,15 @@ class BartarAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: hasLeading
-          ? GestureDetector(
-              onTap: () => Get.back(),
-              child: const Icon(
+          ?
+          IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(
                 Icons.arrow_back_ios,
                 color: AppColor.primaryTextColor,
-              ),
-            )
+              ))
           : null,
       automaticallyImplyLeading: automaticallyImplyLeading,
       title: title,

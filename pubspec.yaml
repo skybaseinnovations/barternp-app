@@ -43,6 +43,7 @@ dependencies:
   intl: ^0.18.1
   pinput: ^2.2.31
 
+
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
