@@ -201,25 +201,29 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomTabBar(
-                    animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
-                        .animate(hpc.tabAnimationController.animationController),
-                    title: 'Featured',
-                    onTap: () {
-                      hpc.tabAnimationController.animationController.reverse();
-                      hpc.showFeaturedPage();
-                    },
-                    tabIndex: 0,
+                  Obx(
+                    () => CustomTabBar(
+                      animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
+                          .animate(hpc.tabAnimationController.animationController),
+                      title: 'Featured',
+                      onTap: () {
+                        hpc.tabAnimationController.animationController.reverse();
+                        hpc.showFeaturedPage();
+                      },
+                      isActive: hpc.currentIndex.value == 0,
+                    ),
                   ),
-                  CustomTabBar(
-                    animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
-                        .animate(hpc.tabAnimationController.animationController),
-                    title: 'Nearby Ads',
-                    onTap: () {
-                      hpc.tabAnimationController.animationController.forward();
-                      hpc.showNearbyAds();
-                    },
-                    tabIndex: 1,
+                  Obx(
+                    () => CustomTabBar(
+                      animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+                          .animate(hpc.tabAnimationController.animationController),
+                      title: 'Nearby Ads',
+                      onTap: () {
+                        hpc.tabAnimationController.animationController.forward();
+                        hpc.showNearbyAds();
+                      },
+                      isActive: hpc.currentIndex.value == 0,
+                    ),
                   ),
                   const Text(
                     "View All",

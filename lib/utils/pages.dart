@@ -4,6 +4,7 @@ import 'package:barter_app_2023/controllers/auth/verification_page_controller.da
 import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/edit_profile_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
 import 'package:barter_app_2023/controllers/product/product_details_controller.dart';
 import 'package:barter_app_2023/controllers/splash_page_controller.dart';
 import 'package:barter_app_2023/views/auth/create_profile_page.dart';
@@ -11,6 +12,7 @@ import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/auth/verification_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
 import 'package:barter_app_2023/views/dashboard/edit_profile_page.dart';
+import 'package:barter_app_2023/views/dashboard/my_ads_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/search_page.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
@@ -60,8 +62,8 @@ var getPages = [
     binding: BindingsBuilder(
       () {
         Get.lazyPut(() => DashPageController());
-
         Get.lazyPut(() => HomePageController());
+        Get.lazyPut(() => MyAdsPageController());
       },
     ),
   ),
@@ -97,4 +99,13 @@ var getPages = [
       },
     ),
   ),
+  GetPage(
+    name: MyAdsPage.routeName,
+    page: () => MyAdsPage(),
+    binding: BindingsBuilder(
+      () {
+        Get.lazyPut(() => MyAdsPageController());
+      },
+    ),
+  )
 ];

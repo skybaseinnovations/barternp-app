@@ -20,18 +20,18 @@ class CustomItemTile extends StatelessWidget {
         Get.toNamed(ProductDetailPage.routeName);
       },
       child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        margin: EdgeInsets.only(bottom: 20),
         height: 152,
         width: 342,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  spreadRadius: 4, // Spread radius
-                  blurRadius: 14, // Blur radius
-                  offset: const Offset(-1, 2),
-                  color: const Color(0xff9f9f9f).withOpacity(0.25))
-            ]),
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.white, boxShadow: [
+          BoxShadow(
+              spreadRadius: 4, // Spread radius
+              blurRadius: 14, // Blur radius
+              offset: const Offset(-1, 2),
+              color: const Color(0xff9f9f9f).withOpacity(0.25))
+        ]),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
@@ -41,8 +41,7 @@ class CustomItemTile extends StatelessWidget {
               CachedNetworkImage(
                   height: 123,
                   width: 112,
-                  errorWidget: (context, url, error) =>
-                      Image.asset(ImagePath.placeHolderPath),
+                  errorWidget: (context, url, error) => Image.asset(ImagePath.placeHolderPath),
                   imageUrl: imageUrl),
               const Expanded(
                 child: Column(
@@ -60,25 +59,19 @@ class CustomItemTile extends StatelessWidget {
                               flex: 1,
                               child: Text(
                                 "Mobile",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: AppColor.secondaryColor),
+                                style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
                               )),
                           Expanded(
                               flex: 2,
                               child: Text(
                                 "New",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: AppColor.secondaryColor),
+                                style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
                               )),
                           Expanded(
                               flex: 1,
                               child: Text(
                                 "Location",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: AppColor.secondaryColor),
+                                style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
                               ))
                         ],
                       ),
@@ -100,9 +93,7 @@ class CustomItemTile extends StatelessWidget {
                               flex: 1,
                               child: Text(
                                 "2 days ago",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: AppColor.tertiaryTextColor),
+                                style: TextStyle(fontSize: 12, color: AppColor.tertiaryTextColor),
                               ))
                         ],
                       ),
@@ -110,8 +101,7 @@ class CustomItemTile extends StatelessWidget {
                     Flexible(
                       child: Text(
                         "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. ...",
-                        style: TextStyle(
-                            fontSize: 13, color: AppColor.tertiaryTextColor),
+                        style: TextStyle(fontSize: 13, color: AppColor.tertiaryTextColor),
                       ),
                     ),
                     Flexible(
@@ -140,9 +130,7 @@ class CustomItemTile extends StatelessWidget {
                               flex: 4,
                               child: Text(
                                 "Sellers name",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: AppColor.primaryTextColor),
+                                style: TextStyle(fontSize: 12, color: AppColor.primaryTextColor),
                               ))
                         ],
                       ),

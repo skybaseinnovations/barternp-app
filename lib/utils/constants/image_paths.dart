@@ -17,4 +17,5 @@ class ImagePath {
   static const String termsAndConditionIconPath = "assets/images/profileIcons/term_condition.svg";
   static const String logoutIconPath = "assets/images/profileIcons/logout.svg";
   static const String editImageIconPath = "assets/images/profileIcons/edit_image.svg";
+  static const String bookmarkIconPath = "assets/images/bookmark_icom.svg";
 }

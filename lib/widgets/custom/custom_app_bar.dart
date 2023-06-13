@@ -16,6 +16,8 @@ class BartarAppBar extends StatelessWidget {
     this.centerTitle,
     this.leadingWidth,
     this.titleTextStyle,
+    this.bottom,
+    this.bottomOpacity = 1.0,
   });
   final bool hasLeading;
   final bool automaticallyImplyLeading;
@@ -27,6 +29,8 @@ class BartarAppBar extends StatelessWidget {
   final bool? centerTitle;
   final double? leadingWidth;
   final TextStyle? titleTextStyle;
+  final PreferredSizeWidget? bottom;
+  final double bottomOpacity;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -50,6 +54,8 @@ class BartarAppBar extends StatelessWidget {
       centerTitle: centerTitle,
       leadingWidth: leadingWidth,
       titleTextStyle: titleTextStyle,
+      bottom: bottom,
+      bottomOpacity: bottomOpacity,
     );
   }
 }

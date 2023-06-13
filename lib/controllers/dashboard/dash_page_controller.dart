@@ -9,7 +9,7 @@ class DashPageController extends GetxController {
   final pages = [
     HomePage(),
     const ChatPage(),
-    const MyAdsPage(),
+    MyAdsPage(),
     ProfilePage(),
   ];
   void onItemTapped(int index) {
