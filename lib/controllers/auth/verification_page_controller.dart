@@ -63,7 +63,6 @@ class VerificationPageController extends GetxController {
           phoneNumber: phoneNumber!,
           otp: verificationNumberController.text,
           onSuccess: (data) async {
-            print(data);
             isLoading.value = false;
             var box = GetStorage();
             if (data["is_profile_completed"]) {

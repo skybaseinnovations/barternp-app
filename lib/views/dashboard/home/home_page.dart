@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
                       Get.toNamed(SearchPage.routeName);
                     },
                     fillColor: AppColor.searchFieldColor,
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                     hint: 'Search',
                     textInputAction: TextInputAction.done,
                     textInputType: TextInputType.text),
