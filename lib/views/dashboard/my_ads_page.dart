@@ -31,6 +31,7 @@ class MyAdsPage extends StatelessWidget {
               // mainAxisSize: MainAxisSize.min,
               children: [
                 const BartarAppBar(
+                  hasLeading: false,
                   title: Text(
                     "My Ads",
                     style: TextStyle(
@@ -72,6 +73,7 @@ class MyAdsPage extends StatelessWidget {
                     indicatorColor: AppColor.primaryTextColor,
                     indicatorWeight: 3,
                     controller: c.tabController,
+
                     tabs: const [
                       Tab(
                         text: "Active Ads",

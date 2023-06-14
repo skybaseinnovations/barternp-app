@@ -1,20 +1,23 @@
 import 'package:barter_app_2023/controllers/auth/create_profile_page_controller.dart';
 import 'package:barter_app_2023/controllers/auth/login_page_controller.dart';
 import 'package:barter_app_2023/controllers/auth/verification_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/chat_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/edit_profile_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/search_chat_controller.dart';
 import 'package:barter_app_2023/controllers/product/product_details_controller.dart';
 import 'package:barter_app_2023/controllers/splash_page_controller.dart';
 import 'package:barter_app_2023/views/auth/create_profile_page.dart';
 import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/auth/verification_page.dart';
+import 'package:barter_app_2023/views/dashboard/chat/search_chat_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
-import 'package:barter_app_2023/views/dashboard/edit_profile_page.dart';
+import 'package:barter_app_2023/views/dashboard/profile/edit_profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
-import 'package:barter_app_2023/views/dashboard/profile_page.dart';
+import 'package:barter_app_2023/views/dashboard/profile/profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/search_page.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/views/splash_page.dart';
@@ -66,6 +69,7 @@ var getPages = [
 
         Get.lazyPut(() => HomePageController());
         Get.lazyPut(() => MyAdsPageController());
+        Get.lazyPut(() => ChatPageController());
       },
     ),
   ),
@@ -109,4 +113,10 @@ var getPages = [
     name: SingleCategory.routeName,
     page: () => SingleCategory(),
   ),
+  GetPage(
+      name: SearchChatPage.routeName,
+      page: () => SearchChatPage(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => SearchChatPageController());
+      }))
 ];

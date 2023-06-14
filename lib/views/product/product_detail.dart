@@ -1,8 +1,9 @@
 import 'package:barter_app_2023/controllers/product/product_details_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
-import 'package:barter_app_2023/utils/image_paths.dart';
+import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -167,20 +168,39 @@ class ProductDetailPage extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Row(
                       children: [
                         CircleAvatar(
-                          backgroundColor: Color(0xffD9D9D9),
                           radius: 26,
+                          child: ClipOval(
+                            child: CachedNetworkImage(
+                              height: 106,
+                              width: 106,
+                              placeholder: (context, _) => const Center(
+                                  child: SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  color: AppColor.primaryColor,
+                                  strokeWidth: 2,
+                                ),
+                              )),
+                              errorWidget: (context, url, error) => Image.asset(
+                                ImagePath.placeHolderPath,
+                              ),
+                              imageUrl: "https://picsum.photos/200/300",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 15,
                         ),
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
@@ -518,7 +538,7 @@ class CommentListTile extends StatelessWidget {
             ),
           ],
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -526,13 +546,32 @@ class CommentListTile extends StatelessWidget {
               child: Row(
                 children: [
                   CircleAvatar(
-                    backgroundColor: Color(0xffD9D9D9),
                     radius: 26,
+                    child: ClipOval(
+                      child: CachedNetworkImage(
+                        height: 106,
+                        width: 106,
+                        placeholder: (context, _) => const Center(
+                            child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            color: AppColor.primaryColor,
+                            strokeWidth: 2,
+                          ),
+                        )),
+                        errorWidget: (context, url, error) => Image.asset(
+                          ImagePath.placeHolderPath,
+                        ),
+                        imageUrl: "https://picsum.photos/200/300",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
-                  Flexible(
+                  const Flexible(
                     // width: 209,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

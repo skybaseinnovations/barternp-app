@@ -238,33 +238,28 @@ class HomePage extends StatelessWidget {
                 () => SizedBox(
                   height: 400,
                   child: PageView(
+                    key: const PageStorageKey(2),
                     physics: const NeverScrollableScrollPhysics(),
                     controller: hpc.pageController.value,
                     children: [
                       Container(
                         color: Colors.white,
-                        child: ListView.separated(
+                        child: ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) =>
                                 CustomItemTile(imageUrl: hpc.featuredImageUrl[index]),
-                            separatorBuilder: (context, index) => const SizedBox(
-                                  height: 20,
-                                ),
                             itemCount: 2),
                       ),
                       Container(
                         color: Colors.white,
-                        child: ListView.separated(
+                        child: ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) =>
                                 CustomItemTile(imageUrl: hpc.nearbyAdsImageUrl[index]),
-                            separatorBuilder: (context, index) => const SizedBox(
-                                  height: 20,
-                                ),
                             itemCount: 2),
                       ),
                     ],

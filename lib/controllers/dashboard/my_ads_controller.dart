@@ -6,7 +6,8 @@ class MyAdsPageController extends GetxController with GetSingleTickerProviderSta
 
   @override
   void onInit() {
-    tabController = TabController(length: 3, vsync: this);
+    tabController =
+        TabController(length: 3, vsync: this, animationDuration: const Duration(milliseconds: 700));
     super.onInit();
   }
 

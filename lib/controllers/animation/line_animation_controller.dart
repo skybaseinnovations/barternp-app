@@ -11,6 +11,4 @@ class SlideAnimation extends GetxController with GetSingleTickerProviderStateMix
     animation =
         Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0)).animate(animationController);
   }
-
-  
 }
