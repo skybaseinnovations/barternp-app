@@ -12,7 +12,6 @@ import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/auth/verification_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
 import 'package:barter_app_2023/views/dashboard/edit_profile_page.dart';
-import 'package:barter_app_2023/views/dashboard/my_ads_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile_page.dart';
