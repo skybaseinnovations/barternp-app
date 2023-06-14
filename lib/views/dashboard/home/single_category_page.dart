@@ -8,9 +8,9 @@ import 'package:get/get.dart';
 import '../../../widgets/custom/custom_app_bar.dart';
 import '../../../widgets/custom/custom_textfield.dart';
 
-class SearchPage extends StatelessWidget {
-  SearchPage({super.key});
-  static const String routeName = "/searchPage";
+class SingleCategory extends StatelessWidget {
+  SingleCategory({super.key});
+  static const String routeName = "/singleCategory";
   final hpc = Get.find<HomePageController>();
 
   @override
@@ -31,7 +31,7 @@ class SearchPage extends StatelessWidget {
                   hasLeading: true,
                   leadingWidth: 30,
                   title: Text(
-                    "Search",
+                    "Mobile",
                     style: TextStyle(color: AppColor.primaryTextColor),
                   ),
                 ),
@@ -53,7 +53,7 @@ class SearchPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "10 Results found",
+                    "1000 Results found",
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
                   ),
