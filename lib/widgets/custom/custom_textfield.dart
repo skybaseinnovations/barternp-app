@@ -26,6 +26,10 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? hintStyle;
   final Icon? prefixIcon;
   final VoidCallback? onEditing;
+  // final EdgeInsets scrollPadding;
+  final EdgeInsetsGeometry? contentPadding;
+  final double? cursorHeight;
+  final VoidCallback? onSuffixTap;
 
   const CustomTextField({
     Key? key,
@@ -52,11 +56,16 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.onEditing,
     this.hintStyle,
+    // this.scrollPadding = const EdgeInsets.all(20.0),
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 20),
+    this.cursorHeight = 13,
+    this.onSuffixTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      // scrollPadding: scrollPadding,
       focusNode: focusNode,
       maxLength: maxCharacters,
       autofocus: autofocus!,
@@ -72,34 +81,33 @@ class CustomTextField extends StatelessWidget {
       onEditingComplete: onEditing,
       // cursorColor: AppColors.backGroundColor,
       cursorColor: AppColor.secondaryTextColor,
-      cursorHeight: 12,
+      cursorHeight: cursorHeight,
       onChanged: (text) {
         if (onValueChange != null) {
           onValueChange!(text);
         }
       },
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+        // isDense: true,
+        contentPadding: contentPadding,
 
         label: labelText != null
             ? Text(
                 labelText ?? "",
-                // style: CustomTextStyles.f16W400(
-                //   color: AppColors.primaryColor,
-                // ),
               )
             : null,
         fillColor: fillColor ?? Colors.white,
         filled: true,
-        // prefixIcon: (preIconPath != null)
-        //     ? SvgPicture.asset(
-        //         preIconPath!,
-        //         // fit: BoxFit.scaleDown,
-        //       )
-        //     : null,
+
         prefixIcon: prefixIcon,
         suffixIcon: (suffixIconPath != null)
-            ? SvgPicture.asset(suffixIconPath!, fit: BoxFit.scaleDown)
+            ? GestureDetector(
+                onTap: onSuffixTap,
+                child: SvgPicture.asset(
+                  suffixIconPath!,
+                  fit: BoxFit.scaleDown,
+                ),
+              )
             : null,
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),

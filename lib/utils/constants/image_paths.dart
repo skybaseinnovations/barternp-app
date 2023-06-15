@@ -18,4 +18,7 @@ class ImagePath {
   static const String logoutIconPath = "assets/images/profileIcons/logout.svg";
   static const String editImageIconPath = "assets/images/profileIcons/edit_image.svg";
   static const String bookmarkIconPath = "assets/images/bookmark_icom.svg";
+  static const String sendMessageIconPath = "assets/images/chatIcons/send_message_icon.svg";
+  static const String cameraIconIconPath = "assets/images/chatIcons/camera_icon.svg";
+  static const String galleryIconPath = "assets/images/chatIcons/gallery_icon.svg";
 }
