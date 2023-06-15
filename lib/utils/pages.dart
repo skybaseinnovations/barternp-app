@@ -15,6 +15,7 @@ import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/search_page.dart';
+import 'package:barter_app_2023/views/product/create_ads_page.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:get/get.dart';
@@ -106,5 +107,9 @@ var getPages = [
   GetPage(
     name: SingleCategory.routeName,
     page: () => SingleCategory(),
+  ),
+  GetPage(
+    name: CreateAdsPage.routeName,
+    page: () => CreateAdsPage(),
   ),
 ];

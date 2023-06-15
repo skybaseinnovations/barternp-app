@@ -32,6 +32,7 @@ dependencies:
   cached_network_image: ^3.2.3
   carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
+  dotted_border: ^2.0.0+3
   dropdown_button2: ^2.1.3
   dropdown_textfield: ^1.0.8
   flutter:
@@ -63,6 +64,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/profileIcons/
+    - assets/images/navbaritems/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
