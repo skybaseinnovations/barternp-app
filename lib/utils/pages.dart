@@ -133,4 +133,8 @@ var getPages = [
       },
     ),
   ),
+  GetPage(
+    name: CreateAdsPage.routeName,
+    page: () => CreateAdsPage(),
+  ),
 ];

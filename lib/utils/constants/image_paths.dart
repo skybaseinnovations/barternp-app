@@ -17,6 +17,15 @@ class ImagePath {
   static const String termsAndConditionIconPath = "assets/images/profileIcons/term_condition.svg";
   static const String logoutIconPath = "assets/images/profileIcons/logout.svg";
   static const String editImageIconPath = "assets/images/profileIcons/edit_image.svg";
+  static const String homeIcon = "assets/images/navbaritems/home_icon.svg";
+  static const String chatIcon = "assets/images/navbaritems/chat_icon.svg";
+  static const String profileIcon = "assets/images/navbaritems/profile_icon.svg";
+  static const String myAdsIcon = "assets/images/navbaritems/myads.svg";
+  static const String activeHomeIcon = "assets/images/navbaritems/active_home_icon.svg";
+  static const String activeChatIcon = "assets/images/navbaritems/active_chat_icon.svg";
+  static const String activeMyAdsIcon = "assets/images/navbaritems/active_my_ads.svg";
+  static const String activeProfileIcon = "assets/images/navbaritems/active_profile_icon.svg";
+  static const String iphonePhoto = "assets/images/iphone.png";
   static const String bookmarkIconPath = "assets/images/bookmark_icom.svg";
   static const String sendMessageIconPath = "assets/images/chatIcons/send_message_icon.svg";
   static const String cameraIconIconPath = "assets/images/chatIcons/camera_icon.svg";

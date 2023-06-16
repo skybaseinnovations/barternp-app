@@ -1,7 +1,10 @@
 import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
+import 'package:barter_app_2023/views/product/create_ads_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:barter_app_2023/utils/constants/image_paths.dart';
 
 class DashPage extends StatelessWidget {
   static const String routeName = "/dashPage/";
@@ -24,7 +27,10 @@ class DashPage extends StatelessWidget {
             elevation: 1.3,
             // clipBehavior: Clip.antiAlias,
             backgroundColor: AppColor.primaryColor,
-            onPressed: () {},
+            onPressed: () {
+              print("object");
+              Get.toNamed(CreateAdsPage.routeName);
+            },
             child: const Icon(
               Icons.add,
               size: 35,
@@ -39,23 +45,36 @@ class DashPage extends StatelessWidget {
             // selectedItemColor: ,
             // selectedIconTheme: const IconThemeData(color: AppColor.secondaryColor),
             type: BottomNavigationBarType.fixed,
-            currentIndex: dpc.currentIndex.value,
+            currentIndex:
+                dpc.currentIndex.value < 2 ? dpc.currentIndex.value : dpc.currentIndex.value + 1,
             onTap: dpc.onItemTapped,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
+                activeIcon: SvgPicture.asset(ImagePath.activeHomeIcon),
+                icon: SvgPicture.asset(ImagePath.homeIcon),
                 label: "Home",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.chat_bubble_outline_rounded),
+                activeIcon: SvgPicture.asset(ImagePath.activeChatIcon),
+                icon: SvgPicture.asset(
+                  ImagePath.chatIcon,
+                ),
                 label: "Chat",
               ),
+              const BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.add,
+                    color: Colors.transparent,
+                  ),
+                  label: ""),
               BottomNavigationBarItem(
-                icon: Icon(Icons.campaign_outlined),
+                activeIcon: SvgPicture.asset(ImagePath.activeMyAdsIcon),
+                icon: SvgPicture.asset(ImagePath.myAdsIcon),
                 label: "My ads",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person_2_outlined),
+                activeIcon: SvgPicture.asset(ImagePath.activeProfileIcon),
+                icon: SvgPicture.asset(ImagePath.profileIcon),
                 label: "Profile",
               ),
             ],
