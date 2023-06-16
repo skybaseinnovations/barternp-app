@@ -7,7 +7,6 @@ class CreateAdsController extends GetxController {
   late List<Step> steps;
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     steps = [
       Step(

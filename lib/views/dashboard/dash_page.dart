@@ -28,7 +28,6 @@ class DashPage extends StatelessWidget {
             // clipBehavior: Clip.antiAlias,
             backgroundColor: AppColor.primaryColor,
             onPressed: () {
-              print("object");
               Get.toNamed(CreateAdsPage.routeName);
             },
             child: const Icon(

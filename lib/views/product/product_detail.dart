@@ -222,7 +222,7 @@ class ProductDetailPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    IconText(iconPath: ImagePath.locationIconPath, title: "Address"),
+                    const IconText(iconPath: ImagePath.locationIconPath, title: "Address"),
                   ],
                 ),
                 const SizedBox(
@@ -601,7 +601,7 @@ class CommentListTile extends StatelessWidget {
                 ],
               ),
             ),
-            Text(
+            const Text(
               "2 days ago",
               style: TextStyle(
                 fontSize: 10,

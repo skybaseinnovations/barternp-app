@@ -4,13 +4,11 @@ import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart'
 import 'package:barter_app_2023/controllers/image_picker_controller.dart';
 import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
-import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_underline_text_field.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
@@ -284,7 +282,7 @@ class CreateAdsPage extends StatelessWidget {
                                 height: 24,
                               ),
                               Obx(
-                                () => Container(
+                                () => SizedBox(
                                   height: 300,
                                   child: GridView.builder(
                                     shrinkWrap: true,
