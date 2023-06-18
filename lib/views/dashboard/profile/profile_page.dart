@@ -5,6 +5,7 @@ import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile/edit_profile_page.dart';
+import 'package:barter_app_2023/views/dashboard/profile/like_ads_page.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -93,7 +94,9 @@ class ProfilePage extends StatelessWidget {
               ProfileListTile(
                 icon: ImagePath.likedAdsIconPath,
                 title: "Liked Ads",
-                action: () {},
+                action: () {
+                  Get.toNamed(LikedAds.routeName);
+                },
               ),
               const SizedBox(
                 height: 36,

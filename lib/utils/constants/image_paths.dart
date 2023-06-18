@@ -30,4 +30,10 @@ class ImagePath {
   static const String sendMessageIconPath = "assets/images/send_message_icon.svg";
   static const String cameraIconIconPath = "assets/images/camera_icon.svg";
   static const String galleryIconPath = "assets/images/gallery_icon.svg";
+  static const String likedAdsErrorImagePath = "assets/images/likedAds_error.png";
+  static const String messageErrorImagePath = "assets/images/message_error.png";
+  static const String myAdsErrorImagePath = "assets/images/myAds_error.png";
+  static const String notificationErrorImagePath = "assets/images/notification_error.png";
+  static const String searchErrorImagePath = "assets/images/search_error.png";
+  static const String replyIconPath = "assets/images/reply_icon.svg";
 }
