@@ -43,11 +43,11 @@ class CustomItemTile extends StatelessWidget {
                   width: 112,
                   errorWidget: (context, url, error) => Image.asset(ImagePath.placeHolderPath),
                   imageUrl: imageUrl),
-              const Expanded(
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     Flexible(
@@ -57,17 +57,42 @@ class CustomItemTile extends StatelessWidget {
                         children: [
                           Expanded(
                               flex: 1,
-                              child: Text(
-                                "Mobile",
-                                style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                              child: Container(
+                                height: 20,
+                                width: 10,
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffEAE8E8),
+                                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                                child: const Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Mobile",
+                                    style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                                  ),
+                                ),
                               )),
+                          const SizedBox(
+                            width: 10,
+                          ),
                           Expanded(
-                              flex: 2,
-                              child: Text(
-                                "New",
-                                style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                              flex: 1,
+                              child: Container(
+                                height: 20,
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffEAE8E8),
+                                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                                child: const Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "New",
+                                    style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                                  ),
+                                ),
                               )),
-                          Expanded(
+                          const SizedBox(
+                            width: 30,
+                          ),
+                          const Expanded(
                               flex: 1,
                               child: Text(
                                 "Location",
@@ -76,7 +101,7 @@ class CustomItemTile extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Flexible(
+                    const Flexible(
                       fit: FlexFit.loose,
                       child: Row(
                         children: [
@@ -98,13 +123,13 @@ class CustomItemTile extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Flexible(
+                    const Flexible(
                       child: Text(
                         "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. ...",
                         style: TextStyle(fontSize: 13, color: AppColor.tertiaryTextColor),
                       ),
                     ),
-                    Flexible(
+                    const Flexible(
                       fit: FlexFit.tight,
                       child: Row(
                         children: [
@@ -135,7 +160,7 @@ class CustomItemTile extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 13,
                     ),
                   ],

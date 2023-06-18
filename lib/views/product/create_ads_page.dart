@@ -28,6 +28,52 @@ class CreateAdsPage extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        bottomNavigationBar: Container(
+          margin: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+          child: BottomAppBar(
+            elevation: 0,
+            color: Colors.transparent,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(
+                  height: 43,
+                  width: 110,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(AppColor.tertiaryTextColor)),
+                      onPressed: () {
+                        if (c.currentStep.value > 0) {
+                          c.currentStep.value--;
+                        }
+                      },
+                      child: const Text('Back'),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 43,
+                  width: 110,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(AppColor.primaryColor)),
+                      onPressed: () {
+                        if (c.currentStep.value < c.steps.length - 1) {
+                          c.currentStep.value++;
+                        }
+                      },
+                      child: const Text('Next'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         backgroundColor: AppColor.backgroundGreyColor,
         body: SafeArea(
           child: Obx(
@@ -55,47 +101,7 @@ class CreateAdsPage extends StatelessWidget {
                     },
                     controlsBuilder: (context, details,
                         {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          SizedBox(
-                            height: 43,
-                            width: 110,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: ElevatedButton(
-                                style: const ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStatePropertyAll(AppColor.tertiaryTextColor)),
-                                onPressed: () {
-                                  if (c.currentStep.value > 0) {
-                                    c.currentStep.value--;
-                                  }
-                                },
-                                child: const Text('Back'),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 43,
-                            width: 110,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: ElevatedButton(
-                                style: const ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStatePropertyAll(AppColor.primaryColor)),
-                                onPressed: () {
-                                  if (c.currentStep.value < c.steps.length - 1) {
-                                    c.currentStep.value++;
-                                  }
-                                },
-                                child: const Text('Next'),
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
+                      return Container();
                     },
                     steps: [
                       Step(
@@ -197,9 +203,6 @@ class CreateAdsPage extends StatelessWidget {
                                   // DropDownValueModel(name: "Other", value: "Other"),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 50,
-                              )
                             ],
                           ),
                         ),
@@ -298,8 +301,8 @@ class CreateAdsPage extends StatelessWidget {
                                         onTap: () {
                                           ipc.deleteImage(index);
                                         },
-                                        position: badges.BadgePosition.bottomStart(
-                                            bottom: 100, start: 70),
+                                        position:
+                                            badges.BadgePosition.bottomStart(bottom: 98, start: 75),
                                         badgeStyle: const badges.BadgeStyle(
                                             badgeColor: AppColor.tertiaryTextColor),
                                         badgeContent: const Icon(
@@ -321,22 +324,6 @@ class CreateAdsPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-
-                              // Row(
-                              //   children: [
-                              //     badges.Badge(
-                              //         badgeStyle: const badges.BadgeStyle(
-                              //             badgeColor: AppColor.tertiaryTextColor),
-                              //         badgeContent: const Icon(
-                              //           Icons.close,
-                              //           color: Colors.white,
-                              //           size: 12,
-                              //         ),
-                              //         child: ClipRRect(
-                              //             borderRadius: BorderRadius.circular(8),
-                              //             child: Image.asset(ImagePath.iphonePhoto))),
-                              //   ],
-                              // ),
                             ]),
                           )),
                       Step(
@@ -347,9 +334,7 @@ class CreateAdsPage extends StatelessWidget {
                           "Additional",
                           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                         ),
-                        content: Container(
-                          height: Get.height,
-                        ),
+                        content: Container(),
                       ),
                     ],
                   ),

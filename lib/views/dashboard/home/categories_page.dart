@@ -17,7 +17,7 @@ class CategoriesPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.backgroundGreyColor,
       body: SafeArea(
-          child: Padding(
+          child: Container(
         padding: const EdgeInsets.only(left: 24, right: 24),
         child: SingleChildScrollView(
           child: Column(
@@ -36,46 +36,54 @@ class CategoriesPage extends StatelessWidget {
                   ),
                 ),
               ),
-              GridView.builder(
-                physics: const ClampingScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 29,
-                  mainAxisSpacing: 20,
-                ),
-                itemCount: hpc.featuredImageUrl.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Get.toNamed(SingleCategory.routeName);
-                    },
-                    child: Container(
-                      height: 176,
-                      width: 156,
-                      decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(16)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: CachedNetworkImage(
-                                height: 120,
-                                width: 120,
-                                fit: BoxFit.fill,
-                                imageUrl: hpc.featuredImageUrl[index]),
-                          ),
-                          const Text(
-                            "Mobile",
-                            style: TextStyle(fontSize: 13),
-                          )
-                        ],
+              Container(
+                margin: EdgeInsets.all(5),
+                child: GridView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 29,
+                    mainAxisSpacing: 20,
+                  ),
+                  itemCount: hpc.featuredImageUrl.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Get.toNamed(SingleCategory.routeName);
+                      },
+                      child: Container(
+                        height: 176,
+                        width: 156,
+                        decoration: BoxDecoration(boxShadow: [
+                          BoxShadow(
+                              color: const Color(0xffa8a8a8).withOpacity(0.25),
+                              blurRadius: 8,
+                              spreadRadius: 2,
+                              offset: const Offset(-1, 2))
+                        ], color: Colors.white, borderRadius: BorderRadius.circular(16)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: CachedNetworkImage(
+                                  height: 120,
+                                  width: 120,
+                                  fit: BoxFit.fill,
+                                  imageUrl: hpc.featuredImageUrl[index]),
+                            ),
+                            const Text(
+                              "Mobile",
+                              style: TextStyle(fontSize: 13),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ],
           ),
