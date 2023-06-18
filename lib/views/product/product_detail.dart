@@ -30,13 +30,84 @@ class ProductDetailPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const BartarAppBar(
+                BartarAppBar(
                   hasLeading: true,
                   actions: [
-                    Icon(
-                      Icons.favorite_border_sharp,
-                      color: AppColor.primaryTextColor,
-                    ),
+                    c.isMyAds.value
+                        ? PopupMenuButton(
+                            splashRadius: 0,
+                            shadowColor: AppColor.tertiaryTextColor,
+                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 60),
+                            position: PopupMenuPosition.under,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(4.0),
+                              ),
+                            ),
+                            constraints: const BoxConstraints(minWidth: 119, minHeight: 123),
+                            onSelected: (value) {
+                              if (value == "Edit") {
+                                c.onEditTap();
+                              } else if (value == "Deactivate") {
+                                c.onDeactivateTap();
+                              } else if (value == "Delete") {
+                                c.onDeletetap();
+                              }
+                            },
+                            itemBuilder: (BuildContext context) => [
+                              const PopupMenuItem(
+                                value: "Edit",
+                                child: Text(
+                                  "Edit",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColor.secondaryColor,
+                                  ),
+                                ),
+                              ),
+                              const PopupMenuItem(
+                                value: "Deactivate",
+                                child: Text(
+                                  "Deactivate",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColor.secondaryColor,
+                                  ),
+                                ),
+                              ),
+                              const PopupMenuItem(
+                                value: "Delete",
+                                child: Text(
+                                  "Delete",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColor.secondaryColor,
+                                  ),
+                                ),
+                              ),
+                            ],
+                            child: const Icon(
+                              color: AppColor.secondaryTextColor,
+                              Icons.more_vert_rounded,
+                            ),
+                          )
+                        : Obx(
+                            () => GestureDetector(
+                              onTap: c.onFavTap,
+                              child: c.isFav.value
+                                  ? const Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                    )
+                                  : const Icon(
+                                      Icons.favorite_border_sharp,
+                                      color: AppColor.primaryTextColor,
+                                    ),
+                            ),
+                          ),
                   ],
                 ),
 
@@ -289,75 +360,84 @@ class ProductDetailPage extends StatelessWidget {
                   fillColor: Color(0xffEBEDF1),
                   borderRadius: 16,
                 ),
-                const SizedBox(
-                  height: 38,
-                ),
-                const Text(
-                  "Similar Ads",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppColor.primaryTextColor,
-                  ),
-                ),
-                const SizedBox(
-                  height: 14,
-                ),
-                const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      SimilarAdsWidget(),
-                      SizedBox(
-                        width: 31,
-                      ),
-                      SimilarAdsWidget(),
-                      SizedBox(
-                        width: 31,
-                      ),
-                      SimilarAdsWidget(),
-                      SizedBox(
-                        width: 31,
-                      ),
-                      SimilarAdsWidget(),
-                    ],
-                  ),
-                )
+                c.isMyAds.value
+                    ? Container()
+                    : const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 38,
+                          ),
+                          Text(
+                            "Similar Ads",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: AppColor.primaryTextColor,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 14,
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                SimilarAdsWidget(),
+                                SizedBox(
+                                  width: 31,
+                                ),
+                                SimilarAdsWidget(),
+                                SizedBox(
+                                  width: 31,
+                                ),
+                                SimilarAdsWidget(),
+                                SizedBox(
+                                  width: 31,
+                                ),
+                                SimilarAdsWidget(),
+                              ],
+                            ),
+                          )
+                        ],
+                      )
               ],
             ),
           ),
         )),
-        floatingActionButton: HawkFabMenu(
-          fabColor: AppColor.secondaryColor,
-          backgroundColor: Colors.transparent,
-          body: Container(),
-          icon: AnimatedIcons.menu_close,
-          hawkFabMenuController: c.hawkFabMenuController,
-          blur: 0,
-          buttonBorder: BorderSide.none,
-          items: [
-            HawkFabMenuItem(
-              label: 'Call',
-              ontap: () {
-                c.onCallTap();
-              },
-              color: AppColor.secondaryColor,
-              icon: const Icon(Icons.phone),
-              // color: Colors.red,
-              // labelColor: Colors.blue,
-            ),
-            HawkFabMenuItem(
-              label: 'Chat',
-              ontap: () {
-                c.onChatTap();
-              },
-              color: AppColor.secondaryColor,
-              icon: const Icon(Icons.chat),
-              // labelColor: Colors.white,
-              // labelBackgroundColor: Colors.blue,
-            ),
-          ],
-        ),
+        floatingActionButton: c.isMyAds.value
+            ? Container()
+            : HawkFabMenu(
+                fabColor: AppColor.secondaryColor,
+                backgroundColor: Colors.transparent,
+                body: Container(),
+                icon: AnimatedIcons.menu_close,
+                hawkFabMenuController: c.hawkFabMenuController,
+                blur: 0,
+                buttonBorder: BorderSide.none,
+                items: [
+                  HawkFabMenuItem(
+                    label: 'Call',
+                    ontap: () {
+                      c.onCallTap();
+                    },
+                    color: AppColor.secondaryColor,
+                    icon: const Icon(Icons.phone),
+                    // color: Colors.red,
+                    // labelColor: Colors.blue,
+                  ),
+                  HawkFabMenuItem(
+                    label: 'Chat',
+                    ontap: () {
+                      c.onChatTap();
+                    },
+                    color: AppColor.secondaryColor,
+                    icon: const Icon(Icons.chat),
+                    // labelColor: Colors.white,
+                    // labelBackgroundColor: Colors.blue,
+                  ),
+                ],
+              ),
         // floatingActionButton: PopupMenuButton(
         //   position: PopupMenuPosition.over,
         //   splashRadius: 0,

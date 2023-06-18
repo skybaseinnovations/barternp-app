@@ -9,7 +9,8 @@ import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:get/get.dart';
 
 class ProfilePage extends StatelessWidget {

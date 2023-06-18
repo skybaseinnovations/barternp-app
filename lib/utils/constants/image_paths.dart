@@ -9,14 +9,14 @@ class ImagePath {
   static const String chatIconPath = "assets/images/chat_icon.svg";
   static const String defaultAvatar = "assets/images/default_avatar.png";
   static const String placeHolderPath = "assets/images/placeholder_barter.jpg";
-  static const String myProfileIconPath = "assets/images/profileIcons/my_profile.svg";
-  static const String myAdsIconPath = "assets/images/profileIcons/my_ads.svg";
-  static const String likedAdsIconPath = "assets/images/profileIcons/like_ads.svg";
-  static const String notificationIconPath = "assets/images/profileIcons/notifications.svg";
-  static const String aboutIconPath = "assets/images/profileIcons/about.svg";
-  static const String termsAndConditionIconPath = "assets/images/profileIcons/term_condition.svg";
-  static const String logoutIconPath = "assets/images/profileIcons/logout.svg";
-  static const String editImageIconPath = "assets/images/profileIcons/edit_image.svg";
+  static const String myProfileIconPath = "assets/images/my_profile.svg";
+  static const String myAdsIconPath = "assets/images/my_ads.svg";
+  static const String likedAdsIconPath = "assets/images/like_ads.svg";
+  static const String notificationIconPath = "assets/images/notifications.svg";
+  static const String aboutIconPath = "assets/images/about.svg";
+  static const String termsAndConditionIconPath = "assets/images/term_condition.svg";
+  static const String logoutIconPath = "assets/images/logout.svg";
+  static const String editImageIconPath = "assets/images/edit_image.svg";
   static const String homeIcon = "assets/images/navbaritems/home_icon.svg";
   static const String chatIcon = "assets/images/navbaritems/chat_icon.svg";
   static const String profileIcon = "assets/images/navbaritems/profile_icon.svg";
@@ -27,7 +27,7 @@ class ImagePath {
   static const String activeProfileIcon = "assets/images/navbaritems/active_profile_icon.svg";
   static const String iphonePhoto = "assets/images/iphone.png";
   static const String bookmarkIconPath = "assets/images/bookmark_icom.svg";
-  static const String sendMessageIconPath = "assets/images/chatIcons/send_message_icon.svg";
-  static const String cameraIconIconPath = "assets/images/chatIcons/camera_icon.svg";
-  static const String galleryIconPath = "assets/images/chatIcons/gallery_icon.svg";
+  static const String sendMessageIconPath = "assets/images/send_message_icon.svg";
+  static const String cameraIconIconPath = "assets/images/camera_icon.svg";
+  static const String galleryIconPath = "assets/images/gallery_icon.svg";
 }
