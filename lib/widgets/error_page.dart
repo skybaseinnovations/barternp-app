@@ -1,11 +1,11 @@
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-class ErrorPage extends StatelessWidget {
+class BarterErrorPage extends StatelessWidget {
   final String imagePath;
   final String? title;
   final String? subTitle;
-  const ErrorPage({
+  const BarterErrorPage({
     super.key,
     required this.imagePath,
     this.title,

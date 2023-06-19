@@ -2,6 +2,7 @@ import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart'
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
+import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/widgets/custom/custom_tab_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -271,8 +272,12 @@ class HomePage extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) =>
-                                CustomItemTile(imageUrl: hpc.nearbyAdsImageUrl[index]),
+                            itemBuilder: (context, index) => CustomItemTile(
+                                  imageUrl: hpc.nearbyAdsImageUrl[index],
+                                  onTap: () {
+                                    Get.toNamed(ProductDetailPage.routeName);
+                                  },
+                                ),
                             itemCount: hpc.nearbyAdsImageUrl.length),
                       ),
                     ],

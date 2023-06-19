@@ -40,7 +40,10 @@ class SearchPage extends StatelessWidget {
                 height: 40,
               ),
               CustomTextField(
-                onSubmitted: (value) {},
+                onEditing: () {
+                  FocusScope.of(context).unfocus();
+                  Get.toNamed(SearchPage.routeName);
+                },
                 fillColor: AppColor.searchFieldColor,
                 prefixIcon: const Icon(Icons.search),
                 hint: 'Search',

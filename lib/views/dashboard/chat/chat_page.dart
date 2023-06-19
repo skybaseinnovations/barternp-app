@@ -112,6 +112,7 @@ class ChatPage extends StatelessWidget {
                           },
                         );
                       }
+
                       return ChatTile(
                         onTap: () {
                           Get.toNamed(ChattingPage.routeName);
