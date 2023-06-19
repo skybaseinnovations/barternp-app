@@ -8,4 +8,6 @@ class AppColor {
   static const Color tertiaryTextColor = Color(0xFFA8A8A8);
   static const Color backgroundGreyColor = Color(0xFFF9F9F9);
   static const Color searchFieldColor = Color(0xffEBEDF1);
+  static final shimmerBase = Colors.grey.withOpacity(0.20);
+  static const Color shimmerHighlight = Color(0xFFE1E1E1);
 }
