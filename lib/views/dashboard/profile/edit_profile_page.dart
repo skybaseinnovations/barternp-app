@@ -1,4 +1,4 @@
-import 'package:barter_app_2023/controllers/dashboard/edit_profile_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/profile/edit_profile_page_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/utils/helpers/validators.dart';

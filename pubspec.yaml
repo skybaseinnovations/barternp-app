@@ -45,7 +45,10 @@ dependencies:
   intl: ^0.18.1
   pinput: ^2.2.31
   shimmer: ^3.0.0
+<<<<<<< HEAD
   sticky_headers: ^0.3.0+2
+=======
+>>>>>>> 376bf8e686802559d91811a0f6dbe155fb2cab2e
 
 
 dev_dependencies:

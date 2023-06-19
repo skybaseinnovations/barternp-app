@@ -6,6 +6,13 @@ import 'package:hawk_fab_menu/hawk_fab_menu.dart';
 
 class ProductDetailPageController extends GetxController {
   var isMyAds = false.obs;
+  @override
+  void onInit() {
+    var isMyAdsArgument = Get.arguments;
+    isMyAds.value = isMyAdsArgument ?? false;
+    super.onInit();
+  }
+
   var isFav = false.obs;
   HawkFabMenuController hawkFabMenuController = HawkFabMenuController();
   CarouselController buttonCarouselController = CarouselController();

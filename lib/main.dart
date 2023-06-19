@@ -1,6 +1,6 @@
 import 'package:barter_app_2023/controllers/core_controller.dart';
 import 'package:barter_app_2023/utils/pages.dart';
-import 'package:barter_app_2023/views/dashboard/dash_page.dart';
+import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,6 +12,8 @@ void main() async {
 
 class BarterApp extends StatelessWidget {
   const BarterApp({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class BarterApp extends StatelessWidget {
         },
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: DashPage.routeName,
+      initialRoute: SplashPage.routeName,
       getPages: getPages,
     );
   }
