@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../../widgets/custom/custom_categories_item.dart';
-import '../../../widgets/custom/custom_items_tile.dart';
+import '../../../widgets/row/product_item_tile.dart';
 
 class HomePage extends StatelessWidget {
   static const String routename = "/homePage";

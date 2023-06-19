@@ -1,14 +1,10 @@
 import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
-import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
-import 'package:barter_app_2023/widgets/custom/custom_items_tile.dart';
+import 'package:barter_app_2023/widgets/row/product_item_tile.dart';
 import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class MyAdsPage extends StatelessWidget {

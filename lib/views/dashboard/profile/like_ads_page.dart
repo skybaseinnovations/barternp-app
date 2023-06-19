@@ -2,7 +2,7 @@ import 'package:barter_app_2023/controllers/dashboard/profile/like_ads_controlle
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
-import 'package:barter_app_2023/widgets/custom/custom_items_tile.dart';
+import 'package:barter_app_2023/widgets/row/product_item_tile.dart';
 import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
 
 import 'package:flutter/material.dart';

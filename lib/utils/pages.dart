@@ -9,6 +9,7 @@ import 'package:barter_app_2023/controllers/dashboard/profile/edit_profile_page_
 import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/chat/search_chat_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/profile/like_ads_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/profile/notification_controller.dart';
 import 'package:barter_app_2023/controllers/product/product_details_controller.dart';
 import 'package:barter_app_2023/controllers/splash_page_controller.dart';
 import 'package:barter_app_2023/views/auth/create_profile_page.dart';
@@ -21,6 +22,7 @@ import 'package:barter_app_2023/views/dashboard/profile/edit_profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile/like_ads_page.dart';
+import 'package:barter_app_2023/views/dashboard/profile/notification_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile/profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/search_page.dart';
 import 'package:barter_app_2023/views/product/create_ads_page.dart';
@@ -146,6 +148,15 @@ var getPages = [
     binding: BindingsBuilder(
       () {
         Get.lazyPut(() => LikedAdsController());
+      },
+    ),
+  ),
+  GetPage(
+    name: NotificationPage.routeName,
+    page: () => NotificationPage(),
+    binding: BindingsBuilder(
+      () {
+        Get.lazyPut(() => NotificationPageController());
       },
     ),
   ),
