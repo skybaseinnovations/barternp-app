@@ -73,7 +73,6 @@ var getPages = [
     binding: BindingsBuilder(
       () {
         Get.lazyPut(() => DashPageController());
-
         Get.lazyPut(() => HomePageController());
         Get.lazyPut(() => MyAdsPageController());
         Get.lazyPut(() => ChatPageController());

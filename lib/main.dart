@@ -14,6 +14,8 @@ void main() async {
 class BarterApp extends StatelessWidget {
   const BarterApp({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
