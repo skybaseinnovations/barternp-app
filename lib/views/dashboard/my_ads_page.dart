@@ -1,5 +1,4 @@
 import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
-import 'package:barter_app_2023/controllers/product/product_details_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
@@ -14,7 +13,6 @@ import 'package:get/get.dart';
 class MyAdsPage extends StatelessWidget {
   static const String routeName = "/myAdsPage/";
   final c = Get.find<MyAdsPageController>();
-  final pdpc = Get.find<ProductDetailPageController>();
   MyAdsPage({super.key});
 
   @override
@@ -33,6 +31,7 @@ class MyAdsPage extends StatelessWidget {
               children: [
                 const BartarAppBar(
                   hasLeading: false,
+                  centerTitle: true,
                   title: Text(
                     "My Ads",
                     style: TextStyle(
@@ -104,7 +103,7 @@ class MyAdsPage extends StatelessWidget {
                               return MyAdsTile(
                                 imageUrl: "https://picsum.photos/200/300",
                                 onTap: () {
-                                  pdpc.isMyAds.value = true;
+                                  // pdpc.isMyAds.value = true;
                                   Get.toNamed(ProductDetailPage.routeName);
                                 },
                                 isBookMarked: true,
@@ -113,7 +112,7 @@ class MyAdsPage extends StatelessWidget {
                             return MyAdsTile(
                               imageUrl: "https://picsum.photos/200/300",
                               onTap: () {
-                                pdpc.isMyAds.value = true;
+                                // pdpc.isMyAds.value = true;
                                 Get.toNamed(ProductDetailPage.routeName);
                               },
                             );

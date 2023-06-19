@@ -3,10 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePageController extends GetxController {
+  ScrollController scrollController = ScrollController();
+  final ScrollController lvsc1 = ScrollController();
+  final ScrollController lvsc2 = ScrollController();
+  var physicsStats = true.obs;
   @override
   void onInit() {
     super.onInit();
     tabAnimationController.initialize();
+
+    scrollController.addListener(() {
+      if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+          !scrollController.position.outOfRange) {
+        physicsStats.value = !physicsStats.value;
+      }
+    });
+
+    lvsc1.addListener(() {
+      if (lvsc1.offset <= lvsc1.position.minScrollExtent && !lvsc1.position.outOfRange) {
+        physicsStats.value = !physicsStats.value;
+      }
+    });
+    lvsc2.addListener(() {
+      if (lvsc2.offset <= lvsc2.position.minScrollExtent && !lvsc2.position.outOfRange) {
+        physicsStats.value = !physicsStats.value;
+      }
+    });
   }
 
   SlideAnimation tabAnimationController = SlideAnimation();
