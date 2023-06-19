@@ -1,14 +1,13 @@
 import 'package:barter_app_2023/controllers/dashboard/chat/chat_page_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
-import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/views/dashboard/chat/chatting_page.dart';
 import 'package:barter_app_2023/views/dashboard/chat/search_chat_page.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/custom/custom_tab_bar.dart';
+import '../../../widgets/row/chat_item_tile.dart';
 
 class ChatPage extends StatelessWidget {
   final c = Get.find<ChatPageController>();
@@ -134,120 +133,5 @@ class ChatPage extends StatelessWidget {
         ],
       ),
     ));
-  }
-}
-
-class ChatTile extends StatelessWidget {
-  final bool isRead;
-  final VoidCallback? onTap;
-  const ChatTile({
-    super.key,
-    this.isRead = false,
-    this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.all(10),
-        padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 11),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 26,
-                    child: ClipOval(
-                      child: CachedNetworkImage(
-                        height: 106,
-                        width: 106,
-                        placeholder: (context, _) => const Center(
-                            child: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            color: AppColor.primaryColor,
-                            strokeWidth: 2,
-                          ),
-                        )),
-                        errorWidget: (context, url, error) => Image.asset(
-                          ImagePath.placeHolderPath,
-                        ),
-                        imageUrl: "https://picsum.photos/200/300",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Flexible(
-                    // width: 209,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Person Name",
-                          style: isRead
-                              ? const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColor.secondaryTextColor,
-                                )
-                              : const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.primaryTextColor,
-                                ),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-                          style: isRead
-                              ? const TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColor.secondaryTextColor,
-                                )
-                              : const TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.secondaryTextColor,
-                                ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Text(
-              "2 days ago",
-              style: isRead
-                  ? const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.tertiaryTextColor,
-                    )
-                  : const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.tertiaryTextColor,
-                    ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

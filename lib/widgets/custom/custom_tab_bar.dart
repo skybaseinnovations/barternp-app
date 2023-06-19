@@ -10,12 +10,14 @@ class CustomTabBar extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
   final bool isActive;
+  final Widget? suffixWidget;
   CustomTabBar({
     super.key,
     required this.animation,
     required this.title,
     required this.onTap,
     this.isActive = false,
+    this.suffixWidget,
   });
 
   @override
@@ -26,12 +28,23 @@ class CustomTabBar extends StatelessWidget {
         // onTap: onTap,
         child: Column(
           children: [
-            Text(
-              title,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: isActive ? AppColor.primaryTextColor : AppColor.secondaryTextColor),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: isActive ? AppColor.primaryTextColor : AppColor.secondaryTextColor),
+                ),
+                suffixWidget != null
+                    ? const SizedBox(
+                        width: 8,
+                      )
+                    : Container(),
+                suffixWidget != null ? suffixWidget! : Container(),
+              ],
             ),
             const SizedBox(
               height: 12,

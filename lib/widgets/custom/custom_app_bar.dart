@@ -13,7 +13,7 @@ class BartarAppBar extends StatelessWidget {
     this.elevation,
     this.backgroundColor,
     this.foregroundColor,
-    this.centerTitle,
+    this.centerTitle = true,
     this.leadingWidth,
     this.titleTextStyle,
     this.bottom,

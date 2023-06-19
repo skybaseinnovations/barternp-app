@@ -1,7 +1,7 @@
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/widgets/custom/custom_bottom_sheet.dart';
-import 'package:barter_app_2023/widgets/custom/custom_items_tile.dart';
+import 'package:barter_app_2023/widgets/row/product_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
