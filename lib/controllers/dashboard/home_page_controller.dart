@@ -3,37 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePageController extends GetxController {
-  ScrollController scrollController = ScrollController();
-  final ScrollController lvsc1 = ScrollController();
-  final ScrollController lvsc2 = ScrollController();
-  var physicsStats = true.obs;
-  @override
-  void onInit() {
-    super.onInit();
-    tabAnimationController.initialize();
-
-    scrollController.addListener(() {
-      if (scrollController.offset >= scrollController.position.maxScrollExtent &&
-          !scrollController.position.outOfRange) {
-        physicsStats.value = !physicsStats.value;
-      }
-    });
-
-    lvsc1.addListener(() {
-      if (lvsc1.offset <= lvsc1.position.minScrollExtent && !lvsc1.position.outOfRange) {
-        physicsStats.value = !physicsStats.value;
-      }
-    });
-    lvsc2.addListener(() {
-      if (lvsc2.offset <= lvsc2.position.minScrollExtent && !lvsc2.position.outOfRange) {
-        physicsStats.value = !physicsStats.value;
-      }
-    });
-  }
-
-  SlideAnimation tabAnimationController = SlideAnimation();
-  final pageController = PageController(initialPage: 0).obs;
-
   List<String> featuredImageUrl = [
     "https://th.bing.com/th/id/R.755b3ccf4906b01fec7886eed3b1c9b0?rik=MUh7BlXmTwbSEA&pid=ImgRaw&r=0",
     "https://th.bing.com/th/id/R.97ef7b3cd27c058c2837b13fb659c87a?rik=eEJttuEl9%2fY13w&pid=ImgRaw&r=0",
@@ -60,6 +29,31 @@ class HomePageController extends GetxController {
     "https://i.pinimg.com/564x/1a/b1/8d/1ab18d99dc62232a647fd8fb5d190fd7.jpg",
   ];
 
+  ScrollController scrollController = ScrollController();
+
+  var physicsStats = true.obs;
+  @override
+  void onInit() {
+    super.onInit();
+    tabAnimationController.initialize();
+
+    scrollController.addListener(() {
+      if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+          !scrollController.position.outOfRange) {
+        physicsStats.value = !physicsStats.value;
+      }
+    });
+  }
+
+  int calculateMaxLength() {
+    return featuredImageUrl.length >= nearbyAdsImageUrl.length
+        ? featuredImageUrl.length
+        : nearbyAdsImageUrl.length;
+  }
+
+  SlideAnimation tabAnimationController = SlideAnimation();
+  final pageController = PageController(initialPage: 0).obs;
+
   final currentIndex = 0.obs;
   final isFeaturedSelected = true.obs;
   final isNearbyAdsSelected = false.obs;
@@ -70,6 +64,8 @@ class HomePageController extends GetxController {
     pageController.value
         .animateToPage(0, duration: const Duration(milliseconds: 300), curve: Curves.ease);
     currentIndex.value = 0;
+    scrollController.animateTo(scrollController.offset - 1,
+        duration: const Duration(microseconds: 1), curve: Curves.easeInOut);
   }
 
   void showNearbyAds() {
@@ -78,5 +74,7 @@ class HomePageController extends GetxController {
     pageController.value
         .animateToPage(1, duration: const Duration(milliseconds: 300), curve: Curves.ease);
     currentIndex.value = 1;
+    scrollController.animateTo(scrollController.offset - 1,
+        duration: const Duration(microseconds: 1), curve: Curves.easeInOut);
   }
 }

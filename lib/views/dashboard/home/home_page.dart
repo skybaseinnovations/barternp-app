@@ -9,7 +9,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
+import 'package:sticky_headers/sticky_headers.dart';
 import '../../../widgets/custom/custom_categories_item.dart';
 import '../../../widgets/custom/custom_items_tile.dart';
 
@@ -204,81 +204,90 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 34,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Obx(
-                    () => CustomTabBar(
-                      animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
-                          .animate(hpc.tabAnimationController.animationController),
-                      title: 'Featured',
-                      onTap: () {
-                        hpc.tabAnimationController.animationController.reverse();
-                        hpc.showFeaturedPage();
-                      },
-                      isActive: hpc.currentIndex.value == 0,
-                    ),
-                  ),
-                  Obx(
-                    () => CustomTabBar(
-                      animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
-                          .animate(hpc.tabAnimationController.animationController),
-                      title: 'Nearby Ads',
-                      onTap: () {
-                        hpc.tabAnimationController.animationController.forward();
-                        hpc.showNearbyAds();
-                      },
-                      isActive: hpc.currentIndex.value == 1,
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 15.0),
-                    child: Text(
-                      "View All",
-                      style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Obx(
-                () => SizedBox(
-                  height: hpc.currentIndex.value == 0
-                      ? hpc.featuredImageUrl.length * 172 + 20
-                      : hpc.nearbyAdsImageUrl.length * 172 + 20,
-                  child: PageView(
-                    pageSnapping: false,
-                    key: const PageStorageKey(2),
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: hpc.pageController.value,
-                    allowImplicitScrolling: true,
+              StickyHeader(
+                header: Container(
+                  color: AppColor.backgroundGreyColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        color: Colors.white,
-                        child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) =>
-                                CustomItemTile(imageUrl: hpc.featuredImageUrl[index]),
-                            itemCount: hpc.featuredImageUrl.length),
+                      const SizedBox(
+                        height: 70,
                       ),
-                      Container(
-                        color: Colors.white,
-                        child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) =>
-                                CustomItemTile(imageUrl: hpc.nearbyAdsImageUrl[index]),
-                            itemCount: hpc.nearbyAdsImageUrl.length),
+                      Obx(
+                        () => CustomTabBar(
+                          animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
+                              .animate(hpc.tabAnimationController.animationController),
+                          title: 'Featured',
+                          onTap: () {
+                            hpc.tabAnimationController.animationController.reverse();
+                            hpc.showFeaturedPage();
+                          },
+                          isActive: hpc.currentIndex.value == 0,
+                        ),
                       ),
+                      Obx(
+                        () => CustomTabBar(
+                          animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+                              .animate(hpc.tabAnimationController.animationController),
+                          title: 'Nearby Ads',
+                          onTap: () {
+                            hpc.tabAnimationController.animationController.forward();
+                            hpc.showNearbyAds();
+                          },
+                          isActive: hpc.currentIndex.value == 1,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 15.0),
+                        child: Text(
+                          "View All",
+                          style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                        ),
+                      )
                     ],
                   ),
                 ),
-              ),
+                content: Obx(
+                  () => SizedBox(
+                    height: hpc.currentIndex.value == 0
+                        ? (hpc.featuredImageUrl.length * 172) >= Get.height - 150
+                            ? (hpc.featuredImageUrl.length * 172) + 20
+                            : Get.height - 150
+                        : (hpc.nearbyAdsImageUrl.length * 172) >= Get.height
+                            ? (hpc.nearbyAdsImageUrl.length * 172) + 20
+                            : Get.height - 150,
+                    child: PageView(
+                      pageSnapping: false,
+                      key: const PageStorageKey(2),
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: hpc.pageController.value,
+                      allowImplicitScrolling: true,
+                      children: [
+                        Container(
+                          color: Colors.white,
+                          child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) =>
+                                  CustomItemTile(imageUrl: hpc.featuredImageUrl[index]),
+                              itemCount: hpc.featuredImageUrl.length),
+                        ),
+                        Container(
+                          color: Colors.white,
+                          child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) =>
+                                  CustomItemTile(imageUrl: hpc.nearbyAdsImageUrl[index]),
+                              itemCount: hpc.nearbyAdsImageUrl.length),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
