@@ -71,6 +71,7 @@ class AuthRepo {
   }
 
   static Future<void> createProfile({
+    String? image,
     required String name,
     required String gender,
     required String dob,
@@ -88,17 +89,27 @@ class AuthRepo {
         "Content-Type": "application/json",
         "Authorization": "${token.tokenType} ${token.accessToken}"
       };
+      var sentImage = "data:image/png;base64,$image";
+      // print(sentImage);
+
       // print("=======>> authorization :: ${token.tokenType} ${token.accessToken}");
       // "Authorization": "Bearer $tokens"
 
-      var body = {"name": name, "gender": gender, "dob": dob, "email": email};
+      var bodyWithoutImage = {"name": name, "gender": gender, "dob": dob, "email": email};
+      var bodyWithImage = {
+        "name": name,
+        "gender": gender,
+        "dob": dob,
+        "email": email,
+        "image": sentImage
+      };
 
       var parseUrl = Uri.parse(Api.createProfileUrl);
 
       log("=================>>> login Url $parseUrl");
 
-      http.Response response =
-          await BarterRequest.post(parseUrl, headers: headers, body: jsonEncode(body));
+      http.Response response = await BarterRequest.post(parseUrl,
+          headers: headers, body: jsonEncode(image == null ? bodyWithoutImage : bodyWithImage));
       dynamic data = jsonDecode(response.body);
 
       if (data["status"]) {

@@ -35,6 +35,7 @@ class EditProfilePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const BartarAppBar(
+                    leadingWidth: 24,
                     title: Text(
                       "My Profile",
                       style: TextStyle(
@@ -51,39 +52,47 @@ class EditProfilePage extends StatelessWidget {
                     child: Stack(
                       children: [
                         GestureDetector(
-                          onTap: c.onPickImage,
+                          onTap: () {
+                            c.showImagePicker(context);
+                          },
                           child: ClipOval(
-                            child: Obx(() => c.imageFile.value != null
-                                ? SizedBox(
-                                    height: 122,
-                                    width: 122,
-                                    child: Image.file(
-                                      c.imageFile.value!,
+                            child: Obx(
+                              () => c.imageFile.value != null
+                                  ? SizedBox(
+                                      height: 122,
+                                      width: 122,
+                                      child: Image.file(
+                                        c.imageFile.value!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : CachedNetworkImage(
+                                      height: 122,
+                                      width: 122,
+                                      placeholder: (context, url) => const Center(
+                                          child: SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          color: AppColor.primaryColor,
+                                          strokeWidth: 2,
+                                        ),
+                                      )),
+                                      errorWidget: (context, url, error) =>
+                                          Image.network(ImagePath.defaultAvatar),
+                                      imageUrl: c.initialImageUrl,
                                       fit: BoxFit.cover,
                                     ),
-                                  )
-                                : CachedNetworkImage(
-                                    height: 122,
-                                    width: 122,
-                                    placeholder: (context, url) => const Center(
-                                            child: SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator(
-                                            color: AppColor.primaryColor,
-                                            strokeWidth: 2,
-                                          ),
-                                        )),
-                                    errorWidget: (context, url, error) =>
-                                        Image.network(ImagePath.defaultAvatar),
-                                    imageUrl: 'https://picsum.photos/200')),
+                            ),
                           ),
                         ),
                         Positioned(
                           bottom: 5,
                           right: 13,
                           child: GestureDetector(
-                            onTap: c.onPickImage,
+                            onTap: () {
+                              c.showImagePicker(context);
+                            },
                             child: SvgPicture.asset(ImagePath.editImageIconPath),
                           ),
                         ),
@@ -155,7 +164,7 @@ class EditProfilePage extends StatelessWidget {
                   CustomOutlineBorderTextField(
                       onTap: () => c.selectDate(context),
                       readOnly: true,
-                      controller: c.dateController,
+                      controller: c.dateOfBirthController,
                       fillColor: AppColor.backgroundGreyColor,
                       textInputAction: TextInputAction.done,
                       textInputType: TextInputType.datetime,

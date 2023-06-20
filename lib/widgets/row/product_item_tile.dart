@@ -26,7 +26,7 @@ class CustomItemTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 5),
-        margin: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
+        margin: const EdgeInsets.only(bottom: 20, left: 8, right: 8),
         height: 152,
         width: 342,
         decoration: BoxDecoration(

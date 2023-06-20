@@ -4,6 +4,7 @@ class User {
   String? email;
   String? phone;
   String? gender;
+  String? dob;
   double? latitude;
   double? longitude;
   String? location;
@@ -18,6 +19,7 @@ class User {
       this.email,
       this.phone,
       this.gender,
+      this.dob,
       this.latitude,
       this.longitude,
       this.location,
@@ -32,6 +34,7 @@ class User {
     email = json['email'];
     phone = json['phone'];
     gender = json['gender'];
+    dob = json['dob'];
     latitude = json['latitude'];
     longitude = json['longitude'];
     location = json['location'];
@@ -48,6 +51,7 @@ class User {
     data['email'] = email;
     data['phone'] = phone;
     data['gender'] = gender;
+    data['dob'] = dob;
     data['latitude'] = latitude;
     data['longitude'] = longitude;
     data['location'] = location;

@@ -24,6 +24,7 @@ class ChattingPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const BartarAppBar(
+              leadingWidth: 24,
               hasLeading: true,
               title: Text(
                 "Name",
@@ -180,7 +181,7 @@ class ChattingTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 11),
+      padding: const EdgeInsets.symmetric(vertical: 2),
       child: Row(
         mainAxisAlignment: isSend ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [

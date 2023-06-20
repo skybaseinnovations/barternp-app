@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -15,13 +16,15 @@ class EditProfilePageController extends GetxController {
   late TextEditingController nameController;
   late TextEditingController emailController;
   late TextEditingController phoneNumberController;
-  late TextEditingController dateController;
+  late TextEditingController dateOfBirthController;
   late SingleValueDropDownController genderController;
   late String initialName;
   late String initialEmail;
   late String initialPhoneNumber;
-  late String initialDate;
+  late String initialDateOfBirth;
   late String initialGender;
+  late String initialImageUrl;
+  String? base64Image;
   FocusNode dropdownFieldFocusNode = FocusNode();
   var hasFocus = false.obs;
   var clearOption = false.obs;
@@ -44,13 +47,15 @@ class EditProfilePageController extends GetxController {
     initialName = cc.currentUser.value!.name!;
     initialEmail = cc.currentUser.value!.email!;
     initialPhoneNumber = cc.currentUser.value!.phone!;
-    // initialDate = cc.currentUser.value!.phone!;
+    initialDateOfBirth = cc.currentUser.value!.dob!;
     initialGender = cc.currentUser.value!.gender!;
+    initialImageUrl = cc.currentUser.value!.avatarUrl!;
+    print(initialImageUrl);
 
     nameController = TextEditingController(text: initialName);
     emailController = TextEditingController(text: initialEmail);
     phoneNumberController = TextEditingController(text: initialPhoneNumber);
-    dateController = TextEditingController();
+    dateOfBirthController = TextEditingController(text: initialDateOfBirth);
     genderController = SingleValueDropDownController(
         data: DropDownValueModel(name: initialGender, value: initialGender));
 
@@ -67,8 +72,8 @@ class EditProfilePageController extends GetxController {
 
     if (pickedDate != null) {
       log("===============>>>>$pickedDate");
-      selectedDate.value = DateFormat('yyyy/MM/dd').format(pickedDate);
-      dateController.text = selectedDate.value;
+      selectedDate.value = DateFormat('yyyy-MM-dd').format(pickedDate);
+      dateOfBirthController.text = selectedDate.value;
     } else {
       log("==============>>>>>>> Date is not selected");
     }
@@ -77,7 +82,9 @@ class EditProfilePageController extends GetxController {
   bool isTextFieldChanged() {
     if (nameController.text != initialName ||
         emailController.text != initialEmail ||
-        genderController.dropDownValue!.name != initialGender) {
+        genderController.dropDownValue!.name != initialGender ||
+        dateOfBirthController.text != initialDateOfBirth ||
+        imageFile.value != null) {
       return true;
     } else {
       return false;
@@ -87,6 +94,8 @@ class EditProfilePageController extends GetxController {
   void onSubmit() async {
     log("=================>>> update profile page submitted");
 
+    // imageFile.value
+
     if (formKey.currentState!.validate()) {
       if (!isTextFieldChanged()) {
         BartarSnackBar.error(
@@ -94,9 +103,10 @@ class EditProfilePageController extends GetxController {
       } else {
         isLoading.value = true;
         AuthRepo.createProfile(
+            image: base64Image,
             name: nameController.text,
             gender: genderController.dropDownValue!.value,
-            dob: dateController.text,
+            dob: dateOfBirthController.text,
             email: emailController.text,
             onSuccess: () {
               cc.loadCurrentUser();
@@ -112,26 +122,57 @@ class EditProfilePageController extends GetxController {
     }
   }
 
-  onPickImage() async {
+  onPickImage(ImageSource source) async {
     log("==================>>>>>pick image");
-//     File? image;
-// Future pickImage() async {
-//     try {
-//       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-// if(image == null) return;
-// final imageTemp = File(image.path);
-// setState(() => this.image = imageTemp);
-//     } on PlatformException catch(e) {
-//       print('Failed to pick image: $e');
-//     }
-//   }
+
     try {
-      var pickedImage = await picker.pickImage(source: ImageSource.gallery);
+      var pickedImage = await picker.pickImage(source: source);
       if (pickedImage != null) {
         imageFile.value = File(pickedImage.path);
+        base64Image = base64Encode(await imageFile.value!.readAsBytes());
+        print(base64Image);
       }
     } catch (e) {
       log("====================>>>>>>> pick image error::: $e");
     }
+  }
+
+  showImagePicker(BuildContext context) {
+    showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) => Container(
+              height: 125,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        onPickImage(ImageSource.camera);
+                      },
+                      child: const Row(
+                        children: [Icon(Icons.camera_alt_outlined), Text("Take a photo")],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        onPickImage(ImageSource.gallery);
+                      },
+                      child: const Row(
+                        children: [Icon(Icons.image_outlined), Text("Add from gallery")],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ));
   }
 }

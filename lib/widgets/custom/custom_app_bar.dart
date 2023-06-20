@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +16,7 @@ class BartarAppBar extends StatelessWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.centerTitle = true,
-    this.leadingWidth,
+    this.leadingWidth = 24,
     this.titleTextStyle,
     this.bottom,
     this.bottomOpacity = 1.0,
@@ -38,11 +40,12 @@ class BartarAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: hasLeading
-          ? IconButton(
-              onPressed: () {
+          ? InkWell(
+              onTap: () {
+                log("Had been called");
                 Get.back();
               },
-              icon: const Icon(
+              child: const Icon(
                 Icons.arrow_back_ios,
                 color: AppColor.primaryTextColor,
               ))

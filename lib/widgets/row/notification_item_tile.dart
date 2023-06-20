@@ -22,7 +22,7 @@ class NotificationTile extends StatelessWidget {
       children: [
         showDate
             ? const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 35),
+                padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,7 +48,7 @@ class NotificationTile extends StatelessWidget {
         InkWell(
           onTap: onTap,
           child: Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 9),
             color: isRead ? AppColor.secondaryColor.withOpacity(0.1) : Colors.transparent,
             child: Row(

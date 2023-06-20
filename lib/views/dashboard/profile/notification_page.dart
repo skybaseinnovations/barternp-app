@@ -38,7 +38,7 @@ class NotificationPage extends StatelessWidget {
                 height: 34,
               ),
               SizedBox(
-                width: Get.width * (1.7 / 2),
+                // width: Get.width * (1.7 / 2),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

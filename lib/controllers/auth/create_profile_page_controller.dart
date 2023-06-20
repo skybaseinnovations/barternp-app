@@ -48,7 +48,7 @@ class CreateProfilePageController extends GetxController {
 
     if (pickedDate != null) {
       log("===============>>>>$pickedDate");
-      selectedDate.value = DateFormat('yyyy/MM/dd').format(pickedDate);
+      selectedDate.value = DateFormat('yyyy-MM-dd').format(pickedDate);
       dateController.text = selectedDate.value;
     } else {
       log("==============>>>>>>> Date is not selected");

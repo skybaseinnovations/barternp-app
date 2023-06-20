@@ -43,11 +43,15 @@ class ProfilePage extends StatelessWidget {
                 height: 41,
               ),
               ClipOval(
-                child: CachedNetworkImage(
+                child: Obx(
+                  () => CachedNetworkImage(
                     height: 122,
                     width: 122,
                     errorWidget: (context, url, error) => Image.network(ImagePath.defaultAvatar),
-                    imageUrl: 'https://picsum.photos/200'),
+                    imageUrl: cc.currentUser.value!.avatarUrl!,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 17,
@@ -80,14 +84,6 @@ class ProfilePage extends StatelessWidget {
                 action: () {
                   Get.toNamed(EditProfilePage.routeName);
                 },
-              ),
-              const SizedBox(
-                height: 36,
-              ),
-              ProfileListTile(
-                icon: ImagePath.myAdsIconPath,
-                title: "My Ads",
-                action: () {},
               ),
               const SizedBox(
                 height: 36,
