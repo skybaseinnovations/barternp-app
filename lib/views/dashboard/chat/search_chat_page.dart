@@ -1,11 +1,9 @@
 import 'package:barter_app_2023/controllers/dashboard/chat/search_chat_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/constants/image_paths.dart';
 import '../../../widgets/custom/custom_textfield.dart';
 import '../../../widgets/row/chat_search_item.dart';
 
