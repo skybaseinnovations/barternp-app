@@ -47,7 +47,8 @@ class ProfilePage extends StatelessWidget {
                   () => CachedNetworkImage(
                     height: 122,
                     width: 122,
-                    errorWidget: (context, url, error) => Image.network(ImagePath.defaultAvatar),
+                    errorWidget: (context, url, error) => Image.asset(ImagePath.defaultAvatar),
+                    placeholder: (context, url) => Image.asset(ImagePath.defaultAvatar),
                     imageUrl: cc.currentUser.value!.avatarUrl!,
                     fit: BoxFit.cover,
                   ),
