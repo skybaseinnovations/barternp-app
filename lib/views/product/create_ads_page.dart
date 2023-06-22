@@ -153,6 +153,16 @@ class CreateAdsPage extends StatelessWidget {
                                 style: TextStyle(fontWeight: FontWeight.w600),
                               ),
                               const SizedBox(
+                                height: 50,
+                                child: CustomOutlineBorderTextField(
+                                    textInputAction: TextInputAction.next,
+                                    textInputType: TextInputType.text),
+                              ),
+                              const Text(
+                                "Category",
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              const SizedBox(
                                 height: 10,
                               ),
                               DropDownTextField(

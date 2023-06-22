@@ -58,6 +58,40 @@ class BarterShimmer {
     );
   }
 
+  static Widget subCategoryShimmer() {
+    return Shimmer.fromColors(
+      baseColor: AppColor.shimmerBase,
+      highlightColor: AppColor.shimmerHighlight,
+      child: GridView.builder(
+        physics: const ClampingScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 29,
+          mainAxisSpacing: 20,
+        ),
+        itemCount: 6,
+        itemBuilder: (context, index) {
+          return Container(
+            height: 176,
+            width: 156,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    color: const Color(0xffa8a8a8).withOpacity(0.25),
+                    blurRadius: 8,
+                    spreadRadius: 2,
+                    offset: const Offset(-1, 2))
+              ],
+              color: Colors.amber,
+              borderRadius: BorderRadius.circular(16),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   static Widget productItemShimmer() {
     return Shimmer.fromColors(
       baseColor: AppColor.shimmerBase,
