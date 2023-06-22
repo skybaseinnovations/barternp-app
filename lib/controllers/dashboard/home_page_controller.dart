@@ -1,6 +1,12 @@
+import 'package:barter_app_2023/Repos/home/categories_repo.dart';
 import 'package:barter_app_2023/controllers/animation/line_animation_controller.dart';
+import 'package:barter_app_2023/models/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../Repos/home/banner_repo.dart';
+import '../../models/banner_image_model.dart';
+import '../../widgets/custom/custom_snackbar.dart';
 
 class HomePageController extends GetxController {
   List<String> featuredImageUrl = [
@@ -32,8 +38,17 @@ class HomePageController extends GetxController {
   ScrollController scrollController = ScrollController();
 
   var physicsStats = true.obs;
+  var isBannerLoading = true.obs;
+  var isCategoryLoading = true.obs;
+  var isCategoryEmpty = true.obs;
+  var isBannerEmpty = true.obs;
+  // List<BannerImage> banners = []; //
+  RxList<BannerImage> banners = RxList();
+  RxList<CategoryDetails> categoryDetails = RxList();
   @override
   void onInit() {
+    fetchData();
+    categoryData();
     super.onInit();
     tabAnimationController.initialize();
 
@@ -76,5 +91,35 @@ class HomePageController extends GetxController {
     currentIndex.value = 1;
     scrollController.animateTo(scrollController.offset - 1,
         duration: const Duration(microseconds: 1), curve: Curves.easeInOut);
+  }
+
+  void fetchData() {
+    BannerRepo.fetchData(
+      onSuccess: (fetchedBanners) {
+        banners.value = fetchedBanners;
+        isBannerLoading.value = false;
+        if (banners.isEmpty) {
+          isBannerEmpty.value = false;
+        }
+      },
+      onError: (message) {
+        BartarSnackBar.error(title: "Render Error", message: message);
+        isBannerLoading.value = false;
+      },
+    );
+  }
+
+  void categoryData() {
+    CategoryRepo.fetchCategoryData(
+      onSuccess: (fetchedCategoryDetails) {
+      categoryDetails.value = fetchedCategoryDetails;
+      isCategoryLoading.value = false;
+      if (categoryDetails.isEmpty) {
+        isCategoryEmpty.value = false;
+      }
+    }, onError: (message) {
+      BartarSnackBar.error(title: "Render Error", message: message);
+      isCategoryLoading.value = false;
+    });
   }
 }
