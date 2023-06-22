@@ -10,6 +10,7 @@ class CoreController extends GetxController {
   @override
   void onInit() {
     loadCurrentUser();
+
     super.onInit();
   }
 

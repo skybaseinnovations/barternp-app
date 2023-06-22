@@ -1,15 +1,19 @@
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
+import 'package:barter_app_2023/models/categories.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
+import 'package:barter_app_2023/views/dashboard/home/sub_categories.dart';
 import 'package:barter_app_2023/widgets/custom/custom_tab_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
+import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import '../../../models/banner_image_model.dart';
 import '../../../widgets/custom/custom_categories_item.dart';
 import '../../../widgets/row/product_item_tile.dart';
 
@@ -92,36 +96,41 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 36,
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: CarouselSlider.builder(
-                  itemCount: hpc.bannerImageUrl.length,
-                  itemBuilder: (context, index, realIndex) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl: hpc.bannerImageUrl[index],
-                        fit: BoxFit.cover,
-                        width: Get.width - 60,
+              Obx(
+                () => hpc.isBannerLoading.value
+                    ? BarterShimmer.bannerShimmer()
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: CarouselSlider.builder(
+                          itemCount: hpc.banners.length,
+                          itemBuilder: (context, index, realIndex) {
+                            BannerImage banner = hpc.banners[index];
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: CachedNetworkImage(
+                                imageUrl: banner.imageUrl!,
+                                fit: BoxFit.cover,
+                                width: Get.width - 60,
+                              ),
+                            );
+                          },
+                          options: CarouselOptions(
+                            height: 114,
+                            aspectRatio: 16 / 9,
+                            viewportFraction: 0.8,
+                            initialPage: 0,
+                            enableInfiniteScroll: true,
+                            reverse: false,
+                            autoPlay: true,
+                            autoPlayInterval: const Duration(seconds: 3),
+                            autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enlargeCenterPage: true,
+                            enlargeFactor: 0.3,
+                            scrollDirection: Axis.horizontal,
+                          ),
+                        ),
                       ),
-                    );
-                  },
-                  options: CarouselOptions(
-                    height: 114,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.8,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    enlargeFactor: 0.3,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
               ),
               const SizedBox(
                 height: 36,
@@ -131,16 +140,19 @@ class HomePage extends StatelessWidget {
                 children: [
                   const Text("Categories",
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(CategoriesPage.routeName);
-                    },
-                    child: const Text(
-                      "View All",
-                      style: TextStyle(
-                          fontSize: 11,
-                          color: AppColor.secondaryColor,
-                          fontWeight: FontWeight.w400),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 40.0),
+                    child: InkWell(
+                      onTap: () {
+                        Get.toNamed(CategoriesPage.routeName);
+                      },
+                      child: const Text(
+                        "View All",
+                        style: TextStyle(
+                            fontSize: 11,
+                            color: AppColor.secondaryColor,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   )
                 ],
@@ -148,58 +160,45 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              SizedBox(
-                height: 152,
-                width: 342,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    SizedBox(
-                      width: Get.width - 70,
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CustomCategoriesItem(
-                              categoryName: "Mobile",
-                              imageName:
-                                  "https://th.bing.com/th/id/OIP.rcrrrL1gIKMugGWkn01XdwHaHZ?w=182&h=181&c=7&r=0&o=5&dpr=1.3&pid=1.7"),
-                          CustomCategoriesItem(
-                            categoryName: "Laptop",
-                            imageName:
-                                "https://th.bing.com/th/id/OIP.Pl-BFLckE_RVkWZYyuJzGgHaDa?w=312&h=161&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+              Obx(
+                () => !hpc.isCategoryEmpty.value
+                    ? Container()
+                    : hpc.isCategoryLoading.value
+                        ? BarterShimmer.categoryShimmer()
+                        : InkWell(
+                            onTap: () {},
+                            child: SizedBox(
+                              height: 152,
+                              width: 342,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: hpc.categoryDetails.length,
+                                itemBuilder: (context, index) {
+                                  CategoryDetails categoryDetail = hpc.categoryDetails[index];
+                                  return InkWell(
+                                    onTap: () {
+                                      // Get.toNamed(CategoriesPage.routeName,
+                                      //     arguments: {'id': 'bidhan'});
+                                      categoryDetail.hasSubcategory!
+                                          ? Get.toNamed(SubCategoriesPage.routeName, arguments: {
+                                              'id': categoryDetail.id,
+                                              'subCategory': true,
+                                              'title': categoryDetail.title
+                                            })
+                                          : Get.toNamed(SubCategoriesPage.routeName, arguments: {
+                                              'id': categoryDetail.id,
+                                              'subCategory': false,
+                                              'title': categoryDetail.title
+                                            });
+                                    },
+                                    child: CustomCategoriesItem(
+                                        categoryName: categoryDetail.title!,
+                                        imageName: categoryDetail.thumbnail!),
+                                  );
+                                },
+                              ),
+                            ),
                           ),
-                          CustomCategoriesItem(
-                            categoryName: "Car",
-                            imageName:
-                                "https://i.pinimg.com/736x/37/95/39/3795395e51af1728c2deb1e5a414773b--birthday-gifts-happy-birthday.jpg",
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: Get.width - 40,
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CustomCategoriesItem(
-                            categoryName: "Bike",
-                            imageName:
-                                "https://i.pinimg.com/originals/7f/2c/71/7f2c715050034570d88e24f9371bf562.jpg",
-                          ),
-                          CustomCategoriesItem(
-                              categoryName: "Animals",
-                              imageName:
-                                  "https://th.bing.com/th/id/R.b6fae2128d03a0f31a04bd2bf5b99ec8?rik=wXsbVJfTU%2b53jw&pid=ImgRaw&r=0"),
-                          CustomCategoriesItem(
-                            categoryName: "Land",
-                            imageName:
-                                "https://th.bing.com/th/id/OIP.P_hhkWTCeNWYjQu0O1M-WQHaHa?w=174&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
               ),
               const SizedBox(
                 height: 34,

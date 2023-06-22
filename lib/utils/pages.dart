@@ -18,8 +18,9 @@ import 'package:barter_app_2023/views/auth/verification_page.dart';
 import 'package:barter_app_2023/views/dashboard/chat/chatting_page.dart';
 import 'package:barter_app_2023/views/dashboard/chat/search_chat_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
-import 'package:barter_app_2023/views/dashboard/profile/edit_profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
+import 'package:barter_app_2023/views/dashboard/profile/edit_profile_page.dart';
+import 'package:barter_app_2023/views/dashboard/home/sub_categories.dart';
 import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile/like_ads_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile/notification_page.dart';
@@ -29,6 +30,8 @@ import 'package:barter_app_2023/views/product/create_ads_page.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:get/get.dart';
+
+import '../controllers/product/category_controller.dart';
 
 var getPages = [
   GetPage(
@@ -112,8 +115,27 @@ var getPages = [
     ),
   ),
   GetPage(
+    arguments: Get.arguments,
+    name: SubCategoriesPage.routeName,
+    page: () {
+      return SubCategoriesPage();
+    },
+    binding: BindingsBuilder(
+      () {
+        Get.lazyPut(() => SubCategoryController());
+      },
+    ),
+  ),
+  GetPage(
     name: CategoriesPage.routeName,
-    page: () => CategoriesPage(),
+    page: () {
+      return CategoriesPage();
+    },
+    binding: BindingsBuilder(
+      () {
+        Get.lazyPut(() => HomePageController());
+      },
+    ),
   ),
   GetPage(
     name: SingleCategory.routeName,
