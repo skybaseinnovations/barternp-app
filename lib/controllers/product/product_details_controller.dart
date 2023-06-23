@@ -1,15 +1,22 @@
 import 'dart:developer';
 
+import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:get/get.dart';
 import 'package:hawk_fab_menu/hawk_fab_menu.dart';
 
 class ProductDetailPageController extends GetxController {
   var isMyAds = false.obs;
+
+  late AdsDetail adsDetail;
+
   @override
   void onInit() {
-    var isMyAdsArgument = Get.arguments;
-    isMyAds.value = isMyAdsArgument ?? false;
+    //argument will be in the form {"isMyAds": false,"adsDetail": AdsDetail.instance }
+    var myAdsArgument = Get.arguments;
+    adsDetail = myAdsArgument["adsDetail"];
+    isMyAds.value = myAdsArgument["isMyAds"] ?? false;
+
     super.onInit();
   }
 

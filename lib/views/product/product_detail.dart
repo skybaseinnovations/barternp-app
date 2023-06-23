@@ -175,13 +175,13 @@ class ProductDetailPage extends StatelessWidget {
                 ),
 
                 // tags details
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
                         Text(
-                          "Mobile",
+                          c.adsDetail.category!.title!,
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w400,
@@ -192,7 +192,7 @@ class ProductDetailPage extends StatelessWidget {
                           width: 16,
                         ),
                         Text(
-                          "Used",
+                          c.adsDetail.subcategory!.title!,
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w400,
@@ -215,11 +215,11 @@ class ProductDetailPage extends StatelessWidget {
                   height: 21,
                 ),
                 // product name
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "iPhone 8 Plus",
+                      c.adsDetail.title!,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -230,7 +230,7 @@ class ProductDetailPage extends StatelessWidget {
                       width: 16,
                     ),
                     Text(
-                      "Rs 100,000",
+                      "Rs ${c.adsDetail.price}",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,

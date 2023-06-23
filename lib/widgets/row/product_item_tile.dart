@@ -1,20 +1,24 @@
+import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
+import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class CustomItemTile extends StatelessWidget {
-  final String imageUrl;
-  final bool isFeatured;
+  final AdsDetail adsModel;
+  final String? imageUrl;
+
   final bool isMyAds;
   final bool isFavourite;
   final VoidCallback? onTap;
 
   const CustomItemTile({
     super.key,
-    required this.imageUrl,
-    this.isFeatured = false,
+    required this.adsModel,
+    this.imageUrl,
     this.isMyAds = false,
     this.isFavourite = false,
     this.onTap,
@@ -23,7 +27,7 @@ class CustomItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () => Get.toNamed(ProductDetailPage.routeName),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         margin: const EdgeInsets.only(bottom: 20, left: 8, right: 8),
@@ -63,7 +67,7 @@ class CustomItemTile extends StatelessWidget {
                   errorWidget: (context, url, error) => Image.asset(
                     ImagePath.placeHolderPath,
                   ),
-                  imageUrl: imageUrl,
+                  imageUrl: adsModel.thumbnail ?? "",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -73,7 +77,7 @@ class CustomItemTile extends StatelessWidget {
               Expanded(
                 child: Stack(
                   children: [
-                    isFeatured
+                    AdsDetail.isfeatured(adsModel.isFeatured)
                         ? Positioned(
                             right: 5,
                             child: SvgPicture.asset(ImagePath.bookmarkIconPath),
@@ -98,12 +102,12 @@ class CustomItemTile extends StatelessWidget {
                                     decoration: const BoxDecoration(
                                         color: Color(0xffEAE8E8),
                                         borderRadius: BorderRadius.all(Radius.circular(4))),
-                                    child: const Align(
+                                    child: Align(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        "Mobile",
-                                        style:
-                                            TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                                        adsModel.category!.title ?? "",
+                                        style: const TextStyle(
+                                            fontSize: 12, color: AppColor.secondaryColor),
                                       ),
                                     ),
                                   )),
@@ -117,50 +121,52 @@ class CustomItemTile extends StatelessWidget {
                                     decoration: const BoxDecoration(
                                         color: Color(0xffEAE8E8),
                                         borderRadius: BorderRadius.all(Radius.circular(4))),
-                                    child: const Align(
+                                    child: Align(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        "New",
-                                        style:
-                                            TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                                        adsModel.subcategory!.title ?? "",
+                                        style: const TextStyle(
+                                            fontSize: 12, color: AppColor.secondaryColor),
                                       ),
                                     ),
                                   )),
                               const SizedBox(
                                 width: 30,
                               ),
-                              const Expanded(
+                              Expanded(
                                   flex: 1,
                                   child: Text(
-                                    "Location",
-                                    style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                                    adsModel.location ?? "",
+                                    style: const TextStyle(
+                                        fontSize: 12, color: AppColor.secondaryColor),
                                   ))
                             ],
                           ),
                         ),
-                        const Flexible(
+                        Flexible(
                           fit: FlexFit.loose,
                           child: Row(
                             children: [
                               Expanded(
-                                flex: 2,
+                                flex: 3,
                                 child: Text(
-                                  "iPhone14",
+                                  adsModel.title ?? "",
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600,
                                       color: AppColor.primaryTextColor),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
                               Expanded(
-                                flex: 1,
+                                flex: 2,
                                 child: Text(
-                                  "2 days ago",
-                                  style: TextStyle(fontSize: 12, color: AppColor.tertiaryTextColor),
+                                  AdsDetail.returnDate(adsModel.updatedAt!),
+                                  style: const TextStyle(
+                                      fontSize: 12, color: AppColor.tertiaryTextColor),
                                 ),
                               ),
                             ],
@@ -168,10 +174,14 @@ class CustomItemTile extends StatelessWidget {
                         ),
                         isMyAds
                             ? Container()
-                            : const Flexible(
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. ...",
-                                  style: TextStyle(fontSize: 13, color: AppColor.tertiaryTextColor),
+                            : Flexible(
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    adsModel.description ?? "",
+                                    style: const TextStyle(
+                                        fontSize: 13, color: AppColor.tertiaryTextColor),
+                                  ),
                                 ),
                               ),
                         Flexible(
@@ -182,9 +192,9 @@ class CustomItemTile extends StatelessWidget {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Text(
-                                      "Rs 100,000",
-                                      style: TextStyle(
+                                    Text(
+                                      "Rs ${adsModel.price!}",
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                           color: AppColor.primaryColor),
@@ -199,12 +209,12 @@ class CustomItemTile extends StatelessWidget {
                                           ),
                                     isMyAds
                                         ? Container()
-                                        : const Flexible(
+                                        : Flexible(
                                             flex: 1,
                                             child: Text(
-                                              "Sellers nameeeeeeeeeee",
+                                              adsModel.seller!.name!,
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontSize: 12, color: AppColor.primaryTextColor),
                                             ),
                                           ),

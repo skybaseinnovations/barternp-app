@@ -1,4 +1,4 @@
-import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/home/home_page_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/widgets/custom/custom_bottom_sheet.dart';
 import 'package:barter_app_2023/widgets/row/product_item_tile.dart';
@@ -85,8 +85,8 @@ class SearchPage extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) =>
-                      CustomItemTile(imageUrl: hpc.featuredImageUrl[index]),
+                  itemBuilder: (context, index) => Container(),
+                  // CustomItemTile(imageUrl: hpc.featuredImageUrl[index]),
                   separatorBuilder: (context, index) => const SizedBox(
                         height: 20,
                       ),

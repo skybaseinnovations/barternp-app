@@ -95,23 +95,24 @@ class MyAdsPage extends StatelessWidget {
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            if (index == 0) {
-                              return CustomItemTile(
-                                isMyAds: true,
-                                imageUrl: "https://picsum.photos/200/300",
-                                onTap: () {
-                                  Get.toNamed(ProductDetailPage.routeName, arguments: true);
-                                },
-                                isFeatured: true,
-                              );
-                            }
-                            return CustomItemTile(
-                              isMyAds: true,
-                              imageUrl: "https://picsum.photos/200/300",
-                              onTap: () {
-                                Get.toNamed(ProductDetailPage.routeName, arguments: true);
-                              },
-                            );
+                            return Container();
+                            // if (index == 0) {
+                            //   return CustomItemTile(
+                            //     isMyAds: true,
+                            //     imageUrl: "https://picsum.photos/200/300",
+                            //     onTap: () {
+                            //       Get.toNamed(ProductDetailPage.routeName, arguments: true);
+                            //     },
+                            //     isFeatured: true,
+                            //   );
+                            // }
+                            // return CustomItemTile(
+                            //   isMyAds: true,
+                            //   imageUrl: "https://picsum.photos/200/300",
+                            //   onTap: () {
+                            //     Get.toNamed(ProductDetailPage.routeName, arguments: true);
+                            //   },
+                            // );
                           },
                           itemCount: 5),
                     ),
@@ -121,11 +122,12 @@ class MyAdsPage extends StatelessWidget {
                           physics: const ClampingScrollPhysics(),
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) => CustomItemTile(
-                                isMyAds: true,
-                                imageUrl: "https://picsum.photos/200/300",
-                                onTap: () => Get.toNamed(ProductDetailPage.routeName),
-                              ),
+                          itemBuilder: (context, index) => Container(),
+                          // CustomItemTile(
+                          //       isMyAds: true,
+                          //       imageUrl: "https://picsum.photos/200/300",
+                          //       onTap: () => Get.toNamed(ProductDetailPage.routeName),
+                          //     ),
                           itemCount: 5),
                     ),
                     Container(
@@ -134,11 +136,12 @@ class MyAdsPage extends StatelessWidget {
                           physics: const ClampingScrollPhysics(),
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) => CustomItemTile(
-                                isMyAds: true,
-                                imageUrl: "https://picsum.photos/200/300",
-                                onTap: () => Get.toNamed(ProductDetailPage.routeName),
-                              ),
+                          itemBuilder: (context, index) => Container(),
+                          // CustomItemTile(
+                          //       isMyAds: true,
+                          //       imageUrl: "https://picsum.photos/200/300",
+                          //       onTap: () => Get.toNamed(ProductDetailPage.routeName),
+                          //     ),
                           itemCount: 5),
                     ),
                   ]),

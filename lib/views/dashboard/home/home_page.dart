@@ -1,4 +1,4 @@
-import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/home/home_page_controller.dart';
 import 'package:barter_app_2023/models/categories.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
@@ -21,14 +21,14 @@ class HomePage extends StatelessWidget {
   static const String routeName = "/homePage";
 
   HomePage({super.key});
-  final hpc = Get.find<HomePageController>();
+  final c = Get.find<HomePageController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.backgroundGreyColor,
       body: SingleChildScrollView(
-        controller: hpc.scrollController,
+        controller: c.scrollController,
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 22),
           child: Column(
@@ -97,14 +97,14 @@ class HomePage extends StatelessWidget {
                 height: 36,
               ),
               Obx(
-                () => hpc.isBannerLoading.value
+                () => c.isBannerLoading.value
                     ? BarterShimmer.bannerShimmer()
                     : ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child: CarouselSlider.builder(
-                          itemCount: hpc.banners.length,
+                          itemCount: c.banners.length,
                           itemBuilder: (context, index, realIndex) {
-                            BannerImage banner = hpc.banners[index];
+                            BannerImage banner = c.banners[index];
                             return ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: CachedNetworkImage(
@@ -161,9 +161,9 @@ class HomePage extends StatelessWidget {
                 height: 24,
               ),
               Obx(
-                () => !hpc.isCategoryEmpty.value
+                () => !c.isCategoryEmpty.value
                     ? Container()
-                    : hpc.isCategoryLoading.value
+                    : c.isCategoryLoading.value
                         ? BarterShimmer.categoryShimmer()
                         : InkWell(
                             onTap: () {},
@@ -172,9 +172,9 @@ class HomePage extends StatelessWidget {
                               width: 342,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: hpc.categoryDetails.length,
+                                itemCount: c.categoryDetails.length,
                                 itemBuilder: (context, index) {
-                                  CategoryDetails categoryDetail = hpc.categoryDetails[index];
+                                  CategoryDetails categoryDetail = c.categoryDetails[index];
                                   return InkWell(
                                     onTap: () {
                                       // Get.toNamed(CategoriesPage.routeName,
@@ -215,32 +215,35 @@ class HomePage extends StatelessWidget {
                       Obx(
                         () => CustomTabBar(
                           animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
-                              .animate(hpc.tabAnimationController.animationController),
+                              .animate(c.tabAnimationController.animationController),
                           title: 'Featured',
                           onTap: () {
-                            hpc.tabAnimationController.animationController.reverse();
-                            hpc.showFeaturedPage();
+                            c.tabAnimationController.animationController.reverse();
+                            c.showFeaturedPage();
                           },
-                          isActive: hpc.currentIndex.value == 0,
+                          isActive: c.currentIndex.value == 0,
                         ),
                       ),
                       Obx(
                         () => CustomTabBar(
                           animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
-                              .animate(hpc.tabAnimationController.animationController),
+                              .animate(c.tabAnimationController.animationController),
                           title: 'Nearby Ads',
                           onTap: () {
-                            hpc.tabAnimationController.animationController.forward();
-                            hpc.showNearbyAds();
+                            c.tabAnimationController.animationController.forward();
+                            c.showNearbyAds();
                           },
-                          isActive: hpc.currentIndex.value == 1,
+                          isActive: c.currentIndex.value == 1,
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 15.0),
-                        child: Text(
-                          "View All",
-                          style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 15.0),
+                        child: InkWell(
+                          onTap: c.onViewAllTap,
+                          child: const Text(
+                            "View All",
+                            style: TextStyle(fontSize: 12, color: AppColor.secondaryColor),
+                          ),
                         ),
                       )
                     ],
@@ -248,29 +251,36 @@ class HomePage extends StatelessWidget {
                 ),
                 content: Obx(
                   () => SizedBox(
-                    height: hpc.currentIndex.value == 0
-                        ? (hpc.featuredImageUrl.length * 172) >= Get.height - 150
-                            ? (hpc.featuredImageUrl.length * 172) + 20
-                            : Get.height - 150
-                        : (hpc.nearbyAdsImageUrl.length * 172) >= Get.height
-                            ? (hpc.nearbyAdsImageUrl.length * 172) + 20
+                    height: c.currentIndex.value == 0
+                        ? (c.featuredAds.length * 172) >= Get.height - 180
+                            ? (c.featuredAds.length * 172) + 20
+                            : Get.height - 180
+                        : (c.nearByAds.length * 172) >= Get.height
+                            ? (c.nearByAds.length * 172) + 20
                             : Get.height - 150,
                     child: PageView(
                       pageSnapping: false,
                       key: const PageStorageKey(2),
                       physics: const NeverScrollableScrollPhysics(),
-                      controller: hpc.pageController.value,
+                      controller: c.pageController.value,
                       allowImplicitScrolling: true,
                       children: [
-                        Container(
-                          color: Colors.white,
-                          child: ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (context, index) =>
-                                  CustomItemTile(imageUrl: hpc.featuredImageUrl[index]),
-                              itemCount: hpc.featuredImageUrl.length),
+                        Obx(
+                          () => c.isFeaturedAdsLoading.value
+                              ? BarterShimmer.productItemShimmer()
+                              : Container(
+                                  color: Colors.white,
+                                  child: ListView.builder(
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (context, index) {
+                                        return CustomItemTile(
+                                          adsModel: c.featuredAds[index],
+                                        );
+                                      },
+                                      itemCount: c.featuredAds.length),
+                                ),
                         ),
                         Container(
                           color: Colors.white,
@@ -278,9 +288,10 @@ class HomePage extends StatelessWidget {
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
-                              itemBuilder: (context, index) =>
-                                  CustomItemTile(imageUrl: hpc.nearbyAdsImageUrl[index]),
-                              itemCount: hpc.nearbyAdsImageUrl.length),
+                              itemBuilder: (context, index) => CustomItemTile(
+                                    adsModel: c.nearByAds[index],
+                                  ),
+                              itemCount: c.nearByAds.length),
                         ),
                       ],
                     ),

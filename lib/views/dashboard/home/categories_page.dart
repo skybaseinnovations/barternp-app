@@ -1,7 +1,5 @@
-import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
-import 'package:barter_app_2023/controllers/product/category_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/home/home_page_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
-import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/sub_categories.dart';
 import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
 import 'package:cached_network_image/cached_network_image.dart';

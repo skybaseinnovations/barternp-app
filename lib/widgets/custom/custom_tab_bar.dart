@@ -2,7 +2,7 @@ import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/dashboard/home_page_controller.dart';
+import '../../controllers/dashboard/home/home_page_controller.dart';
 
 class CustomTabBar extends StatelessWidget {
   final controller = Get.find<HomePageController>();

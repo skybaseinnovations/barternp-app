@@ -1,12 +1,15 @@
+import 'package:barter_app_2023/Repos/home/ads_repo.dart';
 import 'package:barter_app_2023/Repos/home/categories_repo.dart';
+import 'package:barter_app_2023/Repos/home/view_all_page.dart';
 import 'package:barter_app_2023/controllers/animation/line_animation_controller.dart';
+import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:barter_app_2023/models/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Repos/home/banner_repo.dart';
-import '../../models/banner_image_model.dart';
-import '../../widgets/custom/custom_snackbar.dart';
+import '../../../Repos/home/banner_repo.dart';
+import '../../../models/banner_image_model.dart';
+import '../../../widgets/custom/custom_snackbar.dart';
 
 class HomePageController extends GetxController {
   List<String> featuredImageUrl = [
@@ -45,10 +48,16 @@ class HomePageController extends GetxController {
   // List<BannerImage> banners = []; //
   RxList<BannerImage> banners = RxList();
   RxList<CategoryDetails> categoryDetails = RxList();
+  RxList<AdsDetail> featuredAds = RxList();
+  RxList<AdsDetail> nearByAds = RxList();
+  var isFeaturedAdsLoading = true.obs;
+  var isNearByAdsLoading = true.obs;
   @override
   void onInit() {
     fetchData();
     categoryData();
+    fetchFeaturedAdsData();
+    fetchNearByAdsData();
     super.onInit();
     tabAnimationController.initialize();
 
@@ -110,8 +119,7 @@ class HomePageController extends GetxController {
   }
 
   void categoryData() {
-    CategoryRepo.fetchCategoryData(
-      onSuccess: (fetchedCategoryDetails) {
+    CategoryRepo.fetchCategoryData(onSuccess: (fetchedCategoryDetails) {
       categoryDetails.value = fetchedCategoryDetails;
       isCategoryLoading.value = false;
       if (categoryDetails.isEmpty) {
@@ -121,5 +129,41 @@ class HomePageController extends GetxController {
       BartarSnackBar.error(title: "Render Error", message: message);
       isCategoryLoading.value = false;
     });
+  }
+
+  void fetchFeaturedAdsData() {
+    AdsRepo.getFeaturedAdsDetail(
+        isPreview: true,
+        onSuccess: (featuredAdsList, nextPageUrl) {
+          print("get featuredData success");
+          featuredAds.value = featuredAdsList;
+          print(featuredAds);
+          isFeaturedAdsLoading.value = false;
+        },
+        onError: (message) {
+          print("$message");
+          isCategoryLoading.value = false;
+        });
+  }
+
+  void fetchNearByAdsData() {
+    AdsRepo.getNearbyAdsDetail(
+        isPreview: true,
+        onSuccess: (nearByAdsList, nextPageUrl) {
+          print("get nearByAds success");
+          nearByAds.value = nearByAdsList;
+          print(nearByAds);
+          isNearByAdsLoading.value = false;
+        },
+        onError: (message) {
+          print("$message");
+          isNearByAdsLoading.value = false;
+        });
+  }
+
+  void onViewAllTap() {
+    print("view all is tapped");
+    Get.toNamed(ViewAllPage.routeName,
+        arguments: {"pageName": pageController.value.page == 0 ? "Featured_Ads" : "NearBy_Ads"});
   }
 }

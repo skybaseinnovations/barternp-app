@@ -59,22 +59,23 @@ class LikedAds extends StatelessWidget {
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
-                      if (index == 0) {
-                        return CustomItemTile(
-                          imageUrl: "https://picsum.photos/200/300",
-                          onTap: () {
-                            Get.toNamed(ProductDetailPage.routeName, arguments: true);
-                          },
-                          isFavourite: true,
-                        );
-                      }
-                      return CustomItemTile(
-                        imageUrl: "https://picsum.photos/200/300",
-                        onTap: () {
-                          Get.toNamed(ProductDetailPage.routeName, arguments: true);
-                        },
-                        isFavourite: true,
-                      );
+                      return Container();
+                      // if (index == 0) {
+                      //   return CustomItemTile(
+                      //     imageUrl: "https://picsum.photos/200/300",
+                      //     onTap: () {
+                      //       Get.toNamed(ProductDetailPage.routeName, arguments: true);
+                      //     },
+                      //     isFavourite: true,
+                      //   );
+                      // }
+                      // return CustomItemTile(
+                      //   imageUrl: "https://picsum.photos/200/300",
+                      //   onTap: () {
+                      //     Get.toNamed(ProductDetailPage.routeName, arguments: true);
+                      //   },
+                      //   isFavourite: true,
+                      // );
                     },
                     itemCount: 5),
               )

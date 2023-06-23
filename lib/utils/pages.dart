@@ -1,10 +1,12 @@
+import 'package:barter_app_2023/Repos/home/view_all_page.dart';
 import 'package:barter_app_2023/controllers/auth/create_profile_page_controller.dart';
 import 'package:barter_app_2023/controllers/auth/login_page_controller.dart';
 import 'package:barter_app_2023/controllers/auth/verification_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/chat/chat_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/chat/chatting_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart';
-import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/home/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/home/view_all_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/profile/edit_profile_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/chat/search_chat_controller.dart';
@@ -178,6 +180,15 @@ var getPages = [
     binding: BindingsBuilder(
       () {
         Get.lazyPut(() => NotificationPageController());
+      },
+    ),
+  ),
+  GetPage(
+    name: ViewAllPage.routeName,
+    page: () => ViewAllPage(),
+    binding: BindingsBuilder(
+      () {
+        Get.lazyPut(() => ViewAllPageController());
       },
     ),
   ),

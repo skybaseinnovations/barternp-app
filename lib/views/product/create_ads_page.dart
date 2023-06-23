@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/home/home_page_controller.dart';
 import 'package:barter_app_2023/controllers/image_picker_controller.dart';
 import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
