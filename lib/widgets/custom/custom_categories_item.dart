@@ -28,10 +28,14 @@ class CustomCategoriesItem extends StatelessWidget {
                 imageUrl: imageName),
           ),
           // ignore: prefer_const_constructors
-          Text(
-            categoryName,
-            style: const TextStyle(
-              fontSize: 13,
+          SizedBox(
+            width: 90,
+            child: Text(
+              categoryName,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 13,
+              ),
             ),
           )
         ],

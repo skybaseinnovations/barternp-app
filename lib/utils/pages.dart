@@ -122,7 +122,7 @@ var getPages = [
     },
     binding: BindingsBuilder(
       () {
-        Get.lazyPut(() => SubCategoryController());
+        Get.lazyPut(() => CategoryController());
       },
     ),
   ),

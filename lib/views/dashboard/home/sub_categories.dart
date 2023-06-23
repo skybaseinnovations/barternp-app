@@ -1,7 +1,7 @@
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
 import 'package:barter_app_2023/controllers/product/category_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
-import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
+
 import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class SubCategoriesPage extends StatelessWidget {
   SubCategoriesPage({super.key});
   static const String routeName = "/subCategoriesPage";
   final hpc = Get.find<HomePageController>();
-  final c = Get.find<SubCategoryController>();
+  final c = Get.find<CategoryController>();
 
   @override
   Widget build(BuildContext context) {

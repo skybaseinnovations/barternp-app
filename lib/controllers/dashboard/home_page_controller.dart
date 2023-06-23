@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Repos/home/banner_repo.dart';
+import '../../Repos/home/sub_categories_repo.dart';
 import '../../models/banner_image_model.dart';
 import '../../widgets/custom/custom_snackbar.dart';
 
@@ -110,8 +111,7 @@ class HomePageController extends GetxController {
   }
 
   void categoryData() {
-    CategoryRepo.fetchCategoryData(
-      onSuccess: (fetchedCategoryDetails) {
+    CategoryRepo.fetchCategoryData(onSuccess: (fetchedCategoryDetails) {
       categoryDetails.value = fetchedCategoryDetails;
       isCategoryLoading.value = false;
       if (categoryDetails.isEmpty) {
@@ -121,5 +121,29 @@ class HomePageController extends GetxController {
       BartarSnackBar.error(title: "Render Error", message: message);
       isCategoryLoading.value = false;
     });
+  }
+
+  RxString catTitle = "".obs;
+  RxString catId = "".obs;
+  RxBool hasSub = false.obs;
+  RxString catSubTitle = "".obs;
+  RxList<CategoryDetails> subCategoryDetails = RxList();
+  var isSubCategoryLoading = true.obs;
+  var isSubCategoryEmpty = true.obs;
+  void fetchSubCategoryData() {
+    SubCategoryRepo.fetchSubCategoryData(
+      id: catId.value,
+      onSuccess: (fetchedSubCategory) {
+        subCategoryDetails.value = fetchedSubCategory;
+        isSubCategoryLoading.value = false;
+
+        if (subCategoryDetails.isEmpty) {
+          isSubCategoryEmpty.value = false;
+        }
+      },
+      onError: (message) {
+        BartarSnackBar.error(title: "Render Error", message: message);
+      },
+    );
   }
 }

@@ -255,6 +255,41 @@ class BarterShimmer {
           )),
     );
   }
+  static Widget selectCategoryItemShimmer() {
+    return Shimmer.fromColors(
+      baseColor: AppColor.shimmerBase,
+      highlightColor: AppColor.shimmerHighlight,
+      child: Container(
+          margin: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.symmetric(vertical: 9),
+          child: Row(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 50,
+                      color: Colors.amber,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Flexible(
+                      // width: 209,
+                      child: Container(
+                        color: Colors.amber,
+                        height: 12,
+                        width: 100,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )),
+    );
+  }
 
   static Widget notificationItemShimmer() {
     return Shimmer.fromColors(

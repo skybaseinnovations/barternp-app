@@ -5,13 +5,15 @@ import 'package:barter_app_2023/controllers/image_picker_controller.dart';
 import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
+import 'package:barter_app_2023/widgets/custom/custom_category_bottom_sheet.dart';
 import 'package:barter_app_2023/widgets/custom/custom_underline_text_field.dart';
-import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../widgets/custom/custom_sub_category_bottom.dart';
 
 class CreateAdsPage extends StatelessWidget {
   CreateAdsPage({Key? key}) : super(key: key);
@@ -158,6 +160,9 @@ class CreateAdsPage extends StatelessWidget {
                                     textInputAction: TextInputAction.next,
                                     textInputType: TextInputType.text),
                               ),
+                              const SizedBox(
+                                height: 20,
+                              ),
                               const Text(
                                 "Category",
                                 style: TextStyle(fontWeight: FontWeight.w600),
@@ -165,54 +170,81 @@ class CreateAdsPage extends StatelessWidget {
                               const SizedBox(
                                 height: 10,
                               ),
-                              DropDownTextField(
-                                // clearOption: c.clearOption.value,
-                                // controller: c.genderController,
-                                readOnly: true,
-                                dropdownRadius: 4,
-                                dropDownIconProperty:
-                                    IconProperty(icon: Icons.expand_more, size: 25),
-                                // textFieldFocusNode: c.dropdownFieldFocusNode,
-                                // dropDownIconProperty: IconProperty(
-                                //     icon: c.hasFocus.value
-                                //         ? Icons.keyboard_arrow_up_sharp
-                                //         : Icons.keyboard_arrow_down_outlined),
-                                dropDownList: const [
-                                  // DropDownValueModel(name: "Unspecified", value: "Unspecified"),
-                                  // DropDownValueModel(name: "Male", value: "Male"),
-                                  // DropDownValueModel(name: "Female", value: "Female"),
-                                  // DropDownValueModel(name: "Other", value: "Other"),
-                                ],
+                              InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.vertical(top: Radius.circular(16))),
+                                      context: context,
+                                      builder: (context) =>
+                                          SizedBox(child: CustomCategoryBottomSheet()));
+                                },
+                                child: Container(
+                                  height: 40,
+                                  decoration: const BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(color: AppColor.secondaryTextColor))),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Expanded(flex: 5, child: Text(hpc.catTitle.value)),
+                                      const Expanded(flex: 3, child: SizedBox()),
+                                      const Icon(
+                                        Icons.expand_more,
+                                        color: AppColor.secondaryTextColor,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
                               const SizedBox(
                                 height: 38,
                               ),
-                              const Text(
-                                "Subcategory",
-                                style: TextStyle(fontWeight: FontWeight.w600),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              DropDownTextField(
-                                // clearOption: c.clearOption.value,
-                                // controller: c.genderController,
-                                readOnly: true,
-                                dropdownRadius: 4,
-                                dropDownIconProperty:
-                                    IconProperty(icon: Icons.expand_more, size: 25),
-                                // textFieldFocusNode: c.dropdownFieldFocusNode,
-                                // dropDownIconProperty: IconProperty(
-                                //     icon: c.hasFocus.value
-                                //         ? Icons.keyboard_arrow_up_sharp
-                                //         : Icons.keyboard_arrow_down_outlined),
-                                dropDownList: const [
-                                  // DropDownValueModel(name: "Unspecified", value: "Unspecified"),
-                                  // DropDownValueModel(name: "Male", value: "Male"),
-                                  // DropDownValueModel(name: "Female", value: "Female"),
-                                  // DropDownValueModel(name: "Other", value: "Other"),
-                                ],
-                              ),
+                              hpc.hasSub.value
+                                  ? Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          "Subcategory",
+                                          style: TextStyle(fontWeight: FontWeight.w600),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            showModalBottomSheet(
+                                                shape: const RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.vertical(
+                                                        top: Radius.circular(16))),
+                                                context: context,
+                                                builder: (context) => SizedBox(
+                                                    child: CustomSubCategoryBottomSheet()));
+                                          },
+                                          child: Container(
+                                            height: 40,
+                                            decoration: const BoxDecoration(
+                                                border: Border(
+                                                    bottom: BorderSide(
+                                                        color: AppColor.secondaryTextColor))),
+                                            child: Row(
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                Expanded(
+                                                    flex: 3, child: Text(hpc.catSubTitle.value)),
+                                                const Expanded(flex: 3, child: SizedBox()),
+                                                const Icon(
+                                                  Icons.expand_more,
+                                                  color: AppColor.secondaryTextColor,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : const SizedBox()
                             ],
                           ),
                         ),
