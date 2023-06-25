@@ -4,6 +4,7 @@ import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/sub_categories.dart';
+import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/widgets/custom/custom_tab_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
 import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
@@ -277,6 +278,11 @@ class HomePage extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         return CustomItemTile(
                                           adsModel: c.featuredAds[index],
+                                          onTap: () => Get.toNamed(ProductDetailPage.routeName,
+                                              arguments: {
+                                                "isMyAds": false,
+                                                "adId": c.featuredAds[index].id
+                                              }),
                                         );
                                       },
                                       itemCount: c.featuredAds.length),
@@ -290,6 +296,11 @@ class HomePage extends StatelessWidget {
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) => CustomItemTile(
                                     adsModel: c.nearByAds[index],
+                                    onTap: () => Get.toNamed(ProductDetailPage.routeName,
+                                        arguments: {
+                                          "isMyAds": false,
+                                          "adId": c.featuredAds[index].id
+                                        }),
                                   ),
                               itemCount: c.nearByAds.length),
                         ),

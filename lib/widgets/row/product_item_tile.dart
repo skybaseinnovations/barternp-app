@@ -1,11 +1,9 @@
 import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
-import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class CustomItemTile extends StatelessWidget {
   final AdsDetail adsModel;
@@ -27,7 +25,7 @@ class CustomItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.toNamed(ProductDetailPage.routeName),
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         margin: const EdgeInsets.only(bottom: 20, left: 8, right: 8),
@@ -55,18 +53,8 @@ class CustomItemTile extends StatelessWidget {
                 child: CachedNetworkImage(
                   height: 106,
                   width: 106,
-                  placeholder: (context, _) => const Center(
-                      child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      color: AppColor.primaryColor,
-                      strokeWidth: 2,
-                    ),
-                  )),
-                  errorWidget: (context, url, error) => Image.asset(
-                    ImagePath.placeHolderPath,
-                  ),
+                  errorWidget: (context, url, error) => Image.asset(ImagePath.placeHolderPath),
+                  placeholder: (context, url) => Image.asset(ImagePath.placeHolderPath),
                   imageUrl: adsModel.thumbnail ?? "",
                   fit: BoxFit.cover,
                 ),

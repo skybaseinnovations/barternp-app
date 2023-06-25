@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:barter_app_2023/utils/constants/apis.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../utils/helpers/http_requests.dart';
+import '../../utils/helpers/storage_helpers.dart';
 
 class AdsRepo {
   static Future<void> getFeaturedAdsDetail({
@@ -74,6 +76,116 @@ class AdsRepo {
         var nextPageUrl = isPreview ? null : data["data"]["next_page_url"];
 
         onSuccess(adsList, nextPageUrl);
+      } else {
+        onError(data["message"]);
+      }
+    } catch (e, s) {
+      log("$e");
+      log("$s");
+      onError("Something went wrong");
+    }
+  }
+
+  static Future<void> getSingleAdsDetail({
+    String? productId,
+    required Function(AdsDetail adsDetail, List<AdsDetail> similarAdsDetail) onSuccess,
+    required Function(String) onError,
+  }) async {
+    try {
+      var headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      };
+      var stringUrl = "${Api.adsDetailsUrl}/$productId/details";
+
+      var parseUrl = Uri.parse(stringUrl);
+
+      print("=================>>> nearby ads Url $parseUrl");
+
+      http.Response response = await BarterRequest.get(parseUrl, headers: headers);
+      dynamic data = jsonDecode(response.body);
+
+      if (data["status"]) {
+        AdsDetail adsList = AdsDetail.fromJson(data["data"]["details"]);
+        List<AdsDetail> similarAdsDetail = adsModelfromJson(data["data"]["similar"]);
+
+        onSuccess(adsList, similarAdsDetail);
+      } else {
+        onError(data["message"]);
+      }
+    } catch (e, s) {
+      log("$e");
+      log("$s");
+      onError("Something went wrong");
+    }
+  }
+
+  static Future<void> postComment({
+    String? productId,
+    required String commentText,
+    required VoidCallback onSuccess,
+    required Function(String) onError,
+  }) async {
+    try {
+      var token = StorageHelper.getAccessToken()!;
+      var headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "${token.tokenType} ${token.accessToken}"
+      };
+      var body = {"data": commentText};
+      var stringUrl = "${Api.adsDetailsUrl}/$productId/comment";
+
+      var parseUrl = Uri.parse(stringUrl);
+
+      print("=================>>> nearby ads Url $parseUrl");
+
+      log("=================>>> login Url $parseUrl");
+
+      http.Response response =
+          await BarterRequest.post(parseUrl, headers: headers, body: jsonEncode(body));
+
+      dynamic data = jsonDecode(response.body);
+      print(data);
+      if (data["status"]) {
+        onSuccess();
+      } else {
+        onError(data["message"]);
+      }
+    } catch (e, s) {
+      log("$e");
+      log("$s");
+      onError("Something went wrong");
+    }
+  }
+
+  static Future<void> deleteComment({
+    int? commentId,
+    required VoidCallback onSuccess,
+    required Function(String) onError,
+  }) async {
+    try {
+      var token = StorageHelper.getAccessToken()!;
+      var headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "${token.tokenType} ${token.accessToken}"
+      };
+
+      var stringUrl = "${Api.adsDetailsUrl}/comments/$commentId/delete";
+
+      var parseUrl = Uri.parse(stringUrl);
+
+      print("=================>>> nearby ads Url $parseUrl");
+
+      log("=================>>> login Url $parseUrl");
+
+      http.Response response = await BarterRequest.get(parseUrl, headers: headers);
+
+      dynamic data = jsonDecode(response.body);
+      print(data);
+      if (data["status"]) {
+        onSuccess();
       } else {
         onError(data["message"]);
       }

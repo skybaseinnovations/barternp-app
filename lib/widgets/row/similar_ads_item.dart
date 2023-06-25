@@ -1,10 +1,13 @@
+import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/constants/colors.dart';
 
 class SimilarAdsWidget extends StatelessWidget {
+  final AdsDetail similarAds;
   const SimilarAdsWidget({
     super.key,
+    required this.similarAds,
   });
 
   @override
@@ -13,6 +16,7 @@ class SimilarAdsWidget extends StatelessWidget {
       height: 200,
       width: 156,
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 18),
+      margin: const EdgeInsets.only(right: 15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -32,9 +36,9 @@ class SimilarAdsWidget extends StatelessWidget {
           const SizedBox(
             height: 9,
           ),
-          const Text(
-            "iPhone 14 plus",
-            style: TextStyle(
+          Text(
+            similarAds.title!,
+            style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w400,
               color: AppColor.primaryTextColor,
@@ -43,9 +47,9 @@ class SimilarAdsWidget extends StatelessWidget {
           const SizedBox(
             height: 3,
           ),
-          const Text(
-            "Rs 120,000",
-            style: TextStyle(
+          Text(
+            "Rs ${similarAds.price}",
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
               color: AppColor.primaryColor,

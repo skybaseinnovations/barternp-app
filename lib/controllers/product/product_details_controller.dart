@@ -1,22 +1,30 @@
 import 'dart:developer';
 
 import 'package:barter_app_2023/models/ads_model.dart';
+import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hawk_fab_menu/hawk_fab_menu.dart';
 
+import '../../Repos/home/ads_repo.dart';
+
 class ProductDetailPageController extends GetxController {
   var isMyAds = false.obs;
-
-  late AdsDetail adsDetail;
+  late String adId;
+  Rxn<AdsDetail> adsDetail = Rxn();
+  List<AdsDetail>? similarAds;
+  var isLoading = true.obs;
+  TextEditingController commentController = TextEditingController();
 
   @override
   void onInit() {
-    //argument will be in the form {"isMyAds": false,"adsDetail": AdsDetail.instance }
+    // argument will be in the form {"isMyAds": false,"adId": "id" }
     var myAdsArgument = Get.arguments;
-    adsDetail = myAdsArgument["adsDetail"];
+    adId = myAdsArgument["adId"];
     isMyAds.value = myAdsArgument["isMyAds"] ?? false;
-
+    print(myAdsArgument);
+    getSingleProductDetail();
     super.onInit();
   }
 
@@ -54,5 +62,53 @@ class ProductDetailPageController extends GetxController {
 
   onDeletetap() {
     log("================>>>> delete field is tapped");
+  }
+
+  void getSingleProductDetail() {
+    AdsRepo.getSingleAdsDetail(
+      productId: adId,
+      onSuccess: (adsDetails, similarAdsDetails) {
+        adsDetail.value = adsDetails;
+        similarAds = similarAdsDetails;
+
+        print(adsDetails);
+        // print(similarAdsDetails);
+        isLoading.value = false;
+      },
+      onError: (message) {
+        print("$message");
+        isLoading.value = false;
+      },
+    );
+  }
+
+  onComment() {
+    AdsRepo.postComment(
+        productId: adId,
+        commentText: commentController.text,
+        onSuccess: () {
+          getSingleProductDetail();
+          BartarSnackBar.success(title: "Successfully commented");
+          commentController.clear();
+        },
+        onError: (message) {
+          print("$message");
+          isLoading.value = false;
+        });
+  }
+
+  onDeleteComment(int commentId) {
+    AdsRepo.deleteComment(
+      commentId: commentId,
+      onSuccess: () {
+        getSingleProductDetail();
+        BartarSnackBar.success(title: "Successfully deleted");
+        commentController.clear();
+      },
+      onError: (message) {
+        print("$message");
+        isLoading.value = false;
+      },
+    );
   }
 }

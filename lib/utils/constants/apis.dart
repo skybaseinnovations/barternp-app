@@ -8,4 +8,5 @@ class Api {
   static const String subCategoryUrl = "$baseUrl/categories/";
   static const String featuredAdsUrl = "$baseUrl/featured-ads";
   static const String nearByAdsUrl = "$baseUrl/nearby-ads";
+  static const String adsDetailsUrl = "$baseUrl/ads";
 }

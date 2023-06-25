@@ -31,7 +31,7 @@ class BarterShimmer {
           itemCount: 3,
           itemBuilder: (context, index) {
             return Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -314,6 +314,152 @@ class BarterShimmer {
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget productDetailPageShimmer() {
+    return Shimmer.fromColors(
+      baseColor: AppColor.shimmerBase,
+      highlightColor: AppColor.shimmerHighlight,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 300,
+              height: 290,
+              decoration: const BoxDecoration(
+                color: AppColor.backgroundGreyColor,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+
+          // tags details
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              color: Colors.amber,
+              width: double.infinity,
+              height: 20,
+            ),
+          ),
+          const SizedBox(
+            height: 21,
+          ),
+
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 9),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      radius: 13,
+                      child: ClipOval(
+                        child: Container(
+                          color: Colors.amber,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 14,
+                    ),
+                    Flexible(
+                      // width: 209,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                color: Colors.amber,
+                                width: 150,
+                                height: 10,
+                              ),
+                              Container(
+                                color: Colors.amber,
+                                width: 80,
+                                height: 10,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 6,
+                          ),
+                          Container(
+                            color: Colors.amber,
+                            width: double.infinity,
+                            height: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              color: Colors.amber,
+              width: 150,
+              height: 20,
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+
+          Center(
+            child: Container(
+              width: 380,
+              height: 150,
+              decoration: const BoxDecoration(
+                color: AppColor.backgroundGreyColor,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              color: Colors.amber,
+              width: 150,
+              height: 20,
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Center(
+            child: Container(
+              width: 380,
+              height: 50,
+              decoration: const BoxDecoration(
+                color: AppColor.backgroundGreyColor,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
             ),
           ),
         ],

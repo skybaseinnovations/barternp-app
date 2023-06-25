@@ -1,4 +1,6 @@
 import 'package:barter_app_2023/models/categories.dart';
+import 'package:barter_app_2023/models/comment_model.dart';
+import 'package:barter_app_2023/models/user_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../widgets/custom/time_age_message.dart';
@@ -27,10 +29,11 @@ class AdsDetail {
   List<String>? images;
   String? thumbnail;
   String? location;
-  OwnerDetailModel? seller;
-  OwnerDetailModel? buyer;
+  User? seller;
+  User? buyer;
   CategoryDetails? category;
   CategoryDetails? subcategory;
+  List<CommentsModel>? comments;
 
   AdsDetail({
     this.id,
@@ -57,6 +60,7 @@ class AdsDetail {
     this.buyer,
     this.category,
     this.subcategory,
+    this.comments,
   });
 
   AdsDetail.fromJson(Map<String, dynamic> json) {
@@ -82,11 +86,14 @@ class AdsDetail {
     images = json['images'].cast<String>();
     thumbnail = json['thumbnail'];
     location = json['location'];
-    seller = json['seller'] != null ? OwnerDetailModel.fromJson(json['seller']) : null;
-    buyer = json['buyer'] != null ? OwnerDetailModel.fromJson(json['buyer']) : null;
+    seller = json['seller'] != null ? User.fromJson(json['seller']) : null;
+    buyer = json['buyer'] != null ? User.fromJson(json['buyer']) : null;
     category = json['category'] != null ? CategoryDetails.fromJson(json['category']) : null;
     subcategory =
         json['subcategory'] != null ? CategoryDetails.fromJson(json['subcategory']) : null;
+    if (json['comments'] != null) {
+      comments = commentModelfromJson(json['comments']);
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -123,6 +130,9 @@ class AdsDetail {
     if (subcategory != null) {
       data['subcategory'] = subcategory!.toJson();
     }
+    if (comments != null) {
+      data['comments'] = comments!.map((v) => v.toJson()).toList();
+    }
 
     return data;
   }
@@ -135,27 +145,5 @@ class AdsDetail {
     timeago.setLocaleMessages('en', MyCustomMessages());
     DateTime updatedDate = DateTime.parse(date);
     return timeago.format(updatedDate);
-  }
-}
-
-class OwnerDetailModel {
-  String? id;
-  String? name;
-  String? email;
-
-  OwnerDetailModel({this.id, this.name, this.email});
-
-  OwnerDetailModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    email = json['email'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['email'] = email;
-    return data;
   }
 }

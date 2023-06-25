@@ -54,6 +54,7 @@ class HomePageController extends GetxController {
   var isNearByAdsLoading = true.obs;
   @override
   void onInit() {
+    // onProductTap();
     fetchData();
     categoryData();
     fetchFeaturedAdsData();

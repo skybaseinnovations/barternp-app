@@ -46,6 +46,7 @@ dependencies:
   pinput: ^2.2.31
   shimmer: ^3.0.0
   sticky_headers: ^0.3.0+2
+  timeago: ^3.4.0
   timeago_flutter: ^3.4.0
 
 dev_dependencies:
