@@ -169,7 +169,7 @@ class HomePage extends StatelessWidget {
                   height: 24,
                 ),
                 Obx(
-                  () => !hpc.isCategoryEmpty.value
+                  () => hpc.isCategoryEmpty.value
                       ? Container()
                       : hpc.isCategoryLoading.value
                           ? BarterShimmer.categoryShimmer()
@@ -185,19 +185,15 @@ class HomePage extends StatelessWidget {
                                     CategoryDetails categoryDetail = hpc.categoryDetails[index];
                                     return InkWell(
                                       onTap: () {
-                                        // Get.toNamed(CategoriesPage.routeName,
-                                        //     arguments: {'id': 'bidhan'});
+                                        hpc.AcatTitle.value = categoryDetail.title!;
+                                        hpc.AhasSub = true;
+                                        hpc.AcatId.value = categoryDetail.id!;
+                                        hpc.AcatSubTitle.value = "";
+                                        hpc.type = true;
                                         categoryDetail.hasSubcategory!
-                                            ? Get.toNamed(SubCategoriesPage.routeName, arguments: {
-                                                'id': categoryDetail.id,
-                                                'subCategory': true,
-                                                'title': categoryDetail.title
-                                              })
-                                            : Get.toNamed(SubCategoriesPage.routeName, arguments: {
-                                                'id': categoryDetail.id,
-                                                'subCategory': false,
-                                                'title': categoryDetail.title
-                                              });
+                                            ? Get.toNamed(SubCategoriesPage.routeName)
+                                            : Get.toNamed(
+                                                CategoriesPage.routeName); /*Go to ads page after*/
                                       },
                                       child: CustomCategoriesItem(
                                           categoryName: categoryDetail.title!,

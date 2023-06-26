@@ -1,5 +1,5 @@
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
-import 'package:barter_app_2023/controllers/product/category_controller.dart';
+
 import 'package:barter_app_2023/utils/constants/colors.dart';
 
 import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
@@ -14,11 +14,11 @@ import '../../../widgets/custom/custom_app_bar.dart';
 class SubCategoriesPage extends StatelessWidget {
   SubCategoriesPage({super.key});
   static const String routeName = "/subCategoriesPage";
-  final hpc = Get.find<HomePageController>();
-  final c = Get.find<CategoryController>();
+  final c = Get.find<HomePageController>();
 
   @override
   Widget build(BuildContext context) {
+    c.fetchSubCategoryData();
     return Scaffold(
       backgroundColor: AppColor.backgroundGreyColor,
       body: SafeArea(
@@ -32,14 +32,15 @@ class SubCategoriesPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 20.0, bottom: 30),
                 child: BartarAppBar(
-                  centerTitle: true,
-                  hasLeading: true,
-                  leadingWidth: 30,
-                  title: Text(
-                    c.title,
-                    style: const TextStyle(color: AppColor.primaryTextColor),
-                  ),
-                ),
+                    centerTitle: true,
+                    hasLeading: true,
+                    leadingWidth: 30,
+                    title: Obx(
+                      () => Text(
+                        c.AcatTitle.value,
+                        style: const TextStyle(color: AppColor.primaryTextColor),
+                      ),
+                    )),
               ),
               Obx(() => c.isSubCategoryLoading.value
                   ? BarterShimmer.categoryShimmer()
@@ -87,6 +88,7 @@ class SubCategoriesPage extends StatelessWidget {
                                 ),
                                 Text(
                                   subCategoryDetails.title!,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(fontSize: 13),
                                 )
                               ],

@@ -1,4 +1,3 @@
-import 'package:barter_app_2023/controllers/product/category_controller.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +12,7 @@ class CustomCategoryBottomSheet extends StatelessWidget {
   CustomCategoryBottomSheet({
     super.key,
   });
+
   final c = Get.find<HomePageController>();
 
   @override
@@ -29,7 +29,7 @@ class CustomCategoryBottomSheet extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(26),
             child: AppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: AppColor.backgroundGreyColor,
               centerTitle: true,
               title: const Text(
                 "Select Category",
@@ -60,10 +60,16 @@ class CustomCategoryBottomSheet extends StatelessWidget {
             height: 40,
             thickness: 1,
           ),
-          !c.isCategoryEmpty.value
+          Obx(() => c.isCategoryEmpty.value
               ? Container()
               : c.isCategoryLoading.value
-                  ? BarterShimmer.selectCategoryItemShimmer()
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        return BarterShimmer.selectCategoryItemShimmer();
+                      },
+                    )
                   : Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -74,12 +80,13 @@ class CustomCategoryBottomSheet extends StatelessWidget {
                             onTap: () {
                               c.catTitle.value = categoryDetail.title!;
                               if (categoryDetail.hasSubcategory!) {
-                                c.hasSub.value = true;
+                                c.hasSub = true;
                                 c.catId.value = categoryDetail.id!;
                                 c.catSubTitle.value = "";
+                                c.type = false;
                                 Navigator.pop(context);
                               } else {
-                                c.hasSub.value = false;
+                                c.hasSub = false;
                                 Navigator.pop(context);
                               }
                             },
@@ -106,7 +113,7 @@ class CustomCategoryBottomSheet extends StatelessWidget {
                           );
                         },
                       ),
-                    )
+                    ))
         ],
       ),
     );

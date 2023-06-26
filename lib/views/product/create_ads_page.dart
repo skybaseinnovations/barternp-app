@@ -201,7 +201,7 @@ class CreateAdsPage extends StatelessWidget {
                               const SizedBox(
                                 height: 38,
                               ),
-                              hpc.hasSub.value
+                              hpc.hasSub
                                   ? Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [

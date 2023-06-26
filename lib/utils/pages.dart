@@ -31,7 +31,7 @@ import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:get/get.dart';
 
-import '../controllers/product/category_controller.dart';
+
 
 var getPages = [
   GetPage(
@@ -115,15 +115,12 @@ var getPages = [
     ),
   ),
   GetPage(
-    arguments: Get.arguments,
     name: SubCategoriesPage.routeName,
     page: () {
       return SubCategoriesPage();
     },
     binding: BindingsBuilder(
-      () {
-        Get.lazyPut(() => CategoryController());
-      },
+      () {},
     ),
   ),
   GetPage(

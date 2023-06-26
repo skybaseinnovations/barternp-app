@@ -41,8 +41,8 @@ class HomePageController extends GetxController {
   var physicsStats = true.obs;
   var isBannerLoading = true.obs;
   var isCategoryLoading = true.obs;
-  var isCategoryEmpty = true.obs;
-  var isBannerEmpty = true.obs;
+  var isCategoryEmpty = false.obs;
+  var isBannerEmpty = false.obs;
   // List<BannerImage> banners = []; //
   RxList<BannerImage> banners = RxList();
   RxList<CategoryDetails> categoryDetails = RxList();
@@ -100,7 +100,7 @@ class HomePageController extends GetxController {
         banners.value = fetchedBanners;
         isBannerLoading.value = false;
         if (banners.isEmpty) {
-          isBannerEmpty.value = false;
+          isBannerEmpty.value = true;
         }
       },
       onError: (message) {
@@ -115,7 +115,7 @@ class HomePageController extends GetxController {
       categoryDetails.value = fetchedCategoryDetails;
       isCategoryLoading.value = false;
       if (categoryDetails.isEmpty) {
-        isCategoryEmpty.value = false;
+        isCategoryEmpty.value = true;
       }
     }, onError: (message) {
       BartarSnackBar.error(title: "Render Error", message: message);
@@ -124,21 +124,27 @@ class HomePageController extends GetxController {
   }
 
   RxString catTitle = "".obs;
+  RxString AcatTitle = "".obs;
   RxString catId = "".obs;
-  RxBool hasSub = false.obs;
+  RxString AcatId = "".obs;
+  bool hasSub = false;
+  bool AhasSub = false;
   RxString catSubTitle = "".obs;
+  RxString AcatSubTitle = "".obs;
+  bool type = true;
   RxList<CategoryDetails> subCategoryDetails = RxList();
   var isSubCategoryLoading = true.obs;
-  var isSubCategoryEmpty = true.obs;
+  var isSubCategoryEmpty = false.obs;
   void fetchSubCategoryData() {
     SubCategoryRepo.fetchSubCategoryData(
-      id: catId.value,
+      id: 
+      type?
+      AcatId.value:catId.value,
       onSuccess: (fetchedSubCategory) {
         subCategoryDetails.value = fetchedSubCategory;
         isSubCategoryLoading.value = false;
-
         if (subCategoryDetails.isEmpty) {
-          isSubCategoryEmpty.value = false;
+          isSubCategoryEmpty.value = true;
         }
       },
       onError: (message) {
