@@ -134,6 +134,7 @@ class CustomItemTile extends StatelessWidget {
                         Flexible(
                           fit: FlexFit.loose,
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
                                 flex: 3,
@@ -153,6 +154,7 @@ class CustomItemTile extends StatelessWidget {
                                 flex: 2,
                                 child: Text(
                                   AdsDetail.returnDate(adsModel.updatedAt!),
+                                  textAlign: TextAlign.end,
                                   style: const TextStyle(
                                       fontSize: 12, color: AppColor.tertiaryTextColor),
                                 ),

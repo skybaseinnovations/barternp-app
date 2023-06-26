@@ -37,7 +37,7 @@ class ProductDetailPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        BartarAppBar(
+                        BarterAppBar(
                           hasLeading: true,
                           actions: [
                             c.isMyAds.value
@@ -369,10 +369,11 @@ class ProductDetailPage extends StatelessWidget {
                                 shrinkWrap: true,
                                 itemCount: c.adsDetail.value!.comments?.length,
                                 itemBuilder: (context, index) {
+                                  print(c.adsDetail.value!.comments![index]);
                                   return CommentListTile(
                                     onLongTap: () {
                                       c.onDeleteComment(c.adsDetail.value!.comments![index].id!);
-                                      Get.back();
+                                      Navigator.pop(Get.context!);
                                     },
                                     comment: c.adsDetail.value!.comments![index],
                                   );

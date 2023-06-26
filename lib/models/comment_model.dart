@@ -1,48 +1,39 @@
+import 'package:barter_app_2023/models/user_model.dart';
+
 List<CommentsModel> commentModelfromJson(List<dynamic> commentsModelsJson) =>
     List<CommentsModel>.from(
         commentsModelsJson.map((commentModelJson) => CommentsModel.fromJson(commentModelJson)));
 
 class CommentsModel {
   int? id;
-  String? commentableType;
-  String? commentableId;
   String? comment;
-  bool? isApproved;
   String? userId;
+  String? commentableId;
   String? createdAt;
-  String? updatedAt;
+  User? commentator;
 
   CommentsModel(
-      {this.id,
-      this.commentableType,
-      this.commentableId,
-      this.comment,
-      this.isApproved,
-      this.userId,
-      this.createdAt,
-      this.updatedAt});
+      {this.id, this.comment, this.userId, this.commentableId, this.createdAt, this.commentator});
 
   CommentsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    commentableType = json['commentable_type'];
-    commentableId = json['commentable_id'];
     comment = json['comment'];
-    isApproved = json['is_approved'];
     userId = json['user_id'];
+    commentableId = json['commentable_id'];
     createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    commentator = json['commentator'] != null ? User.fromJson(json['commentator']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['commentable_type'] = commentableType;
-    data['commentable_id'] = commentableId;
     data['comment'] = comment;
-    data['is_approved'] = isApproved;
     data['user_id'] = userId;
+    data['commentable_id'] = commentableId;
     data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
+    if (commentator != null) {
+      data['commentator'] = commentator!.toJson();
+    }
     return data;
   }
 }

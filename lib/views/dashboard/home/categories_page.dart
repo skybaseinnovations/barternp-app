@@ -29,7 +29,7 @@ class CategoriesPage extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 30),
-                child: BartarAppBar(
+                child: BarterAppBar(
                   centerTitle: true,
                   hasLeading: true,
                   leadingWidth: 30,

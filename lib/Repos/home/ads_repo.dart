@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:barter_app_2023/utils/constants/apis.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../utils/helpers/http_requests.dart';
@@ -186,6 +187,36 @@ class AdsRepo {
       print(data);
       if (data["status"]) {
         onSuccess();
+      } else {
+        onError(data["message"]);
+      }
+    } catch (e, s) {
+      log("$e");
+      log("$s");
+      onError("Something went wrong");
+    }
+  }
+
+  static Future<void> searchAds({
+    String? adsName,
+    String? url,
+    required Function(List<AdsDetail>, String? nextPageUrl) onSuccess,
+    required Function(String) onError,
+  }) async {
+    try {
+      var headers = {"Accept": "application/json", "Content-Type": "application/json"};
+      var stringUrl = url ?? "${Api.searchAdsUrl}?query=$adsName";
+
+      var parseUrl = Uri.parse(stringUrl);
+
+      print("=================>>> featured ads Url $parseUrl");
+
+      http.Response response = await BarterRequest.get(parseUrl, headers: headers);
+      dynamic data = jsonDecode(response.body);
+      if (data["status"]) {
+        List<AdsDetail> adsList = adsModelfromJson(data["data"]["data"]);
+        var nextPageUrl = data["data"]["next_page_url"];
+        onSuccess(adsList, nextPageUrl);
       } else {
         onError(data["message"]);
       }

@@ -39,6 +39,7 @@ class HomePageController extends GetxController {
   ];
 
   ScrollController scrollController = ScrollController();
+  TextEditingController searchAdsController = TextEditingController();
 
   var physicsStats = true.obs;
   var isBannerLoading = true.obs;
@@ -54,7 +55,6 @@ class HomePageController extends GetxController {
   var isNearByAdsLoading = true.obs;
   @override
   void onInit() {
-    // onProductTap();
     fetchData();
     categoryData();
     fetchFeaturedAdsData();
@@ -163,7 +163,7 @@ class HomePageController extends GetxController {
   }
 
   void onViewAllTap() {
-    print("view all is tapped");
+    print("=================>>>>>>>>>>  view all is tapped");
     Get.toNamed(ViewAllPage.routeName,
         arguments: {"pageName": pageController.value.page == 0 ? "Featured_Ads" : "NearBy_Ads"});
   }

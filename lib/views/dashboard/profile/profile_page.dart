@@ -28,7 +28,7 @@ class ProfilePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const BartarAppBar(
+              const BarterAppBar(
                 hasLeading: false,
                 title: Text(
                   "Profile",

@@ -81,7 +81,7 @@ class CreateAdsPage extends StatelessWidget {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(top: 20.0, left: 24, right: 24),
-                  child: BartarAppBar(
+                  child: BarterAppBar(
                     centerTitle: true,
                     hasLeading: true,
                     leadingWidth: 30,

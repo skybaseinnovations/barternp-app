@@ -4,8 +4,8 @@ import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BartarAppBar extends StatelessWidget {
-  const BartarAppBar({
+class BarterAppBar extends StatelessWidget {
+  const BarterAppBar({
     super.key,
     this.hasLeading = true,
     this.automaticallyImplyLeading = false,

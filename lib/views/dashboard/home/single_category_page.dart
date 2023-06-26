@@ -25,7 +25,7 @@ class SingleCategory extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 20.0),
-                child: BartarAppBar(
+                child: BarterAppBar(
                   centerTitle: true,
                   hasLeading: true,
                   leadingWidth: 30,

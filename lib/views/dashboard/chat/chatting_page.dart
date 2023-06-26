@@ -23,7 +23,7 @@ class ChattingPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const BartarAppBar(
+            const BarterAppBar(
               leadingWidth: 24,
               hasLeading: true,
               title: Text(

@@ -52,7 +52,6 @@ class CommentListTile extends StatelessWidget {
         } else {
           return;
         }
-        ;
       },
       child: Container(
         margin: const EdgeInsets.only(top: 10, bottom: 20, right: 10, left: 10),
@@ -87,7 +86,7 @@ class CommentListTile extends StatelessWidget {
                   ),
 
                   //comment avatar halnu xa
-                  imageUrl: "",
+                  imageUrl: comment!.commentator!.avatarUrl!,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -103,11 +102,11 @@ class CommentListTile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "Person Name",
+                          comment!.commentator!.name!,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             color: AppColor.primaryTextColor,
@@ -115,7 +114,7 @@ class CommentListTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        AdsDetail.returnDate(comment!.updatedAt!),
+                        AdsDetail.returnDate(comment!.createdAt!),
                         style: const TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w400,

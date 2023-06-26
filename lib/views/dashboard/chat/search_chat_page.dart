@@ -22,7 +22,7 @@ class SearchChatPage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 10, left: 24, right: 24),
-            child: BartarAppBar(
+            child: BarterAppBar(
               hasLeading: true,
               titileSpacing: 0,
               title: CustomTextField(

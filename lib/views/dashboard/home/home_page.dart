@@ -3,6 +3,7 @@ import 'package:barter_app_2023/models/categories.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
+import 'package:barter_app_2023/views/dashboard/home/search_ads_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/sub_categories.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/widgets/custom/custom_tab_bar.dart';
@@ -11,8 +12,8 @@ import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../../../models/banner_image_model.dart';
 import '../../../widgets/custom/custom_categories_item.dart';
@@ -88,12 +89,26 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              const CustomTextField(
-                  fillColor: AppColor.searchFieldColor,
-                  prefixIcon: Icon(Icons.search),
-                  hint: 'Search',
-                  textInputAction: TextInputAction.done,
-                  textInputType: TextInputType.text),
+              CustomTextField(
+                controller: c.searchAdsController,
+                fillColor: AppColor.searchFieldColor,
+                prefixIcon: const Icon(Icons.search),
+                hint: 'Search',
+                textInputAction: TextInputAction.done,
+                textInputType: TextInputType.text,
+                onEditing: () {
+                  FocusScope.of(context).unfocus();
+                  c.searchAdsController.text.isNotEmpty
+                      ? Get.toNamed(
+                          SearchAdsPage.routeName,
+                          arguments: {
+                            "adsName": c.searchAdsController.text,
+                          },
+                        )
+                      : null;
+                  c.searchAdsController.clear();
+                },
+              ),
               const SizedBox(
                 height: 36,
               ),

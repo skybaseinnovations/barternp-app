@@ -20,7 +20,7 @@ class ViewAllPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            BartarAppBar(
+            BarterAppBar(
               hasLeading: true,
               title: Text(
                 c.title.value,

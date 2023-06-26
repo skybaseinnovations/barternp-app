@@ -24,7 +24,7 @@ class MyAdsPage extends StatelessWidget {
             child: Column(
               // mainAxisSize: MainAxisSize.min,
               children: [
-                const BartarAppBar(
+                const BarterAppBar(
                   hasLeading: false,
                   title: Text(
                     "My Ads",

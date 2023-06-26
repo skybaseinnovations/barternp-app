@@ -6,6 +6,7 @@ import 'package:barter_app_2023/controllers/dashboard/chat/chat_page_controller.
 import 'package:barter_app_2023/controllers/dashboard/chat/chatting_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/home/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/home/search_ads_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/home/view_all_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/profile/edit_profile_page_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
@@ -27,7 +28,7 @@ import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile/like_ads_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile/notification_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile/profile_page.dart';
-import 'package:barter_app_2023/views/dashboard/home/search_page.dart';
+import 'package:barter_app_2023/views/dashboard/home/search_ads_page.dart';
 import 'package:barter_app_2023/views/product/create_ads_page.dart';
 import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/views/splash_page.dart';
@@ -98,10 +99,10 @@ var getPages = [
     ),
   ),
   GetPage(
-      name: SearchPage.routeName,
-      page: () => SearchPage(),
+      name: SearchAdsPage.routeName,
+      page: () => SearchAdsPage(),
       binding: BindingsBuilder(() {
-        Get.lazyPut(() => HomePageController());
+        Get.lazyPut(() => SearchAdsController());
       })),
   GetPage(
     name: ProfilePage.routeName,

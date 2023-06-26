@@ -22,7 +22,7 @@ class NotificationPage extends StatelessWidget {
           padding: const EdgeInsets.only(top: 10, left: 24, right: 24),
           child: Column(
             children: [
-              const BartarAppBar(
+              const BarterAppBar(
                 hasLeading: true,
                 centerTitle: true,
                 title: Text(
