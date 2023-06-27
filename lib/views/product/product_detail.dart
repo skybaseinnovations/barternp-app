@@ -106,15 +106,29 @@ class ProductDetailPage extends StatelessWidget {
                                 : Obx(
                                     () => GestureDetector(
                                       onTap: c.onFavTap,
-                                      child: c.isFav.value
-                                          ? const Icon(
-                                              Icons.favorite,
-                                              color: Colors.red,
+                                      child: c.isFavLoading.value
+                                          ? const Center(
+                                              child: Padding(
+                                                padding: EdgeInsets.only(right: 3),
+                                                child: SizedBox(
+                                                  width: 20,
+                                                  height: 20,
+                                                  child: CircularProgressIndicator(
+                                                    color: AppColor.secondaryTextColor,
+                                                    strokeWidth: 2,
+                                                  ),
+                                                ),
+                                              ),
                                             )
-                                          : const Icon(
-                                              Icons.favorite_border_sharp,
-                                              color: AppColor.primaryTextColor,
-                                            ),
+                                          : c.isFav.value
+                                              ? const Icon(
+                                                  Icons.favorite,
+                                                  color: Colors.red,
+                                                )
+                                              : const Icon(
+                                                  Icons.favorite_border_sharp,
+                                                  color: AppColor.primaryTextColor,
+                                                ),
                                     ),
                                   ),
                           ],
@@ -122,21 +136,7 @@ class ProductDetailPage extends StatelessWidget {
 
                         // //photo caruaul here
                         c.adsDetail.value!.images!.isEmpty
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Center(
-                                  child: CachedNetworkImage(
-                                    height: 290,
-                                    width: 106,
-                                    errorWidget: (context, url, error) =>
-                                        Image.asset(ImagePath.placeHolderPath),
-                                    placeholder: (context, url) =>
-                                        Image.asset(ImagePath.placeHolderPath),
-                                    imageUrl: c.adsDetail.value!.thumbnail ?? "",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              )
+                            ? Container()
                             : Stack(
                                 children: [
                                   Container(
@@ -421,7 +421,9 @@ class ProductDetailPage extends StatelessWidget {
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
                                       children: c.similarAds!.map((similarAd) {
-                                        return SimilarAdsWidget(similarAds: similarAd);
+                                        return SimilarAdsWidget(
+                                          similarAds: similarAd,
+                                        );
                                       }).toList(),
                                     ),
                                   )

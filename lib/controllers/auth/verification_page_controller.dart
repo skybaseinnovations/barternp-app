@@ -91,7 +91,7 @@ class VerificationPageController extends GetxController {
             }
           },
           onError: (value) {
-            BartarSnackBar.error(title: "Verification Error", message: value);
+            BarterSnackBar.error(title: "Verification Error", message: value);
             isLoading.value = false;
           });
     }
@@ -105,14 +105,14 @@ class VerificationPageController extends GetxController {
         // phoneNumber: "1234567890",
         onSuccess: () {
           isResendLoading.value = false;
-          BartarSnackBar.success(
+          BarterSnackBar.success(
               title: "Resend successful",
               message: "An One Time Password (OTP) is sent to your phone number");
           startTimer(timerDuration.value);
         },
         onError: (value) {
           isResendLoading.value = false;
-          BartarSnackBar.error(title: "Resend Error", message: value);
+          BarterSnackBar.error(title: "Resend Error", message: value);
         });
   }
 }

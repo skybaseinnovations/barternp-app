@@ -24,6 +24,7 @@ class SearchAdsPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24),
         child: SingleChildScrollView(
+          controller: c.scrollController,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -110,14 +111,27 @@ class SearchAdsPage extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            itemCount: c.searchedAds.length,
-                            itemBuilder: (context, index) => CustomItemTile(
-                                  adsModel: c.searchedAds[index],
-                                  onTap: () => Get.toNamed(ProductDetailPage.routeName, arguments: {
-                                    "isMyAds": false,
-                                    "adId": c.searchedAds[index].id
-                                  }),
-                                )),
+                            itemCount: c.searchedAds.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index == c.searchedAds.length) {
+                                return c.nextPageUrl.value == null
+                                    ? Container()
+                                    : const Center(
+                                        child: SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          color: AppColor.primaryColor,
+                                          strokeWidth: 2,
+                                        ),
+                                      ));
+                              }
+                              return CustomItemTile(
+                                adsModel: c.searchedAds[index],
+                                onTap: () => Get.toNamed(ProductDetailPage.routeName,
+                                    arguments: {"isMyAds": false, "adId": c.searchedAds[index].id}),
+                              );
+                            }),
               ),
             ],
           ),

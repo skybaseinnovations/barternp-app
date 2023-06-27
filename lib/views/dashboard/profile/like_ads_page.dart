@@ -2,10 +2,16 @@ import 'package:barter_app_2023/controllers/dashboard/profile/like_ads_controlle
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
+import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+
+import '../../../utils/constants/image_paths.dart';
+import '../../../widgets/error_page.dart';
+import '../../../widgets/row/product_item_tile.dart';
+import '../../product/product_detail.dart';
 
 class LikedAds extends StatelessWidget {
   static const String routeName = "/likedAds/";
@@ -33,50 +39,86 @@ class LikedAds extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 41,
-              ),
-              CustomTextField(
-                controller: c.searchController,
-                fillColor: AppColor.searchFieldColor,
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: AppColor.secondaryTextColor,
-                ),
-                hint: 'Search',
-                textInputAction: TextInputAction.done,
-                textInputType: TextInputType.text,
-              ),
-              const SizedBox(
-                height: 41,
-              ),
+              // const SizedBox(
+              //   height: 41,
+              // ),
+              // CustomTextField(
+              //   controller: c.searchController,
+              //   fillColor: AppColor.searchFieldColor,
+              //   prefixIcon: const Icon(
+              //     Icons.search,
+              //     color: AppColor.secondaryTextColor,
+              //   ),
+              //   hint: 'Search',
+              //   textInputAction: TextInputAction.done,
+              //   textInputType: TextInputType.text,
+              // ),
+              // const SizedBox(
+              //   height: 41,
+              // ),
               Expanded(
-                child: ListView.builder(
-                    padding: const EdgeInsets.only(top: 10),
-                    physics: const ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) {
-                      return Container();
-                      // if (index == 0) {
-                      //   return CustomItemTile(
-                      //     imageUrl: "https://picsum.photos/200/300",
-                      //     onTap: () {
-                      //       Get.toNamed(ProductDetailPage.routeName, arguments: true);
-                      //     },
-                      //     isFavourite: true,
-                      //   );
-                      // }
-                      // return CustomItemTile(
-                      //   imageUrl: "https://picsum.photos/200/300",
-                      //   onTap: () {
-                      //     Get.toNamed(ProductDetailPage.routeName, arguments: true);
-                      //   },
-                      //   isFavourite: true,
-                      // );
-                    },
-                    itemCount: 5),
+                child: Obx(
+                  () => c.isLikeAdPageLoading.value
+                      ? ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return BarterShimmer.productItemShimmer();
+                          },
+                        )
+                      : c.favouriteAds.isEmpty
+                          ? const BarterErrorPage(
+                              imagePath: ImagePath.likedAdsErrorImagePath,
+                              title: "No liked ads yet",
+                              subTitle: "Start favouriting ads",
+                            )
+                          : ListView.builder(
+                              padding: const EdgeInsets.only(top: 10),
+                              physics: const ClampingScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: c.favouriteAds.length,
+                              itemBuilder: (context, index) {
+                                return CustomItemTile(
+                                  isFavourite: true,
+                                  adsModel: c.favouriteAds[index],
+                                  onTap: () => Get.toNamed(ProductDetailPage.routeName, arguments: {
+                                    "isMyAds": false,
+                                    "adId": c.favouriteAds[index].id
+                                  }),
+                                );
+                              }),
+                ),
               )
+              // Expanded(
+              //   child: ListView.builder(
+              //       padding: const EdgeInsets.only(top: 10),
+              //       physics: const ClampingScrollPhysics(),
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.vertical,
+              //       itemBuilder: (context, index) {
+              //         return Container();
+              //         // if (index == 0) {
+              //         //   return CustomItemTile(
+              //         //     imageUrl: "https://picsum.photos/200/300",
+              //         //     onTap: () {
+              //         //       Get.toNamed(ProductDetailPage.routeName, arguments: true);
+              //         //     },
+              //         //     isFavourite: true,
+              //         //   );
+              //         // }
+              //         // return CustomItemTile(
+              //         //   imageUrl: "https://picsum.photos/200/300",
+              //         //   onTap: () {
+              //         //     Get.toNamed(ProductDetailPage.routeName, arguments: true);
+              //         //   },
+              //         //   isFavourite: true,
+              //         // );
+              //       },
+              //       itemCount: 5),
+              // )
             ],
           ),
         ),

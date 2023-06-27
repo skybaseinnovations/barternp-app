@@ -98,7 +98,7 @@ class EditProfilePageController extends GetxController {
 
     if (formKey.currentState!.validate()) {
       if (!isTextFieldChanged()) {
-        BartarSnackBar.error(
+        BarterSnackBar.error(
             title: "Update Profile Error", message: "Please make some update to save changes.");
       } else {
         isLoading.value = true;
@@ -111,11 +111,11 @@ class EditProfilePageController extends GetxController {
             onSuccess: () {
               cc.loadCurrentUser();
               Get.back();
-              BartarSnackBar.success(title: "Successful");
+              BarterSnackBar.success(title: "Successful");
               isLoading.value = false;
             },
             onError: (errorMessage) {
-              BartarSnackBar.error(title: "Update Profile Error", message: errorMessage);
+              BarterSnackBar.error(title: "Update Profile Error", message: errorMessage);
               isLoading.value = false;
             });
       }

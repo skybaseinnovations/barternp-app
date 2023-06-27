@@ -70,7 +70,10 @@ class CustomItemTile extends StatelessWidget {
                             right: 5,
                             child: SvgPicture.asset(ImagePath.bookmarkIconPath),
                           )
-                        : Container(),
+                        : Positioned(
+                            right: 5,
+                            child: Container(),
+                          ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -93,7 +96,7 @@ class CustomItemTile extends StatelessWidget {
                                     child: Align(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        adsModel.category!.title ?? "",
+                                        adsModel.category?.title ?? "",
                                         style: const TextStyle(
                                             fontSize: 12, color: AppColor.secondaryColor),
                                       ),
@@ -112,7 +115,7 @@ class CustomItemTile extends StatelessWidget {
                                     child: Align(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        adsModel.subcategory!.title ?? "",
+                                        adsModel.subcategory?.title ?? "",
                                         style: const TextStyle(
                                             fontSize: 12, color: AppColor.secondaryColor),
                                       ),
@@ -153,7 +156,9 @@ class CustomItemTile extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  AdsDetail.returnDate(adsModel.updatedAt!),
+                                  adsModel.updatedAt != null
+                                      ? AdsDetail.returnDate(adsModel.updatedAt!)
+                                      : "",
                                   textAlign: TextAlign.end,
                                   style: const TextStyle(
                                       fontSize: 12, color: AppColor.tertiaryTextColor),
@@ -183,7 +188,7 @@ class CustomItemTile extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      "Rs ${adsModel.price!}",
+                                      "Rs ${adsModel.price ?? ""}",
                                       style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -202,7 +207,9 @@ class CustomItemTile extends StatelessWidget {
                                         : Flexible(
                                             flex: 1,
                                             child: Text(
-                                              adsModel.seller!.name!,
+                                              adsModel.seller != null
+                                                  ? adsModel.seller!.name ?? ""
+                                                  : "",
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
                                                   fontSize: 12, color: AppColor.primaryTextColor),

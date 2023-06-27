@@ -25,7 +25,7 @@ class LoginPageController extends GetxController {
           },
           onError: (value) {
             isLoading.value = false;
-            BartarSnackBar.error(title: "Login Error", message: value);
+            BarterSnackBar.error(title: "Login Error", message: value);
           });
     }
   }

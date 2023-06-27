@@ -113,7 +113,7 @@ class HomePageController extends GetxController {
         }
       },
       onError: (message) {
-        BartarSnackBar.error(title: "Render Error", message: message);
+        BarterSnackBar.error(title: "Render Error", message: message);
         isBannerLoading.value = false;
       },
     );
@@ -127,7 +127,7 @@ class HomePageController extends GetxController {
         isCategoryEmpty.value = false;
       }
     }, onError: (message) {
-      BartarSnackBar.error(title: "Render Error", message: message);
+      BarterSnackBar.error(title: "Render Error", message: message);
       isCategoryLoading.value = false;
     });
   }

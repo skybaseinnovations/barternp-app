@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import '../../../Repos/home/ads_repo.dart';
 
 class SearchAdsController extends GetxController {
+  ScrollController scrollController = ScrollController();
   late TextEditingController searchController;
   String adsName = "";
   RxList<AdsDetail> searchedAds = RxList();
   var isSearchedAdsLoading = true.obs;
+  Rx<String?> nextPageUrl = Rx(null);
   @override
   void onInit() {
     // argument data is in the form {"adsName": adsName}
@@ -16,15 +18,25 @@ class SearchAdsController extends GetxController {
     adsName = argumentData["adsName"];
     searchController = TextEditingController(text: adsName);
     fetchSearchAdsData();
+    scrollController.addListener(() {
+      if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+          !scrollController.position.outOfRange) {
+        print(" =========>>> the value of next page url is: ${nextPageUrl.value}");
+        if (nextPageUrl.value != null) {
+          fetchSearchAdsData();
+        }
+      }
+    });
     super.onInit();
   }
 
   void fetchSearchAdsData() {
     AdsRepo.searchAds(
         adsName: searchController.text,
-        onSuccess: (nearByAdsList, nextPageUrl) {
+        onSuccess: (nearByAdsList, nextpageUrl) {
           print("search ads success");
-          searchedAds.value = nearByAdsList;
+          searchedAds.addAll(nearByAdsList);
+          nextPageUrl.value = nextpageUrl;
           print(searchedAds);
           print(nextPageUrl);
           isSearchedAdsLoading.value = false;

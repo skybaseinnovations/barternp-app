@@ -1,5 +1,6 @@
 import 'package:barter_app_2023/controllers/dashboard/home/view_all_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
+import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:barter_app_2023/widgets/row/product_item_tile.dart';
 import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
@@ -66,6 +67,13 @@ class ViewAllPage extends StatelessWidget {
                           }
                           return CustomItemTile(
                             adsModel: c.adsDetail[index],
+                            onTap: () => Get.toNamed(
+                              ProductDetailPage.routeName,
+                              arguments: {
+                                "isMyAds": false,
+                                "adId": c.adsDetail[index].id,
+                              },
+                            ),
                           );
                         },
                       ),

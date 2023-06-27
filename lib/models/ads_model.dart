@@ -138,7 +138,7 @@ class AdsDetail {
   }
 
   static bool isfeatured(int? value) {
-    return value == 0 ? true : false;
+    return value == 1 ? true : false;
   }
 
   static returnDate(String date) {

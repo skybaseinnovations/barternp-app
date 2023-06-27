@@ -3,8 +3,6 @@ import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
 import 'package:get/get.dart';
 
-import '../Repos/home/banner_repo.dart';
-
 class SplashPageController extends GetxController {
   CoreController cc = Get.find<CoreController>();
   @override

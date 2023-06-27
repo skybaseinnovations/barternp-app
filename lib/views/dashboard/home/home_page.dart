@@ -314,7 +314,7 @@ class HomePage extends StatelessWidget {
                                     onTap: () => Get.toNamed(ProductDetailPage.routeName,
                                         arguments: {
                                           "isMyAds": false,
-                                          "adId": c.featuredAds[index].id
+                                          "adId": c.nearByAds[index].id
                                         }),
                                   ),
                               itemCount: c.nearByAds.length),

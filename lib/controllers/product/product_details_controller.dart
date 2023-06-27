@@ -1,20 +1,24 @@
 import 'dart:developer';
 
 import 'package:barter_app_2023/models/ads_model.dart';
+import 'package:barter_app_2023/views/dashboard/chat/chatting_page.dart';
 import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hawk_fab_menu/hawk_fab_menu.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Repos/home/ads_repo.dart';
 
 class ProductDetailPageController extends GetxController {
   var isMyAds = false.obs;
   late String adId;
-  Rxn<AdsDetail> adsDetail = Rxn();
+  Rxn<AdsDetail> adsDetail = Rxn<AdsDetail>();
   List<AdsDetail>? similarAds;
   var isLoading = true.obs;
+  var isFavLoading = false.obs;
+  var isFav = false.obs;
   TextEditingController commentController = TextEditingController();
 
   @override
@@ -23,33 +27,61 @@ class ProductDetailPageController extends GetxController {
     var myAdsArgument = Get.arguments;
     adId = myAdsArgument["adId"];
     isMyAds.value = myAdsArgument["isMyAds"] ?? false;
-    print(myAdsArgument);
     getSingleProductDetail();
+    isFavouritAd();
     super.onInit();
   }
 
-  var isFav = false.obs;
   HawkFabMenuController hawkFabMenuController = HawkFabMenuController();
   CarouselController buttonCarouselController = CarouselController();
 
   var photoIndex = 1.obs;
-  var productImage = [
-    "https://picsum.photos/200",
-    "https://picsum.photos/200",
-    "https://picsum.photos/200",
-    "https://picsum.photos/200",
-    "https://picsum.photos/200",
-  ];
   onChatTap() {
     log("================>>>> chat field is tapped");
+    Get.toNamed(ChattingPage.routeName);
   }
 
-  onCallTap() {
+  var hasSupport = false;
+  onCallTap() async {
     log("================>>>> call field is tapped");
+
+    try {
+      await launchUrl(Uri(
+        scheme: 'tel',
+        path: adsDetail.value!.seller!.phone,
+      ));
+    } catch (e) {
+      BarterSnackBar.error(
+          title: "Cannot open dialer", message: "Your device doesnot support dialer");
+    }
   }
 
   onFavTap() {
-    isFav.value = !isFav.value;
+    isFavLoading.value = true;
+    AdsRepo.toogleFavouriteAd(
+        adId: adId,
+        onSuccess: (isFavourite) {
+          isFav.value = isFavourite;
+          isFavLoading.value = false;
+        },
+        onError: (messages) {
+          BarterSnackBar.error(title: "Toggle like", message: messages);
+          isFavLoading.value = false;
+        });
+  }
+
+  isFavouritAd() {
+    isFavLoading.value = true;
+    AdsRepo.isFavouriteAd(
+        adId: adId,
+        onSuccess: (isFavourite) {
+          isFav.value = isFavourite;
+          isFavLoading.value = false;
+        },
+        onError: (messages) {
+          BarterSnackBar.error(title: "Favourite ad", message: messages);
+          isFavLoading.value = false;
+        });
   }
 
   onEditTap() {
@@ -88,7 +120,7 @@ class ProductDetailPageController extends GetxController {
         commentText: commentController.text,
         onSuccess: () {
           getSingleProductDetail();
-          BartarSnackBar.success(title: "Successfully commented");
+          BarterSnackBar.success(title: "Successfully commented");
           commentController.clear();
         },
         onError: (message) {
@@ -102,7 +134,7 @@ class ProductDetailPageController extends GetxController {
       commentId: commentId,
       onSuccess: () {
         getSingleProductDetail();
-        BartarSnackBar.success(title: "Successfully deleted");
+        BarterSnackBar.success(title: "Successfully deleted");
         commentController.clear();
       },
       onError: (message) {

@@ -58,7 +58,7 @@ class CustomTextField extends StatelessWidget {
     this.hintStyle,
     // this.scrollPadding = const EdgeInsets.all(20.0),
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 20),
-    this.cursorHeight = 13,
+    this.cursorHeight,
     this.onSuffixTap,
   }) : super(key: key);
 

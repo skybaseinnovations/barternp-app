@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BartarSnackBar {
+class BarterSnackBar {
   static success({String? title, String? message}) {
     Get.snackbar(title ?? "Success", message ?? "The action was successful!",
         snackPosition: SnackPosition.TOP,

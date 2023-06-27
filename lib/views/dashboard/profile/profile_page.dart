@@ -131,7 +131,7 @@ class ProfilePage extends StatelessWidget {
                 isLogOut: true,
                 action: () {
                   cc.loggedOut();
-                  BartarSnackBar.success(
+                  BarterSnackBar.success(
                       title: "Log out Successful", message: "You have logged out of your account");
                   Get.offAllNamed(LoginPage.routeName);
                   log("==============loggout clicked");

@@ -66,12 +66,12 @@ class CreateProfilePageController extends GetxController {
           email: emailController.text,
           onSuccess: () {
             cc.loadCurrentUser();
-            BartarSnackBar.success(title: "Successful");
+            BarterSnackBar.success(title: "Successful");
             Get.offAllNamed(DashPage.routeName);
             isLoading.value = false;
           },
           onError: (errorMessage) {
-            BartarSnackBar.error(title: "Create Profile Error", message: errorMessage);
+            BarterSnackBar.error(title: "Create Profile Error", message: errorMessage);
             isLoading.value = false;
           });
     }

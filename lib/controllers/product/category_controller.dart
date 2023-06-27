@@ -33,7 +33,7 @@ class SubCategoryController extends GetxController {
         }
       },
       onError: (message) {
-        BartarSnackBar.error(title: "Render Error", message: message);
+        BarterSnackBar.error(title: "Render Error", message: message);
       },
     );
   }
