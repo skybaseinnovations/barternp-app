@@ -12,5 +12,9 @@ class Api {
   static const String searchAdsUrl = "$baseUrl/ads-search";
   static const String toggleFavouriteAdsUrl = "$baseUrl/auth/user-favourite";
   static const String isAddFavouriteUrl = "$baseUrl/auth/is-ad-favourite";
-  static const String myFavouriteAds = "$baseUrl/auth/user-favourites";
+  static const String myFavouriteAdsUrl = "$baseUrl/auth/user-favourites";
+  static const String myActiveAdsUrl = "$baseUrl/user/my-ads/active";
+  static const String myInactiveAdsUrl = "$baseUrl/user/my-ads/inactive";
+  static const String myExpiredAdsUrl = "$baseUrl/user/my-ads/expired";
+  static const String deleteAdsUrl = "$baseUrl/auth/ads/delete";
 }

@@ -87,40 +87,44 @@ class CustomItemTile extends StatelessWidget {
                             children: [
                               Expanded(
                                   flex: 1,
-                                  child: Container(
-                                    height: 20,
-                                    width: 10,
-                                    decoration: const BoxDecoration(
-                                        color: Color(0xffEAE8E8),
-                                        borderRadius: BorderRadius.all(Radius.circular(4))),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        adsModel.category?.title ?? "",
-                                        style: const TextStyle(
-                                            fontSize: 12, color: AppColor.secondaryColor),
-                                      ),
-                                    ),
-                                  )),
+                                  child: adsModel.category?.title == null
+                                      ? Container()
+                                      : Container(
+                                          height: 20,
+                                          width: 10,
+                                          decoration: const BoxDecoration(
+                                              color: Color(0xffEAE8E8),
+                                              borderRadius: BorderRadius.all(Radius.circular(4))),
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              adsModel.category!.title!,
+                                              style: const TextStyle(
+                                                  fontSize: 12, color: AppColor.secondaryColor),
+                                            ),
+                                          ),
+                                        )),
                               const SizedBox(
                                 width: 10,
                               ),
                               Expanded(
                                   flex: 1,
-                                  child: Container(
-                                    height: 20,
-                                    decoration: const BoxDecoration(
-                                        color: Color(0xffEAE8E8),
-                                        borderRadius: BorderRadius.all(Radius.circular(4))),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        adsModel.subcategory?.title ?? "",
-                                        style: const TextStyle(
-                                            fontSize: 12, color: AppColor.secondaryColor),
-                                      ),
-                                    ),
-                                  )),
+                                  child: adsModel.subcategory?.title == null
+                                      ? Container()
+                                      : Container(
+                                          height: 20,
+                                          decoration: const BoxDecoration(
+                                              color: Color(0xffEAE8E8),
+                                              borderRadius: BorderRadius.all(Radius.circular(4))),
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              adsModel.subcategory?.title ?? "",
+                                              style: const TextStyle(
+                                                  fontSize: 12, color: AppColor.secondaryColor),
+                                            ),
+                                          ),
+                                        )),
                               const SizedBox(
                                 width: 30,
                               ),

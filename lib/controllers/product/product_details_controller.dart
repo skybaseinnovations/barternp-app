@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
 import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:barter_app_2023/views/dashboard/chat/chatting_page.dart';
 import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
@@ -94,6 +95,18 @@ class ProductDetailPageController extends GetxController {
 
   onDeletetap() {
     log("================>>>> delete field is tapped");
+    AdsRepo.deleteAdsDetail(
+        adId: adId,
+        onSuccess: (message) {
+          Get.back();
+          BarterSnackBar.success(title: "Ads Deleted", message: message);
+          MyAdsPageController().fetchActiveAdsData();
+          MyAdsPageController().fetchExpiredAdsData();
+          MyAdsPageController().fetchInactiveAdsData();
+        },
+        onError: (message) {
+          BarterSnackBar.error(title: "Ads Deleted", message: message);
+        });
   }
 
   void getSingleProductDetail() {
@@ -103,12 +116,11 @@ class ProductDetailPageController extends GetxController {
         adsDetail.value = adsDetails;
         similarAds = similarAdsDetails;
 
-        print(adsDetails);
         // print(similarAdsDetails);
         isLoading.value = false;
       },
       onError: (message) {
-        print("$message");
+        log("=============>>>>> getsingle ads error :::$message");
         isLoading.value = false;
       },
     );

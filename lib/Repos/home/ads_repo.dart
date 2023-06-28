@@ -28,7 +28,7 @@ class AdsRepo {
 
       http.Response response = await BarterRequest.get(parseUrl, headers: headers);
       dynamic data = jsonDecode(response.body);
-      print(data);
+
       if (data["status"]) {
         List<AdsDetail> adsList;
 
@@ -312,7 +312,7 @@ class AdsRepo {
         "Authorization": "${token.tokenType} ${token.accessToken}"
       };
 
-      var parseUrl = Uri.parse(Api.myFavouriteAds);
+      var parseUrl = Uri.parse(Api.myFavouriteAdsUrl);
 
       print("=================>>> nearby ads Url $parseUrl");
 
@@ -320,8 +320,143 @@ class AdsRepo {
       dynamic data = jsonDecode(response.body);
 
       if (data["status"]) {
-        List<AdsDetail> adsList = adsModelfromJson(data["data"]["favourite"]);
+        List<AdsDetail> adsList = adsModelfromJson(data["data"]);
         onSuccess(adsList);
+      } else {
+        onError(data["message"]);
+      }
+    } catch (e, s) {
+      log("$e");
+      log("$s");
+      onError("Something went wrong");
+    }
+  }
+
+  static Future<void> getMyActiveAdsDetail({
+    String? url,
+    required Function(List<AdsDetail> myads, String? nextPageUrl) onSuccess,
+    required Function(String) onError,
+  }) async {
+    try {
+      var token = StorageHelper.getAccessToken()!;
+      var headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "${token.tokenType} ${token.accessToken}"
+      };
+
+      var parseUrl = Uri.parse(url ?? Api.myActiveAdsUrl);
+
+      print("=================>>> active ads Url $parseUrl");
+
+      http.Response response = await BarterRequest.get(parseUrl, headers: headers);
+      dynamic data = jsonDecode(response.body);
+
+      if (data["status"]) {
+        List<AdsDetail> activeAdsList = adsModelfromJson(data["data"]["data"]);
+        var nextPageUrl = data["data"]["next_page_url"];
+        onSuccess(activeAdsList, nextPageUrl);
+      } else {
+        onError(data["message"]);
+      }
+    } catch (e, s) {
+      log("$e");
+      log("$s");
+      onError("Something went wrong");
+    }
+  }
+
+  static Future<void> getMyInactiveAdsDetail({
+    String? url,
+    required Function(List<AdsDetail> myads, String? nextPageUrl) onSuccess,
+    required Function(String) onError,
+  }) async {
+    try {
+      var token = StorageHelper.getAccessToken()!;
+      var headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "${token.tokenType} ${token.accessToken}"
+      };
+
+      var parseUrl = Uri.parse(url ?? Api.myInactiveAdsUrl);
+
+      print("=================>>> active ads Url $parseUrl");
+
+      http.Response response = await BarterRequest.get(parseUrl, headers: headers);
+      dynamic data = jsonDecode(response.body);
+
+      if (data["status"]) {
+        List<AdsDetail> activeAdsList = adsModelfromJson(data["data"]["data"]);
+        var nextPageUrl = data["data"]["next_page_url"];
+        onSuccess(activeAdsList, nextPageUrl);
+      } else {
+        onError(data["message"]);
+      }
+    } catch (e, s) {
+      log("$e");
+      log("$s");
+      onError("Something went wrong");
+    }
+  }
+
+  static Future<void> getMyExpiredAdsDetail({
+    String? url,
+    required Function(List<AdsDetail> myads, String? nextPageUrl) onSuccess,
+    required Function(String) onError,
+  }) async {
+    try {
+      var token = StorageHelper.getAccessToken()!;
+      var headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "${token.tokenType} ${token.accessToken}"
+      };
+
+      var parseUrl = Uri.parse(url ?? Api.myExpiredAdsUrl);
+
+      print("=================>>> active ads Url $parseUrl");
+
+      http.Response response = await BarterRequest.get(parseUrl, headers: headers);
+      dynamic data = jsonDecode(response.body);
+
+      if (data["status"]) {
+        List<AdsDetail> activeAdsList = adsModelfromJson(data["data"]["data"]);
+        var nextPageUrl = data["data"]["next_page_url"];
+        onSuccess(activeAdsList, nextPageUrl);
+      } else {
+        onError(data["message"]);
+      }
+    } catch (e, s) {
+      log("$e");
+      log("$s");
+      onError("Something went wrong");
+    }
+  }
+
+  static Future<void> deleteAdsDetail({
+    String? adId,
+    required Function(String) onSuccess,
+    required Function(String) onError,
+  }) async {
+    try {
+      var token = StorageHelper.getAccessToken()!;
+      var headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "${token.tokenType} ${token.accessToken}"
+      };
+      var stringUrl = "${Api.deleteAdsUrl}?id=$adId";
+
+      var parseUrl = Uri.parse(stringUrl);
+
+      print("=================>>> nearby ads Url $parseUrl");
+
+      http.Response response = await BarterRequest.post(parseUrl, headers: headers);
+      dynamic data = jsonDecode(response.body);
+
+      if (data["status"]) {
+        onSuccess(data["message"]);
       } else {
         onError(data["message"]);
       }

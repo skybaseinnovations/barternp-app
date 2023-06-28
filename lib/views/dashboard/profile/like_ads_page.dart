@@ -1,7 +1,5 @@
 import 'package:barter_app_2023/controllers/dashboard/profile/like_ads_controller.dart';
-import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
-import 'package:barter_app_2023/widgets/custom/custom_textfield.dart';
 import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
 
 import 'package:flutter/material.dart';
