@@ -1,4 +1,5 @@
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 
 import 'package:barter_app_2023/utils/constants/colors.dart';
 
@@ -14,7 +15,7 @@ import '../../../widgets/custom/custom_app_bar.dart';
 class SubCategoriesPage extends StatelessWidget {
   SubCategoriesPage({super.key});
   static const String routeName = "/subCategoriesPage";
-  final c = Get.find<HomePageController>();
+  final c = Get.put(CreateAdsController());
 
   @override
   Widget build(BuildContext context) {

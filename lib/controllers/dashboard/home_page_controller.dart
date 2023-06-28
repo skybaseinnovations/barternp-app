@@ -1,11 +1,11 @@
-import 'package:barter_app_2023/Repos/home/categories_repo.dart';
+import 'package:barter_app_2023/Repos/products/categories_repo.dart';
 import 'package:barter_app_2023/controllers/animation/line_animation_controller.dart';
 import 'package:barter_app_2023/models/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Repos/home/banner_repo.dart';
-import '../../Repos/home/sub_categories_repo.dart';
+import '../../Repos/products/sub_categories_repo.dart';
 import '../../models/banner_image_model.dart';
 import '../../widgets/custom/custom_snackbar.dart';
 
@@ -39,17 +39,14 @@ class HomePageController extends GetxController {
   ScrollController scrollController = ScrollController();
 
   var physicsStats = true.obs;
-  var isBannerLoading = true.obs;
-  var isCategoryLoading = true.obs;
-  var isCategoryEmpty = false.obs;
   var isBannerEmpty = false.obs;
-  // List<BannerImage> banners = []; //
+  var isBannerLoading = true.obs;
   RxList<BannerImage> banners = RxList();
-  RxList<CategoryDetails> categoryDetails = RxList();
+  // List<BannerImage> banners = []; //
+
   @override
   void onInit() {
     fetchData();
-    categoryData();
     super.onInit();
     tabAnimationController.initialize();
 
@@ -106,49 +103,6 @@ class HomePageController extends GetxController {
       onError: (message) {
         BartarSnackBar.error(title: "Render Error", message: message);
         isBannerLoading.value = false;
-      },
-    );
-  }
-
-  void categoryData() {
-    CategoryRepo.fetchCategoryData(onSuccess: (fetchedCategoryDetails) {
-      categoryDetails.value = fetchedCategoryDetails;
-      isCategoryLoading.value = false;
-      if (categoryDetails.isEmpty) {
-        isCategoryEmpty.value = true;
-      }
-    }, onError: (message) {
-      BartarSnackBar.error(title: "Render Error", message: message);
-      isCategoryLoading.value = false;
-    });
-  }
-
-  RxString catTitle = "".obs;
-  RxString AcatTitle = "".obs;
-  RxString catId = "".obs;
-  RxString AcatId = "".obs;
-  bool hasSub = false;
-  bool AhasSub = false;
-  RxString catSubTitle = "".obs;
-  RxString AcatSubTitle = "".obs;
-  bool type = true;
-  RxList<CategoryDetails> subCategoryDetails = RxList();
-  var isSubCategoryLoading = true.obs;
-  var isSubCategoryEmpty = false.obs;
-  void fetchSubCategoryData() {
-    SubCategoryRepo.fetchSubCategoryData(
-      id: 
-      type?
-      AcatId.value:catId.value,
-      onSuccess: (fetchedSubCategory) {
-        subCategoryDetails.value = fetchedSubCategory;
-        isSubCategoryLoading.value = false;
-        if (subCategoryDetails.isEmpty) {
-          isSubCategoryEmpty.value = true;
-        }
-      },
-      onError: (message) {
-        BartarSnackBar.error(title: "Render Error", message: message);
       },
     );
   }

@@ -1,9 +1,8 @@
+import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../controllers/dashboard/home_page_controller.dart';
 import '../../models/categories.dart';
 import '../../utils/constants/colors.dart';
 import '../shimmer/barter_shimmer.dart';
@@ -12,7 +11,7 @@ class CustomSubCategoryBottomSheet extends StatelessWidget {
   CustomSubCategoryBottomSheet({
     super.key,
   });
-  final c = Get.find<HomePageController>();
+  final c = Get.put(CreateAdsController());
 
   @override
   Widget build(BuildContext context) {

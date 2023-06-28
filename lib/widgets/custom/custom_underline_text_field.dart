@@ -24,6 +24,7 @@ class CustomOutlineBorderTextField extends StatelessWidget {
   final int? maxCharacters;
   final TextCapitalization textCapitalization;
   final TextStyle? hintStyle;
+  final Color? color;
 
   const CustomOutlineBorderTextField({
     super.key,
@@ -48,6 +49,7 @@ class CustomOutlineBorderTextField extends StatelessWidget {
     this.labelText,
     this.borderRadius = 30,
     this.hintStyle,
+    this.color,
   });
 
   @override
@@ -104,11 +106,17 @@ class CustomOutlineBorderTextField extends StatelessWidget {
           contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           isDense: true,
           enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColor.tertiaryTextColor),
-          ),
+              borderSide: BorderSide(
+            color: AppColor.tertiaryTextColor,
+          )
+              // color == null ? AppColor.tertiaryTextColor : Colors.transparent),
+              ),
           focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColor.tertiaryTextColor),
-          ),
+              borderSide: BorderSide(
+            color: AppColor.tertiaryTextColor,
+          )
+              // BorderSide(color: color == null ? AppColor.tertiaryTextColor : Colors.transparent),
+              ),
           hintText: hint,
           hintStyle: hintStyle,
           errorStyle: showError

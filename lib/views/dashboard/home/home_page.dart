@@ -1,4 +1,5 @@
 import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/models/categories.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
@@ -23,6 +24,7 @@ class HomePage extends StatelessWidget {
 
   HomePage({super.key});
   final hpc = Get.find<HomePageController>();
+  final c = Get.put(CreateAdsController());
 
   @override
   Widget build(BuildContext context) {
@@ -169,9 +171,9 @@ class HomePage extends StatelessWidget {
                   height: 24,
                 ),
                 Obx(
-                  () => hpc.isCategoryEmpty.value
+                  () => c.isCategoryEmpty.value
                       ? Container()
-                      : hpc.isCategoryLoading.value
+                      : c.isCategoryLoading.value
                           ? BarterShimmer.categoryShimmer()
                           : InkWell(
                               onTap: () {},
@@ -180,16 +182,16 @@ class HomePage extends StatelessWidget {
                                 width: 342,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: hpc.categoryDetails.length,
+                                  itemCount: c.categoryDetails.length,
                                   itemBuilder: (context, index) {
-                                    CategoryDetails categoryDetail = hpc.categoryDetails[index];
+                                    CategoryDetails categoryDetail = c.categoryDetails[index];
                                     return InkWell(
                                       onTap: () {
-                                        hpc.AcatTitle.value = categoryDetail.title!;
-                                        hpc.AhasSub = true;
-                                        hpc.AcatId.value = categoryDetail.id!;
-                                        hpc.AcatSubTitle.value = "";
-                                        hpc.type = true;
+                                        c.AcatTitle.value = categoryDetail.title!;
+                                        c.AhasSub = true;
+                                        c.AcatId.value = categoryDetail.id!;
+                                        c.AcatSubTitle.value = "";
+                                        c.type = true;
                                         categoryDetail.hasSubcategory!
                                             ? Get.toNamed(SubCategoriesPage.routeName)
                                             : Get.toNamed(
