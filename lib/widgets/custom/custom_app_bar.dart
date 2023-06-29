@@ -42,8 +42,9 @@ class BarterAppBar extends StatelessWidget {
       leading: hasLeading
           ? InkWell(
               onTap: () {
-                log("Had been called");
-                Get.back();
+                // log("Had been called");
+                // Get.back();
+                Navigator.pop(context);
               },
               child: const Icon(
                 Icons.arrow_back_ios,

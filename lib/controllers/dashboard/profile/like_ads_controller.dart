@@ -4,6 +4,8 @@ import '../../../Repos/home/ads_repo.dart';
 import '../../../models/ads_model.dart';
 
 class LikedAdsController extends GetxController with GetSingleTickerProviderStateMixin {
+  RxList<AdsDetail> favouriteAds = RxList();
+  var isLikeAdPageLoading = true.obs;
   @override
   void onInit() {
     fetchFeaturedAdsData();
@@ -12,15 +14,14 @@ class LikedAdsController extends GetxController with GetSingleTickerProviderStat
 
   // var searchController = TextEditingController();
 
-  RxList<AdsDetail> favouriteAds = RxList();
-  var isLikeAdPageLoading = false.obs;
-
   void fetchFeaturedAdsData() {
+    isLikeAdPageLoading.value = true;
     AdsRepo.getFavouriteAdsDetail(onSuccess: (featuredAdsList) {
       print("get favaourteads success");
       favouriteAds.value = featuredAdsList;
       print(favouriteAds);
       isLikeAdPageLoading.value = false;
+      print(isLikeAdPageLoading.value);
     }, onError: (message) {
       print("$message");
       isLikeAdPageLoading.value = false;

@@ -283,9 +283,17 @@ class HomePage extends StatelessWidget {
                       children: [
                         Obx(
                           () => c.isFeaturedAdsLoading.value
-                              ? BarterShimmer.productItemShimmer()
+                              ? ListView.builder(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  shrinkWrap: true,
+                                  physics: const ClampingScrollPhysics(),
+                                  itemCount: 4,
+                                  itemBuilder: (context, index) {
+                                    return BarterShimmer.productItemShimmer();
+                                  },
+                                )
                               : Container(
-                                  color: Colors.white,
+                                  color: AppColor.backgroundGreyColor,
                                   child: ListView.builder(
                                       physics: const NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
@@ -303,22 +311,32 @@ class HomePage extends StatelessWidget {
                                       itemCount: c.featuredAds.length),
                                 ),
                         ),
-                        Container(
-                          color: Colors.white,
-                          child: ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (context, index) => CustomItemTile(
-                                    adsModel: c.nearByAds[index],
-                                    onTap: () => Get.toNamed(ProductDetailPage.routeName,
-                                        arguments: {
-                                          "isMyAds": false,
-                                          "adId": c.nearByAds[index].id
-                                        }),
-                                  ),
-                              itemCount: c.nearByAds.length),
-                        ),
+                        Obx(() => c.isNearByAdsLoading.value
+                            ? ListView.builder(
+                                padding: const EdgeInsets.only(top: 5),
+                                shrinkWrap: true,
+                                physics: const ClampingScrollPhysics(),
+                                itemCount: 4,
+                                itemBuilder: (context, index) {
+                                  return BarterShimmer.productItemShimmer();
+                                },
+                              )
+                            : Container(
+                                color: AppColor.backgroundGreyColor,
+                                child: ListView.builder(
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (context, index) => CustomItemTile(
+                                          adsModel: c.nearByAds[index],
+                                          onTap: () => Get.toNamed(ProductDetailPage.routeName,
+                                              arguments: {
+                                                "isMyAds": false,
+                                                "adId": c.nearByAds[index].id
+                                              }),
+                                        ),
+                                    itemCount: c.nearByAds.length),
+                              )),
                       ],
                     ),
                   ),

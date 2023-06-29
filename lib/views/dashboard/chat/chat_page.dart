@@ -16,123 +16,124 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: AppColor.backgroundGreyColor,
         body: Padding(
-      padding: const EdgeInsets.only(top: 10, left: 24, right: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          BarterAppBar(
-            hasLeading: false,
-            title: const Text(
-              "Chat",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
+          padding: const EdgeInsets.only(top: 10, left: 24, right: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BarterAppBar(
+                hasLeading: false,
+                title: const Text(
+                  "Chat",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: () => Get.toNamed(SearchChatPage.routeName),
+                    child: const Icon(
+                      Icons.search,
+                      color: AppColor.primaryTextColor,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            actions: [
-              GestureDetector(
-                onTap: () => Get.toNamed(SearchChatPage.routeName),
-                child: const Icon(
-                  Icons.search,
-                  color: AppColor.primaryTextColor,
+              const SizedBox(
+                height: 34,
+              ),
+              SizedBox(
+                width: Get.width / 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Obx(
+                      () => CustomTabBar(
+                        animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
+                            .animate(c.tabAnimationController.animationController),
+                        title: 'Buying',
+                        onTap: () {
+                          c.tabAnimationController.animationController.reverse();
+                          c.showFeaturedPage();
+                        },
+                        isActive: c.currentIndex.value == 0,
+                      ),
+                    ),
+                    Obx(
+                      () => CustomTabBar(
+                        animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+                            .animate(c.tabAnimationController.animationController),
+                        title: 'Selling',
+                        onTap: () {
+                          c.tabAnimationController.animationController.forward();
+                          c.showNearbyAds();
+                        },
+                        isActive: c.currentIndex.value == 1,
+                      ),
+                    ),
+                  ],
                 ),
               ),
+              const SizedBox(
+                height: 24,
+              ),
+              // Obx(
+              //   () => ,
+              // ),
+              Expanded(
+                child: PageView(
+                  key: const PageStorageKey(1),
+                  padEnds: false,
+                  physics: const BouncingScrollPhysics(),
+                  controller: c.pageController,
+                  allowImplicitScrolling: true,
+                  onPageChanged: (int index) {
+                    if (index == 0) {
+                      c.tabAnimationController.animationController.reverse();
+                      c.currentIndex.value = index;
+                    } else {
+                      c.tabAnimationController.animationController.forward();
+                      c.currentIndex.value = index;
+                    }
+                  },
+                  children: [
+                    ListView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          if (index == 1) {
+                            return ChatTile(
+                              isRead: true,
+                              onTap: () {
+                                Get.toNamed(ChattingPage.routeName);
+                              },
+                            );
+                          }
+
+                          return ChatTile(
+                            onTap: () {
+                              Get.toNamed(ChattingPage.routeName);
+                            },
+                          );
+                        },
+                        itemCount: 3),
+                    ListView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return const ChatTile();
+                        },
+                        itemCount: 3),
+                  ],
+                ),
+              )
             ],
           ),
-          const SizedBox(
-            height: 34,
-          ),
-          SizedBox(
-            width: Get.width / 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Obx(
-                  () => CustomTabBar(
-                    animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
-                        .animate(c.tabAnimationController.animationController),
-                    title: 'Buying',
-                    onTap: () {
-                      c.tabAnimationController.animationController.reverse();
-                      c.showFeaturedPage();
-                    },
-                    isActive: c.currentIndex.value == 0,
-                  ),
-                ),
-                Obx(
-                  () => CustomTabBar(
-                    animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
-                        .animate(c.tabAnimationController.animationController),
-                    title: 'Selling',
-                    onTap: () {
-                      c.tabAnimationController.animationController.forward();
-                      c.showNearbyAds();
-                    },
-                    isActive: c.currentIndex.value == 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          // Obx(
-          //   () => ,
-          // ),
-          Expanded(
-            child: PageView(
-              key: const PageStorageKey(1),
-              padEnds: false,
-              physics: const BouncingScrollPhysics(),
-              controller: c.pageController,
-              allowImplicitScrolling: true,
-              onPageChanged: (int index) {
-                if (index == 0) {
-                  c.tabAnimationController.animationController.reverse();
-                  c.currentIndex.value = index;
-                } else {
-                  c.tabAnimationController.animationController.forward();
-                  c.currentIndex.value = index;
-                }
-              },
-              children: [
-                ListView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) {
-                      if (index == 1) {
-                        return ChatTile(
-                          isRead: true,
-                          onTap: () {
-                            Get.toNamed(ChattingPage.routeName);
-                          },
-                        );
-                      }
-
-                      return ChatTile(
-                        onTap: () {
-                          Get.toNamed(ChattingPage.routeName);
-                        },
-                      );
-                    },
-                    itemCount: 3),
-                ListView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) {
-                      return const ChatTile();
-                    },
-                    itemCount: 3),
-              ],
-            ),
-          )
-        ],
-      ),
-    ));
+        ));
   }
 }

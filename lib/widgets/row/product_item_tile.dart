@@ -28,7 +28,7 @@ class CustomItemTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 5),
-        margin: const EdgeInsets.only(bottom: 20, left: 8, right: 8),
+        margin: const EdgeInsets.only(bottom: 20, left: 13, right: 13, top: 13),
         height: 152,
         width: 342,
         decoration: BoxDecoration(
@@ -129,8 +129,9 @@ class CustomItemTile extends StatelessWidget {
                                 width: 30,
                               ),
                               Expanded(
-                                  flex: 1,
+                                  flex: 2,
                                   child: Text(
+                                    textAlign: TextAlign.end,
                                     adsModel.location ?? "",
                                     style: const TextStyle(
                                         fontSize: 12, color: AppColor.secondaryColor),

@@ -18,6 +18,7 @@ class LikedAds extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    c.fetchFeaturedAdsData();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -72,7 +73,7 @@ class LikedAds extends StatelessWidget {
                               title: "No liked ads yet",
                               subTitle: "Start favouriting ads",
                             )
-                          : ListView.builder(
+                          : Obx(() => ListView.builder(
                               padding: const EdgeInsets.only(top: 10),
                               physics: const ClampingScrollPhysics(),
                               shrinkWrap: true,
@@ -87,36 +88,9 @@ class LikedAds extends StatelessWidget {
                                     "adId": c.favouriteAds[index].id
                                   }),
                                 );
-                              }),
+                              })),
                 ),
               )
-              // Expanded(
-              //   child: ListView.builder(
-              //       padding: const EdgeInsets.only(top: 10),
-              //       physics: const ClampingScrollPhysics(),
-              //       shrinkWrap: true,
-              //       scrollDirection: Axis.vertical,
-              //       itemBuilder: (context, index) {
-              //         return Container();
-              //         // if (index == 0) {
-              //         //   return CustomItemTile(
-              //         //     imageUrl: "https://picsum.photos/200/300",
-              //         //     onTap: () {
-              //         //       Get.toNamed(ProductDetailPage.routeName, arguments: true);
-              //         //     },
-              //         //     isFavourite: true,
-              //         //   );
-              //         // }
-              //         // return CustomItemTile(
-              //         //   imageUrl: "https://picsum.photos/200/300",
-              //         //   onTap: () {
-              //         //     Get.toNamed(ProductDetailPage.routeName, arguments: true);
-              //         //   },
-              //         //   isFavourite: true,
-              //         // );
-              //       },
-              //       itemCount: 5),
-              // )
             ],
           ),
         ),

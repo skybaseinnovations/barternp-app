@@ -17,9 +17,14 @@ class MyAdsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print("active ${c.myActiveAds[0].title}");
+    // print("active ${c.myActiveAds[1].title}");
+    // print("inactive ${c.myInactiveAds}");
+    // print("expired ${c.myExpiredAds}");
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: AppColor.backgroundGreyColor,
         body: Padding(
           padding: const EdgeInsets.only(top: 10, left: 24, right: 24),
           child: ConstrainedBox(
@@ -92,10 +97,10 @@ class MyAdsPage extends StatelessWidget {
                 Expanded(
                   child: TabBarView(controller: c.tabController, children: [
                     Container(
-                      color: Colors.white,
+                      color: AppColor.backgroundGreyColor,
                       child: Obx(() => c.isActivePageLoading.value
                           ? ListView.builder(
-                              padding: const EdgeInsets.only(top: 5),
+                              padding: const EdgeInsets.only(top: 15),
                               shrinkWrap: true,
                               physics: const ClampingScrollPhysics(),
                               itemCount: 4,
@@ -109,51 +114,51 @@ class MyAdsPage extends StatelessWidget {
                                   title: "Nothing to show here ",
                                   subTitle: "Post new ads",
                                 )
-                              : ListView.builder(
-                                  controller: c.activePageScrollController,
-                                  physics: const ClampingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: c.myActiveAds.length + 1,
-                                  itemBuilder: (context, index) {
-                                    if (index == c.myActiveAds.length) {
-                                      return c.activeAdsNextPageUrl.value == null
-                                          ? Container()
-                                          : const Center(
-                                              child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                SizedBox(
-                                                  width: 20,
-                                                  height: 20,
-                                                  child: CircularProgressIndicator(
-                                                    color: AppColor.primaryColor,
-                                                    strokeWidth: 2,
+                              : Obx(() => ListView.builder(
+                                    controller: c.activePageScrollController,
+                                    physics: const ClampingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: c.myActiveAds.length + 1,
+                                    itemBuilder: (context, index) {
+                                      if (index == c.myActiveAds.length) {
+                                        return c.activeAdsNextPageUrl.value == null
+                                            ? Container()
+                                            : const Center(
+                                                child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 20,
+                                                    height: 20,
+                                                    child: CircularProgressIndicator(
+                                                      color: AppColor.primaryColor,
+                                                      strokeWidth: 2,
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: 50,
-                                                )
-                                              ],
-                                            ));
-                                    }
-                                    return CustomItemTile(
-                                      adsModel: c.myActiveAds[index],
-                                      isMyAds: true,
-                                      onTap: () => Get.toNamed(ProductDetailPage.routeName,
-                                          arguments: {
-                                            "isMyAds": true,
-                                            "adId": c.myActiveAds[index].id
-                                          }),
-                                    );
-                                  },
-                                )),
+                                                  SizedBox(
+                                                    height: 50,
+                                                  )
+                                                ],
+                                              ));
+                                      }
+                                      return CustomItemTile(
+                                        adsModel: c.myActiveAds[index],
+                                        isMyAds: true,
+                                        onTap: () => Get.toNamed(ProductDetailPage.routeName,
+                                            arguments: {
+                                              "isMyAds": true,
+                                              "adId": c.myActiveAds[index].id
+                                            }),
+                                      );
+                                    },
+                                  ))),
                     ),
                     Container(
-                      color: Colors.white,
+                      color: AppColor.backgroundGreyColor,
                       child: Obx(() => c.isInactivePageLoading.value
                           ? ListView.builder(
-                              padding: const EdgeInsets.only(top: 5),
+                              padding: const EdgeInsets.only(top: 15),
                               shrinkWrap: true,
                               physics: const ClampingScrollPhysics(),
                               itemCount: 4,
@@ -208,10 +213,10 @@ class MyAdsPage extends StatelessWidget {
                                 )),
                     ),
                     Container(
-                      color: Colors.white,
+                      color: AppColor.backgroundGreyColor,
                       child: Obx(() => c.isExpiredPageLoading.value
                           ? ListView.builder(
-                              padding: const EdgeInsets.only(top: 5),
+                              padding: const EdgeInsets.only(top: 15),
                               shrinkWrap: true,
                               physics: const ClampingScrollPhysics(),
                               itemCount: 4,

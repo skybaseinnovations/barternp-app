@@ -67,6 +67,7 @@ class MyAdsPageController extends GetxController with GetSingleTickerProviderSta
   }
 
   fetchActiveAdsData({String? nextPageurl}) {
+    isActivePageLoading.value = true;
     AdsRepo.getMyActiveAdsDetail(
         url: nextPageurl,
         onSuccess: (adsList, url) {
@@ -76,10 +77,11 @@ class MyAdsPageController extends GetxController with GetSingleTickerProviderSta
         },
         onError: (message) {
           print("===========>> $message");
-        });
+        }).then((value) => print("active ads $myActiveAds"));
   }
 
   fetchInactiveAdsData({String? nextPageurl}) {
+    isInactivePageLoading.value = true;
     AdsRepo.getMyInactiveAdsDetail(
         url: nextPageurl,
         onSuccess: (adsList, url) {
@@ -89,10 +91,11 @@ class MyAdsPageController extends GetxController with GetSingleTickerProviderSta
         },
         onError: (message) {
           print("===========>> $message");
-        });
+        }).then((value) => print("inactive ads $myInactiveAds"));
   }
 
   fetchExpiredAdsData({String? nextPageurl}) {
+    isExpiredPageLoading.value = true;
     AdsRepo.getMyExpiredAdsDetail(
         url: nextPageurl,
         onSuccess: (adsList, url) {
@@ -102,6 +105,6 @@ class MyAdsPageController extends GetxController with GetSingleTickerProviderSta
         },
         onError: (message) {
           print("===========>> $message");
-        });
+        }).then((value) => print("expired ads $myExpiredAds"));
   }
 }

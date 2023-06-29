@@ -143,7 +143,7 @@ class HomePageController extends GetxController {
         },
         onError: (message) {
           print("$message");
-          isCategoryLoading.value = false;
+          // isFeaturedAdsLoading.value = false;
         });
   }
 
@@ -158,7 +158,7 @@ class HomePageController extends GetxController {
         },
         onError: (message) {
           print("$message");
-          isNearByAdsLoading.value = false;
+          // isNearByAdsLoading.value = false;
         });
   }
 

@@ -101,25 +101,25 @@ class MyCustomMessages implements LookupMessages {
   @override
   String lessThanOneMinute(int seconds) => 'now';
   @override
-  String aboutAMinute(int minutes) => '$minutes minutes';
+  String aboutAMinute(int minutes) => '$minutes min';
   @override
-  String minutes(int minutes) => '$minutes minutes';
+  String minutes(int minutes) => '$minutes min';
   @override
-  String aboutAnHour(int minutes) => '$minutes minutes';
+  String aboutAnHour(int minutes) => '$minutes min';
   @override
-  String hours(int hours) => '$hours hours';
+  String hours(int hours) => '$hours hrs';
   @override
-  String aDay(int hours) => '$hours hours';
+  String aDay(int hours) => '$hours hrs';
   @override
   String days(int days) => '$days days';
   @override
   String aboutAMonth(int days) => '$days days';
   @override
-  String months(int months) => '$months months';
+  String months(int months) => '$months mon';
   @override
-  String aboutAYear(int year) => '$year year';
+  String aboutAYear(int year) => '$year yr';
   @override
-  String years(int years) => '$years years';
+  String years(int years) => '$years yr';
   @override
   String wordSeparator() => ' ';
 }

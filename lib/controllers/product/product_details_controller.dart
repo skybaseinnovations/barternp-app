@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/profile/like_ads_controller.dart';
 import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:barter_app_2023/views/dashboard/chat/chatting_page.dart';
 import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
@@ -13,6 +14,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../Repos/home/ads_repo.dart';
 
 class ProductDetailPageController extends GetxController {
+  var lac = Get.find<LikedAdsController>();
+  var apc = Get.find<MyAdsPageController>();
   var isMyAds = false.obs;
   late String adId;
   Rxn<AdsDetail> adsDetail = Rxn<AdsDetail>();
@@ -69,6 +72,11 @@ class ProductDetailPageController extends GetxController {
           BarterSnackBar.error(title: "Toggle like", message: messages);
           isFavLoading.value = false;
         });
+    try {
+      lac.fetchFeaturedAdsData();
+    } catch (e) {
+      print("Controller is not found");
+    }
   }
 
   isFavouritAd() {
@@ -99,13 +107,18 @@ class ProductDetailPageController extends GetxController {
         adId: adId,
         onSuccess: (message) {
           Get.back();
-          BarterSnackBar.success(title: "Ads Deleted", message: message);
-          MyAdsPageController().fetchActiveAdsData();
-          MyAdsPageController().fetchExpiredAdsData();
-          MyAdsPageController().fetchInactiveAdsData();
+          BarterSnackBar.success(title: "Delete Ad", message: message);
+          apc.myActiveAds.clear();
+          apc.myExpiredAds.clear();
+          apc.myInactiveAds.clear();
+          apc.fetchActiveAdsData();
+          apc.fetchExpiredAdsData();
+          apc.fetchInactiveAdsData();
+
+          // print("hereeee ${}");
         },
         onError: (message) {
-          BarterSnackBar.error(title: "Ads Deleted", message: message);
+          BarterSnackBar.error(title: "Delete Ad", message: message);
         });
   }
 
