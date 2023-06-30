@@ -14,7 +14,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../Repos/home/ads_repo.dart';
 
 class ProductDetailPageController extends GetxController {
-  var lac = Get.find<LikedAdsController>();
   var apc = Get.find<MyAdsPageController>();
   var isMyAds = false.obs;
   late String adId;
@@ -73,6 +72,7 @@ class ProductDetailPageController extends GetxController {
           isFavLoading.value = false;
         });
     try {
+      var lac = Get.find<LikedAdsController>();
       lac.fetchFeaturedAdsData();
     } catch (e) {
       print("Controller is not found");
