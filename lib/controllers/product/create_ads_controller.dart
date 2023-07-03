@@ -1,18 +1,14 @@
 import 'package:barter_app_2023/Repos/post_ads_repo.dart';
-import 'package:barter_app_2023/Repos/products/fields_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import '../../Repos/products/categories_repo.dart';
 import '../../Repos/products/sub_categories_repo.dart';
-
+import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 import '../../models/categories.dart';
 import '../../models/fields_model.dart';
 import '../../models/post_ads_model.dart';
-import '../../utils/helpers/validators.dart';
-import '../../widgets/custom/custom_snackbar.dart';
-import '../../widgets/custom/custom_underline_text_field.dart';
 
 class CreateAdsController extends GetxController {
   final currentStep = 0.obs;
@@ -59,7 +55,7 @@ class CreateAdsController extends GetxController {
         isCategoryEmpty.value = true;
       }
     }, onError: (message) {
-      BartarSnackBar.error(title: "Render Error", message: message);
+      BarterSnackBar.error(title: "Render Error", message: message);
       isCategoryLoading.value = false;
     });
   }
@@ -91,7 +87,7 @@ class CreateAdsController extends GetxController {
         }
       },
       onError: (message) {
-        BartarSnackBar.error(title: "Render Error", message: message);
+        BarterSnackBar.error(title: "Render Error", message: message);
       },
     );
   }
@@ -122,7 +118,7 @@ class CreateAdsController extends GetxController {
         }
       },
       onError: (message) {
-        BartarSnackBar.error(title: "Render Error", message: message);
+        BarterSnackBar.error(title: "Render Error", message: message);
       },
     );
   }
@@ -182,7 +178,7 @@ class CreateAdsController extends GetxController {
           print("success");
         },
         onError: (errorMessage) {
-          BartarSnackBar.error(title: "Create Profile Error", message: errorMessage);
+          BarterSnackBar.error(title: "Create Profile Error", message: errorMessage);
         });
   }
 }

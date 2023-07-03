@@ -1,6 +1,6 @@
-import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 
 class ImagePickerController extends GetxController {
   RxList images = [].obs;
@@ -12,11 +12,9 @@ class ImagePickerController extends GetxController {
     }
   }
 
-  
-
   pickImage(ImageSource source) async {
     if (images.length >= 5) {
-      return BartarSnackBar.error(
+      return BarterSnackBar.error(
           message: "You can only post 5 ads per post.", title: "Photo limit reached");
     }
 

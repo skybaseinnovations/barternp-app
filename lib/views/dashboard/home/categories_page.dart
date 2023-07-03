@@ -1,4 +1,3 @@
-import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
 import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/views/dashboard/home/sub_categories.dart';
@@ -7,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/dashboard/home/home_page_controller.dart';
 import '../../../models/categories.dart';
 import '../../../utils/constants/image_paths.dart';
 import '../../../widgets/custom/custom_app_bar.dart';
@@ -32,7 +32,7 @@ class CategoriesPage extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 30),
-                child: BartarAppBar(
+                child: BarterAppBar(
                   centerTitle: true,
                   hasLeading: true,
                   leadingWidth: 30,

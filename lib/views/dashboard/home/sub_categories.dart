@@ -1,4 +1,4 @@
-import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
+
 import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 
 import 'package:barter_app_2023/utils/constants/colors.dart';
@@ -32,7 +32,7 @@ class SubCategoriesPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 20.0, bottom: 30),
-                child: BartarAppBar(
+                child: BarterAppBar(
                     centerTitle: true,
                     hasLeading: true,
                     leadingWidth: 30,

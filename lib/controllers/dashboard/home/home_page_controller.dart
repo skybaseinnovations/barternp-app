@@ -1,12 +1,15 @@
-import 'package:barter_app_2023/Repos/home/categories_repo.dart';
+import 'package:barter_app_2023/Repos/home/ads_repo.dart';
+import 'package:barter_app_2023/Repos/home/banner_repo.dart';
+import 'package:barter_app_2023/Repos/products/categories_repo.dart';
 import 'package:barter_app_2023/controllers/animation/line_animation_controller.dart';
+import 'package:barter_app_2023/models/ads_model.dart';
+import 'package:barter_app_2023/models/banner_image_model.dart';
 import 'package:barter_app_2023/models/categories.dart';
+import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Repos/home/banner_repo.dart';
-import '../../models/banner_image_model.dart';
-import '../../widgets/custom/custom_snackbar.dart';
+import '../../../Repos/home/view_all_page.dart';
 
 class HomePageController extends GetxController {
   List<String> featuredImageUrl = [
@@ -112,6 +115,8 @@ class HomePageController extends GetxController {
     );
   }
 
+  RxBool isCategoryLoading = true.obs;
+  RxBool isCategoryEmpty = false.obs;
   void categoryData() {
     CategoryRepo.fetchCategoryData(onSuccess: (fetchedCategoryDetails) {
       categoryDetails.value = fetchedCategoryDetails;

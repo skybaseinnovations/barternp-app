@@ -78,7 +78,7 @@ class CreateAdsPage extends StatelessWidget {
                             c.fetchFieldsData();
                             c.currentStep.value++;
                           } else {
-                            BartarSnackBar.error(
+                            BarterSnackBar.error(
                                 message: "You must post at least 2 ads per post.",
                                 title: "Photo limit not reached");
                           }
@@ -108,7 +108,7 @@ class CreateAdsPage extends StatelessWidget {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(top: 20.0, left: 24, right: 24),
-                  child: BartarAppBar(
+                  child: BarterAppBar(
                     centerTitle: true,
                     hasLeading: true,
                     leadingWidth: 30,
