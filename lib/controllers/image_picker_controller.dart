@@ -12,10 +12,11 @@ class ImagePickerController extends GetxController {
     }
   }
 
+  
+
   pickImage(ImageSource source) async {
     if (images.length >= 5) {
-      // Maximum number of images reached
-      return BarterSnackBar.error(
+      return BartarSnackBar.error(
           message: "You can only post 5 ads per post.", title: "Photo limit reached");
     }
 

@@ -17,4 +17,5 @@ class Api {
   static const String myInactiveAdsUrl = "$baseUrl/user/my-ads/inactive";
   static const String myExpiredAdsUrl = "$baseUrl/user/my-ads/expired";
   static const String deleteAdsUrl = "$baseUrl/auth/ads/delete";
+  static const String postAdsUrl = "$baseUrl/auth/ads/";
 }

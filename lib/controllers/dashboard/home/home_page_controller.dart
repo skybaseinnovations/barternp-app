@@ -1,15 +1,12 @@
-import 'package:barter_app_2023/Repos/home/ads_repo.dart';
 import 'package:barter_app_2023/Repos/home/categories_repo.dart';
-import 'package:barter_app_2023/Repos/home/view_all_page.dart';
 import 'package:barter_app_2023/controllers/animation/line_animation_controller.dart';
-import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:barter_app_2023/models/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../Repos/home/banner_repo.dart';
-import '../../../models/banner_image_model.dart';
-import '../../../widgets/custom/custom_snackbar.dart';
+import '../../Repos/home/banner_repo.dart';
+import '../../models/banner_image_model.dart';
+import '../../widgets/custom/custom_snackbar.dart';
 
 class HomePageController extends GetxController {
   List<String> featuredImageUrl = [
@@ -39,14 +36,10 @@ class HomePageController extends GetxController {
   ];
 
   ScrollController scrollController = ScrollController();
-  TextEditingController searchAdsController = TextEditingController();
 
   var physicsStats = true.obs;
+  var isBannerEmpty = false.obs;
   var isBannerLoading = true.obs;
-  var isCategoryLoading = true.obs;
-  var isCategoryEmpty = true.obs;
-  var isBannerEmpty = true.obs;
-  // List<BannerImage> banners = []; //
   RxList<BannerImage> banners = RxList();
   RxList<CategoryDetails> categoryDetails = RxList();
   RxList<AdsDetail> featuredAds = RxList();
@@ -109,7 +102,7 @@ class HomePageController extends GetxController {
         banners.value = fetchedBanners;
         isBannerLoading.value = false;
         if (banners.isEmpty) {
-          isBannerEmpty.value = false;
+          isBannerEmpty.value = true;
         }
       },
       onError: (message) {

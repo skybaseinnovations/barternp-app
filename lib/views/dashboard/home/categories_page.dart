@@ -1,4 +1,5 @@
-import 'package:barter_app_2023/controllers/dashboard/home/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/dashboard/home_page_controller.dart';
+import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/views/dashboard/home/sub_categories.dart';
 import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
@@ -15,6 +16,8 @@ class CategoriesPage extends StatelessWidget {
   static const String routeName = "/categoriesPage";
   final hpc = Get.find<HomePageController>();
 
+  final c = Get.put(CreateAdsController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +32,7 @@ class CategoriesPage extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 30),
-                child: BarterAppBar(
+                child: BartarAppBar(
                   centerTitle: true,
                   hasLeading: true,
                   leadingWidth: 30,
@@ -39,7 +42,7 @@ class CategoriesPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Obx(() => hpc.isCategoryLoading.value
+              Obx(() => c.isCategoryLoading.value
                   ? BarterShimmer.categoryShimmer()
                   : Container(
                       margin: const EdgeInsets.all(5),
@@ -51,9 +54,9 @@ class CategoriesPage extends StatelessWidget {
                           crossAxisSpacing: 29,
                           mainAxisSpacing: 20,
                         ),
-                        itemCount: hpc.categoryDetails.length,
+                        itemCount: c.categoryDetails.length,
                         itemBuilder: (context, index) {
-                          CategoryDetails categoryDetail = hpc.categoryDetails[index];
+                          CategoryDetails categoryDetail = c.categoryDetails[index];
 
                           return InkWell(
                             onTap: () {

@@ -26,5 +26,6 @@ class BannerImage {
     return data;
   }
 }
-List<BannerImage> bannersFromJson(List<dynamic> bannersJson) => List<BannerImage>.from(
-    bannersJson.map((categoryJson) => BannerImage.fromJson(categoryJson)));
+
+List<BannerImage> bannersFromJson(List<dynamic> bannersJson) =>
+    List<BannerImage>.from(bannersJson.map((categoryJson) => BannerImage.fromJson(categoryJson)));

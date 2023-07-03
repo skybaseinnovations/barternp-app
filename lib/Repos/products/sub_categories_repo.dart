@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:get/get.dart';
-
-import '../../controllers/product/category_controller.dart';
 import '../../models/categories.dart';
 import '../../utils/constants/apis.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +8,6 @@ import 'package:http/http.dart' as http;
 import '../../utils/helpers/http_requests.dart';
 
 class SubCategoryRepo {
-  final c = Get.put(SubCategoryController());
   static Future<void> fetchSubCategoryData({
     required String id,
     required Function(List<CategoryDetails> categoryDetails) onSuccess,
@@ -19,12 +15,14 @@ class SubCategoryRepo {
   }) async {
     try {
       var parseUrl = Uri.parse(Api.subCategoryUrl + id);
+
       http.Response response = await BarterRequest.get(parseUrl);
       dynamic responseData = jsonDecode(response.body);
 
       if (responseData["status"]) {
         List<CategoryDetails> categoryDetails =
             categorisefromJson(responseData['data']["subcategories"]);
+
         onSuccess(categoryDetails);
       } else {
         onError(responseData["message"]);
