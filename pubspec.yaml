@@ -46,6 +46,8 @@ dependencies:
   pinput: ^2.2.31
   shimmer: ^3.0.0
   sticky_headers: ^0.3.0+2
+  geolocator: ^9.0.2
+  geocoding: ^2.1.0
 
 
 dev_dependencies:

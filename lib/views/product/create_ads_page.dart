@@ -5,6 +5,7 @@ import 'package:barter_app_2023/models/fields_model.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_category_bottom_sheet.dart';
+import 'package:barter_app_2023/widgets/custom/custom_fields_bottom_sheet.dart';
 import 'package:barter_app_2023/widgets/custom/custom_underline_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
@@ -73,8 +74,8 @@ class CreateAdsPage extends StatelessWidget {
                             c.currentStep.value++;
                           }
                         } else if (c.currentStep.value == 1) {
-                          print("page 2");
                           if (ipc.images.length >= 2) {
+                            c.fetchFieldsData();
                             c.currentStep.value++;
                           } else {
                             BartarSnackBar.error(
@@ -82,13 +83,15 @@ class CreateAdsPage extends StatelessWidget {
                                 title: "Photo limit not reached");
                           }
                         } else if (c.currentStep.value == 2) {
-                          print("page 3");
-                          c.fetchFieldsData();
+                          if (c.onNext()) {
+                            c.getLocation();
+                            c.postAds();
+                            print("completed");
+
+                            // c.currentStep.value++;
+                          }
+                          // c.fetchFieldsData();
                         }
-                        // if (c.currentStep.value < c.steps.length - 1) {
-                        //   c.onSubmit();
-                        //   c.currentStep.value++;
-                        // }
                       },
                       child: const Text('Next'),
                     ),
@@ -154,14 +157,10 @@ class CreateAdsPage extends StatelessWidget {
                                 SizedBox(
                                   height: 50,
                                   child: CustomOutlineBorderTextField(
-                                    controller: c.titleFieldController,
-                                    textInputAction: TextInputAction.next,
-                                    textInputType: TextInputType.text,
-                                    validator: (String? fieldContent) {
-                                      return Validators.checkFieldEmpty(
-                                          c.titleFieldController.text);
-                                    },
-                                  ),
+                                      controller: c.titleFieldController,
+                                      textInputAction: TextInputAction.next,
+                                      textInputType: TextInputType.text,
+                                      validator: Validators.checkFieldEmpty),
                                 ),
                                 const SizedBox(
                                   height: 38,
@@ -176,14 +175,10 @@ class CreateAdsPage extends StatelessWidget {
                                 SizedBox(
                                   height: 50,
                                   child: CustomOutlineBorderTextField(
-                                    controller: c.descriptionFieldController,
-                                    textInputAction: TextInputAction.next,
-                                    textInputType: TextInputType.text,
-                                    validator: (String? fieldContent) {
-                                      return Validators.checkFieldEmpty(
-                                          c.descriptionFieldController.text);
-                                    },
-                                  ),
+                                      controller: c.descriptionFieldController,
+                                      textInputAction: TextInputAction.next,
+                                      textInputType: TextInputType.text,
+                                      validator: Validators.checkFieldEmpty),
                                 ),
                                 const SizedBox(
                                   height: 38,
@@ -195,14 +190,10 @@ class CreateAdsPage extends StatelessWidget {
                                 SizedBox(
                                   height: 50,
                                   child: CustomOutlineBorderTextField(
-                                    controller: c.priceFieldController,
-                                    textInputAction: TextInputAction.next,
-                                    textInputType: TextInputType.text,
-                                    validator: (String? fieldContent) {
-                                      return Validators.checkFieldEmpty(
-                                          c.priceFieldController.text);
-                                    },
-                                  ),
+                                      controller: c.priceFieldController,
+                                      textInputAction: TextInputAction.next,
+                                      textInputType: TextInputType.number,
+                                      validator: Validators.checkFieldEmpty),
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -215,28 +206,24 @@ class CreateAdsPage extends StatelessWidget {
                                   height: 10,
                                 ),
                                 CustomOutlineBorderTextField(
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                        shape: const RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.vertical(top: Radius.circular(16))),
-                                        context: context,
-                                        builder: (context) =>
-                                            SizedBox(child: CustomCategoryBottomSheet()));
-                                  },
-                                  color: Colors.transparent,
-                                  suffixIconPath: ImagePath.downArrowconPath,
-                                  controller: c.categoryFieldController,
-                                  textInputAction: TextInputAction.next,
-                                  textInputType: TextInputType.none,
-                                  readOnly: true,
-                                  hint: c.catTitle.value,
-                                  hintStyle: const TextStyle(color: Colors.black),
-                                  validator: (String? fieldContent) {
-                                    return Validators.checkFieldEmpty(
-                                        c.categoryFieldController.text);
-                                  },
-                                ),
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.vertical(top: Radius.circular(16))),
+                                          context: context,
+                                          builder: (context) =>
+                                              SizedBox(child: CustomCategoryBottomSheet()));
+                                    },
+                                    color: Colors.transparent,
+                                    suffixIconPath: ImagePath.downArrowconPath,
+                                    controller: c.categoryFieldController,
+                                    textInputAction: TextInputAction.next,
+                                    textInputType: TextInputType.none,
+                                    readOnly: true,
+                                    hint: c.catTitle.value,
+                                    hintStyle: const TextStyle(color: Colors.black),
+                                    validator: Validators.checkFieldEmpty),
                                 const SizedBox(
                                   height: 38,
                                 ),
@@ -266,11 +253,8 @@ class CreateAdsPage extends StatelessWidget {
                                             textInputAction: TextInputAction.next,
                                             textInputType: TextInputType.none,
                                             readOnly: true,
-                                            hint: c.catSubTitle.value,
-                                            validator: (String? fieldContent) {
-                                              return Validators.checkFieldEmpty(
-                                                  c.subCategoryFieldController.text);
-                                            },
+                                            hint: c.catSubTitle.value?.title,
+                                            validator: Validators.checkFieldEmpty,
                                             hintStyle: const TextStyle(color: Colors.black),
                                           ),
                                         ],
@@ -409,14 +393,59 @@ class CreateAdsPage extends StatelessWidget {
                             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                           ),
                           content: SingleChildScrollView(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: c.fieldsData.length,
-                              itemBuilder: (context, index) {
-                                FieldDetails fieldDetail = c.fieldsData[index];
-                                print(fieldDetail.id);
-                                return Container();
-                              },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Feature this ad ",
+                                          style: TextStyle(fontWeight: FontWeight.w600),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 10.0),
+                                          child:
+                                              Text("Featuring the ad will increase the ads reach"),
+                                        )
+                                      ],
+                                    ),
+                                    Switch(
+                                        value: c.isFeatured.value,
+                                        onChanged: (value) {
+                                          c.isFeatured.value = value;
+                                          if (c.isFeatured.value) {
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return const AlertDialog();
+                                                });
+                                          }
+                                        })
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Form(
+                                  key: c.fieldsFormKey,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: c.fieldsData.length,
+                                    itemBuilder: (context, index) {
+                                      FieldDetails fieldDetail = c.fieldsData[index];
+                                      Widget widget = createFieldsWithType(fieldDetail, context);
+                                      return Padding(
+                                        padding: const EdgeInsets.only(bottom: 20.0),
+                                        child: widget,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           )),
                     ],
@@ -428,5 +457,83 @@ class CreateAdsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  createFieldsWithType(FieldDetails fieldDetails, BuildContext context) {
+    switch (fieldDetails.type) {
+      case 'TEXT':
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              fieldDetails.label!,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+            SizedBox(
+              height: 50,
+              child: CustomOutlineBorderTextField(
+                controller: c.fieldControllers[fieldDetails.label!],
+                textInputAction: TextInputAction.next,
+                validator: fieldDetails.required == 1 ? Validators.checkFieldEmpty : null,
+                textInputType: TextInputType.text,
+              ),
+            ),
+          ],
+        );
+
+      case 'TEXT_NUMBER':
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              fieldDetails.label!,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+            SizedBox(
+              height: 50,
+              child: CustomOutlineBorderTextField(
+                controller: c.fieldControllers[fieldDetails.label!],
+                textInputAction: TextInputAction.next,
+                textInputType: TextInputType.number,
+                validator: fieldDetails.required == 1 ? Validators.checkFieldEmpty : null,
+              ),
+            ),
+          ],
+        );
+
+      case 'SELECT':
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              fieldDetails.label!,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            CustomOutlineBorderTextField(
+              onTap: () {
+                showModalBottomSheet(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+                    context: context,
+                    builder: (context) => SizedBox(
+                            child: CustomFieldsBottomSheet(
+                          options: fieldDetails.options,
+                          label: fieldDetails.label,
+                        )));
+              },
+              textInputAction: TextInputAction.next,
+              textInputType: TextInputType.none,
+              controller: c.fieldControllers[fieldDetails.label!],
+              color: Colors.transparent,
+              suffixIconPath: ImagePath.downArrowconPath,
+              validator: fieldDetails.required == 1 ? Validators.checkFieldEmpty : null,
+              readOnly: true,
+            )
+          ],
+        );
+    }
   }
 }

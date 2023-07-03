@@ -77,7 +77,10 @@ class CustomSubCategoryBottomSheet extends StatelessWidget {
                           CategoryDetails categoryDetail = c.subCategoryDetails[index];
                           return InkWell(
                             onTap: () {
-                              c.catSubTitle.value = categoryDetail.title!;
+                              c.subCatId.value = categoryDetail.id!;
+                              c.subCategoryFieldController.text = categoryDetail.title!;
+                              var categorydetaill = CategoryDetails(title: categoryDetail.title);
+                              c.catSubTitle.value = categorydetaill;
                               Navigator.pop(context);
                             },
                             child: Padding(

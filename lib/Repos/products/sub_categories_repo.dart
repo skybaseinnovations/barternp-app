@@ -15,12 +15,14 @@ class SubCategoryRepo {
   }) async {
     try {
       var parseUrl = Uri.parse(Api.subCategoryUrl + id);
+
       http.Response response = await BarterRequest.get(parseUrl);
       dynamic responseData = jsonDecode(response.body);
 
       if (responseData["status"]) {
         List<CategoryDetails> categoryDetails =
             categorisefromJson(responseData['data']["subcategories"]);
+
         onSuccess(categoryDetails);
       } else {
         onError(responseData["message"]);

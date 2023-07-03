@@ -26,35 +26,33 @@ class CustomCategoryBottomSheet extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(26),
-            child: AppBar(
-              backgroundColor: AppColor.backgroundGreyColor,
-              centerTitle: true,
-              title: const Text(
-                "Select Category",
-                style: TextStyle(
-                    color: AppColor.primaryTextColor, fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-              actions: [
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: const Icon(
-                        Icons.close,
-                        color: AppColor.primaryTextColor,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 27,
-                    )
-                  ],
-                )
-              ],
+          AppBar(
+            elevation: 0,
+            backgroundColor: AppColor.backgroundGreyColor,
+            centerTitle: true,
+            title: const Text(
+              "Select Category",
+              style: TextStyle(
+                  color: AppColor.primaryTextColor, fontSize: 16, fontWeight: FontWeight.w600),
             ),
+            actions: [
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: const Icon(
+                      Icons.close,
+                      color: AppColor.primaryTextColor,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 27,
+                  )
+                ],
+              )
+            ],
           ),
           const Divider(
             height: 40,
@@ -78,11 +76,12 @@ class CustomCategoryBottomSheet extends StatelessWidget {
                           CategoryDetails categoryDetail = c.categoryDetails[index];
                           return InkWell(
                             onTap: () {
+                              c.categoryFieldController.text = categoryDetail.title!;
                               c.catTitle.value = categoryDetail.title!;
                               if (categoryDetail.hasSubcategory!) {
                                 c.hasSub = true;
                                 c.catId.value = categoryDetail.id!;
-                                c.catSubTitle.value = "";
+
                                 c.type = false;
                                 Navigator.pop(context);
                               } else {

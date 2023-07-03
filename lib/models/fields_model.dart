@@ -30,7 +30,7 @@ class FieldDetails {
     isPrice = json['is_price'];
     required = json['required'];
     type = json['type'];
-    // options = json['options'].cast<String>();
+    options = json['options'].cast<String>();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }

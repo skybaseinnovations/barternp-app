@@ -6,4 +6,5 @@ class Api {
   static const String homeBannerUrl = "$baseUrl/banners";
   static const String categoryDetailsUrl = "$baseUrl/categories";
   static const String subCategoryUrl = "$baseUrl/categories/";
+  static const String postAdsUrl = "$baseUrl/auth/ads/";
 }
