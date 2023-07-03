@@ -34,8 +34,6 @@ import 'package:barter_app_2023/views/product/product_detail.dart';
 import 'package:barter_app_2023/views/splash_page.dart';
 import 'package:get/get.dart';
 
-
-
 var getPages = [
   GetPage(
     name: SplashPage.routeName,
@@ -82,6 +80,7 @@ var getPages = [
         Get.lazyPut(() => HomePageController());
         Get.lazyPut(() => MyAdsPageController());
         Get.lazyPut(() => ChatPageController());
+        Get.lazyPut(() => SearchAdsController());
       },
     ),
   ),

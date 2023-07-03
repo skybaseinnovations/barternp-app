@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
 
   HomePage({super.key});
   final c = Get.find<HomePageController>();
-  final sc = Get.put(SearchAdsController());
+  final sc = Get.find<SearchAdsController>();
   // final c = Get.put(CreateAdsController());
 
   @override
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
                     height: 30,
                   ),
                   CustomTextField(
-                    controller: sc.searchController,
+                    // controller: sc.searchController,
                     fillColor: AppColor.searchFieldColor,
                     prefixIcon: const Icon(Icons.search),
                     hint: 'Search',
