@@ -20,7 +20,7 @@ class BarterApp extends StatelessWidget {
         fontFamily: "Libre Franklin",
       ),
       initialBinding: BindingsBuilder(
-        () { 
+        () {
           Get.put(CoreController());
         },
       ),

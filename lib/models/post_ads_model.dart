@@ -9,7 +9,7 @@ class PostAdsModel {
   bool? isFeatured;
   int? price;
   List<dynamic>? fields;
-
+  List<dynamic>? images;
   PostAdsModel(
       {this.categoryId,
       this.subcategoryId,
@@ -20,7 +20,8 @@ class PostAdsModel {
       this.longitude,
       this.isFeatured,
       this.price,
-      this.fields});
+      this.fields,
+      this.images});
 
   PostAdsModel.fromJson(Map<String, dynamic> json) {
     categoryId = json['category_id'];
@@ -38,6 +39,7 @@ class PostAdsModel {
         fields!.add(Fields.fromJson(v));
       });
     }
+    images = json['images'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -56,6 +58,7 @@ class PostAdsModel {
     if (fields != null) {
       data['fields'] = fields!.map((v) => v.toJson()).toList();
     }
+    data['images'] = images;
     return data;
   }
 }

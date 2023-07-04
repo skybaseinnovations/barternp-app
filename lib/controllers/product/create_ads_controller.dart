@@ -1,4 +1,5 @@
 import 'package:barter_app_2023/Repos/post_ads_repo.dart';
+import 'package:barter_app_2023/controllers/image_picker_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
@@ -170,6 +171,7 @@ class CreateAdsController extends GetxController {
                 value: entry.value.text,
               ))
           .toList(),
+      images: ImagePickerController().displayImage,
     );
 
     PostAdsRepo.postAds(
@@ -178,7 +180,7 @@ class CreateAdsController extends GetxController {
           print("success");
         },
         onError: (errorMessage) {
-          BarterSnackBar.error(title: "Create Profile Error", message: errorMessage);
+          BarterSnackBar.error(title: "Create Ads Error", message: errorMessage);
         });
   }
 }

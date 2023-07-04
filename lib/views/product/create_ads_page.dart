@@ -371,7 +371,7 @@ class CreateAdsPage extends StatelessWidget {
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(8),
                                           child: Image.file(
-                                            File(ipc.images[index]),
+                                            File(ipc.displayImage[index]),
                                             fit: BoxFit.cover,
                                             height: 90,
                                             width: 90,
@@ -495,7 +495,11 @@ class CreateAdsPage extends StatelessWidget {
                 controller: c.fieldControllers[fieldDetails.label!],
                 textInputAction: TextInputAction.next,
                 textInputType: TextInputType.number,
-                validator: fieldDetails.required == 1 ? Validators.checkFieldEmpty : null,
+                validator: fieldDetails.required == 1
+                    ? fieldDetails.label == "Contact no."
+                        ? Validators.checkPhoneField
+                        : Validators.checkFieldEmpty
+                    : null,
               ),
             ),
           ],

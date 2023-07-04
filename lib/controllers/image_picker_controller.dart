@@ -1,9 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 
 class ImagePickerController extends GetxController {
   RxList images = [].obs;
+  RxList displayImage = [].obs;
+  String? base64Image;
   final ImagePicker _picker = ImagePicker();
 
   void deleteImage(int index) {
@@ -22,9 +27,11 @@ class ImagePickerController extends GetxController {
       imageQuality: 100,
       source: source,
     );
-
     if (pickedImage != null) {
-      images.add(pickedImage.path);
+      displayImage.add(pickedImage.path);
+      base64Image = base64Encode(await pickedImage.readAsBytes());
+      print(base64Image);
+      images.add(base64Image);
     }
   }
 }
