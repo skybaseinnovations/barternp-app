@@ -14,6 +14,7 @@ class SubCategoryRepo {
     required Function(String message) onError,
   }) async {
     try {
+      print(id);
       var parseUrl = Uri.parse(Api.subCategoryUrl + id);
 
       http.Response response = await BarterRequest.get(parseUrl);

@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
   final c = Get.find<HomePageController>();
   final sc = Get.find<SearchAdsController>();
-  // final c = Get.put(CreateAdsController());
+  final cac = Get.put(CreateAdsController());
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +180,7 @@ class HomePage extends StatelessWidget {
                     height: 24,
                   ),
                   Obx(
-                    () => !c.isCategoryEmpty.value
+                    () => c.isCategoryEmpty.value
                         ? Container()
                         : c.isCategoryLoading.value
                             ? BarterShimmer.categoryShimmer()
@@ -196,8 +196,9 @@ class HomePage extends StatelessWidget {
                                       CategoryDetails categoryDetail = c.categoryDetails[index];
                                       return InkWell(
                                         onTap: () {
-                                          // Get.toNamed(CategoriesPage.routeName,
-                                          //     arguments: {'id': 'bidhan'});
+                                          cac.AcatId.value = categoryDetail.id!;
+                                          cac.AcatTitle.value = categoryDetail.title!;
+
                                           categoryDetail.hasSubcategory!
                                               ? Get.toNamed(SubCategoriesPage.routeName,
                                                   arguments: {

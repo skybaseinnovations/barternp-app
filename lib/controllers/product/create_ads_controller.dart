@@ -66,7 +66,6 @@ class CreateAdsController extends GetxController {
   RxString catId = "".obs;
   RxString AcatId = "".obs;
   bool hasSub = false;
-  bool AhasSub = false;
 
   Rxn<CategoryDetails> catSubTitle = Rxn<CategoryDetails>();
   // Rxn<CategoryDetails> selectedCategory = Rxn<CategoryDetails>();
