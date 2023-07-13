@@ -1,3 +1,4 @@
+import 'package:barter_app_2023/controllers/dashboard/home/home_page_controller.dart';
 import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 
 import 'package:barter_app_2023/utils/constants/colors.dart';
@@ -14,7 +15,7 @@ import '../../../widgets/custom/custom_app_bar.dart';
 class SubCategoriesPage extends StatelessWidget {
   SubCategoriesPage({super.key});
   static const String routeName = "/subCategoriesPage";
-  final c = Get.put(CreateAdsController());
+  final c = Get.put(HomePageController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class SubCategoriesPage extends StatelessWidget {
                     leadingWidth: 30,
                     title: Obx(
                       () => Text(
-                        c.AcatTitle.value,
+                        c.categoryTitle.value,
                         style: const TextStyle(color: AppColor.primaryTextColor),
                       ),
                     )),
@@ -75,21 +76,27 @@ class SubCategoriesPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(4),
-                                  child: CachedNetworkImage(
-                                    errorWidget: (context, url, error) =>
-                                        Image.asset(ImagePath.placeHolderPath),
-                                    imageUrl: subCategoryDetails.thumbnail!,
-                                    height: 110,
-                                    width: 110,
-                                    fit: BoxFit.fill,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 9.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(4),
+                                    child: CachedNetworkImage(
+                                      errorWidget: (context, url, error) =>
+                                          Image.asset(ImagePath.placeHolderPath),
+                                      imageUrl: subCategoryDetails.thumbnail!,
+                                      height: 110,
+                                      width: 110,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
-                                Text(
-                                  subCategoryDetails.title!,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 13),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 4.0),
+                                  child: Text(
+                                    subCategoryDetails.title!,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(fontSize: 13),
+                                  ),
                                 )
                               ],
                             ),

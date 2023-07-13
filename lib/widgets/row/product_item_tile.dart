@@ -4,11 +4,11 @@ import 'package:barter_app_2023/utils/constants/image_paths.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:marquee_text/marquee_text.dart';
 
 class CustomItemTile extends StatelessWidget {
   final AdsDetail adsModel;
   final String? imageUrl;
-
   final bool isMyAds;
   final bool isFavourite;
   final VoidCallback? onTap;
@@ -27,8 +27,8 @@ class CustomItemTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        margin: const EdgeInsets.only(bottom: 20, left: 13, right: 13, top: 13),
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        margin: const EdgeInsets.only(bottom: 13, left: 13, right: 13, top: 13),
         height: 152,
         width: 342,
         decoration: BoxDecoration(
@@ -87,49 +87,24 @@ class CustomItemTile extends StatelessWidget {
                             children: [
                               Expanded(
                                   flex: 1,
-                                  child: adsModel.category?.title == null
+                                  child: adsModel.adCategory?.title == null
                                       ? Container()
-                                      : Container(
+                                      : SizedBox(
                                           height: 20,
-                                          width: 10,
-                                          decoration: const BoxDecoration(
-                                              color: Color(0xffEAE8E8),
-                                              borderRadius: BorderRadius.all(Radius.circular(4))),
+                                          width: 140,
                                           child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              adsModel.category!.title!,
-                                              style: const TextStyle(
-                                                  fontSize: 12, color: AppColor.secondaryColor),
-                                            ),
-                                          ),
+                                              alignment: Alignment.center,
+                                              child: MarqueeText(
+                                                  speed: 15,
+                                                  text: TextSpan(
+                                                      text:
+                                                          "${adsModel.adCategory!.title!}  |  ${adsModel.subcategory!.title!}",
+                                                      style: const TextStyle(
+                                                          fontSize: 12,
+                                                          color: AppColor.secondaryColor)))),
                                         )),
-                              const SizedBox(
-                                width: 10,
-                              ),
                               Expanded(
                                   flex: 1,
-                                  child: adsModel.subcategory?.title == null
-                                      ? Container()
-                                      : Container(
-                                          height: 20,
-                                          decoration: const BoxDecoration(
-                                              color: Color(0xffEAE8E8),
-                                              borderRadius: BorderRadius.all(Radius.circular(4))),
-                                          child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              adsModel.subcategory?.title ?? "",
-                                              style: const TextStyle(
-                                                  fontSize: 12, color: AppColor.secondaryColor),
-                                            ),
-                                          ),
-                                        )),
-                              const SizedBox(
-                                width: 30,
-                              ),
-                              Expanded(
-                                  flex: 2,
                                   child: Text(
                                     textAlign: TextAlign.end,
                                     adsModel.location ?? "",
@@ -178,7 +153,8 @@ class CustomItemTile extends StatelessWidget {
                                 child: Align(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    adsModel.description ?? "",
+                                    adsModel.description!,
+                                    // adsModel.description ?? "",
                                     style: const TextStyle(
                                         fontSize: 13, color: AppColor.tertiaryTextColor),
                                   ),
@@ -197,7 +173,7 @@ class CustomItemTile extends StatelessWidget {
                                       style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
-                                          color: AppColor.primaryColor),
+                                          color: AppColor.primaryTextColor),
                                     ),
                                     isMyAds
                                         ? Container()

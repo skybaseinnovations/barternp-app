@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:barter_app_2023/controllers/image_picker_controller.dart';
 import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/models/fields_model.dart';
@@ -7,6 +8,7 @@ import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:barter_app_2023/widgets/custom/custom_category_bottom_sheet.dart';
 import 'package:barter_app_2023/widgets/custom/custom_fields_bottom_sheet.dart';
 import 'package:barter_app_2023/widgets/custom/custom_underline_text_field.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:get/get.dart';
@@ -23,8 +25,8 @@ class CreateAdsPage extends StatelessWidget {
 
   static const String routeName = "/createAdsPage";
 
-  final c = Get.put(CreateAdsController());
-  final ipc = Get.put(ImagePickerController());
+  final c = Get.find<CreateAdsController>();
+  final ipc = Get.find<ImagePickerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,7 @@ class CreateAdsPage extends StatelessWidget {
                             c.currentStep.value++;
                           }
                         } else if (c.currentStep.value == 1) {
-                          if (ipc.images.length >= 2) {
+                          if (ipc.images.length >= 2 || ipc.editImages.length >= 2) {
                             c.fetchFieldsData();
                             c.currentStep.value++;
                           } else {
@@ -84,9 +86,9 @@ class CreateAdsPage extends StatelessWidget {
                           }
                         } else if (c.currentStep.value == 2) {
                           if (c.onNext()) {
+                            c.isLoading.value = true;
                             c.getLocation();
-                            c.postAds();
-                            print("completed");
+                            c.postAds(context);
 
                             // c.currentStep.value++;
                           }
@@ -106,13 +108,13 @@ class CreateAdsPage extends StatelessWidget {
           child: Obx(
             () => Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 20.0, left: 24, right: 24),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0, left: 24, right: 24),
                   child: BarterAppBar(
                     centerTitle: true,
                     hasLeading: true,
                     leadingWidth: 30,
-                    title: Text(
+                    title: const Text(
                       "New Ad",
                       style: TextStyle(color: AppColor.primaryTextColor),
                     ),
@@ -207,6 +209,7 @@ class CreateAdsPage extends StatelessWidget {
                                 ),
                                 CustomOutlineBorderTextField(
                                     onTap: () {
+                                      c.subCategoryFieldController.clear();
                                       showModalBottomSheet(
                                           shape: const RoundedRectangleBorder(
                                               borderRadius:
@@ -221,13 +224,12 @@ class CreateAdsPage extends StatelessWidget {
                                     textInputAction: TextInputAction.next,
                                     textInputType: TextInputType.none,
                                     readOnly: true,
-                                    hint: c.catTitle.value,
                                     hintStyle: const TextStyle(color: Colors.black),
                                     validator: Validators.checkFieldEmpty),
                                 const SizedBox(
                                   height: 38,
                                 ),
-                                c.hasSub
+                                c.hasSub.value
                                     ? Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
@@ -253,7 +255,6 @@ class CreateAdsPage extends StatelessWidget {
                                             textInputAction: TextInputAction.next,
                                             textInputType: TextInputType.none,
                                             readOnly: true,
-                                            hint: c.catSubTitle.value?.title,
                                             validator: Validators.checkFieldEmpty,
                                             hintStyle: const TextStyle(color: Colors.black),
                                           ),
@@ -353,7 +354,9 @@ class CreateAdsPage extends StatelessWidget {
                                       crossAxisSpacing: 4,
                                       mainAxisSpacing: 4,
                                     ),
-                                    itemCount: ipc.images.length,
+                                    itemCount: ipc.isEdit.value
+                                        ? ipc.editImages.length
+                                        : ipc.images.length,
                                     itemBuilder: (context, index) {
                                       return badges.Badge(
                                         onTap: () {
@@ -368,15 +371,40 @@ class CreateAdsPage extends StatelessWidget {
                                           color: Colors.white,
                                           size: 12,
                                         ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(8),
-                                          child: Image.file(
-                                            File(ipc.displayImage[index]),
-                                            fit: BoxFit.cover,
-                                            height: 90,
-                                            width: 90,
-                                          ),
-                                        ),
+                                        child: Obx(() {
+                                          if (ipc.isEdit.value) {
+                                            try {
+                                              return ClipRRect(
+                                                borderRadius: BorderRadius.circular(8),
+                                                child: CachedNetworkImage(
+                                                  height: 90,
+                                                  width: 90,
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: ipc.editImages[index],
+                                                  errorWidget: (context, url, error) => Image.file(
+                                                    File(ipc.editImages[index]),
+                                                    fit: BoxFit.cover,
+                                                    height: 90,
+                                                    width: 90,
+                                                  ),
+                                                ),
+                                              );
+                                            } catch (e) {
+                                              // Handle the error, if needed
+                                              print('Error loading image from network: $e');
+                                            }
+                                          }
+
+                                          return ClipRRect(
+                                            borderRadius: BorderRadius.circular(8),
+                                            child: Image.file(
+                                              File(ipc.displayImage[index]),
+                                              fit: BoxFit.cover,
+                                              height: 90,
+                                              width: 90,
+                                            ),
+                                          );
+                                        }),
                                       );
                                     },
                                   ),
@@ -392,62 +420,64 @@ class CreateAdsPage extends StatelessWidget {
                             "Additional",
                             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                           ),
-                          content: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          content: Obx(() => c.isLoading.value
+                              ? const CircularProgressIndicator()
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          "Feature this ad ",
-                                          style: TextStyle(fontWeight: FontWeight.w600),
+                                        const Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Feature this ad ",
+                                              style: TextStyle(fontWeight: FontWeight.w600),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(top: 10.0),
+                                              child: Text(
+                                                  "Featuring the ad will increase the ads reach"),
+                                            )
+                                          ],
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 10.0),
-                                          child:
-                                              Text("Featuring the ad will increase the ads reach"),
-                                        )
+                                        Switch(
+                                            value: c.isFeatured.value,
+                                            onChanged: (value) {
+                                              c.isFeatured.value = value;
+                                              if (c.isFeatured.value) {
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (BuildContext context) {
+                                                      return const AlertDialog();
+                                                    });
+                                              }
+                                            })
                                       ],
                                     ),
-                                    Switch(
-                                        value: c.isFeatured.value,
-                                        onChanged: (value) {
-                                          c.isFeatured.value = value;
-                                          if (c.isFeatured.value) {
-                                            showDialog(
-                                                context: context,
-                                                builder: (BuildContext context) {
-                                                  return const AlertDialog();
-                                                });
-                                          }
-                                        })
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    Form(
+                                      key: c.fieldsFormKey,
+                                      child: ListView.builder(
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: c.fieldsData.length,
+                                        itemBuilder: (context, index) {
+                                          FieldDetails fieldDetail = c.fieldsData[index];
+                                          Widget widget =
+                                              createFieldsWithType(fieldDetail, context);
+                                          return Padding(
+                                            padding: const EdgeInsets.only(bottom: 20.0),
+                                            child: widget,
+                                          );
+                                        },
+                                      ),
+                                    ),
                                   ],
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                Form(
-                                  key: c.fieldsFormKey,
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: c.fieldsData.length,
-                                    itemBuilder: (context, index) {
-                                      FieldDetails fieldDetail = c.fieldsData[index];
-                                      Widget widget = createFieldsWithType(fieldDetail, context);
-                                      return Padding(
-                                        padding: const EdgeInsets.only(bottom: 20.0),
-                                        child: widget,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )),
+                                ))),
                     ],
                   ),
                 ),
@@ -491,15 +521,17 @@ class CreateAdsPage extends StatelessWidget {
             ),
             SizedBox(
               height: 50,
-              child: CustomOutlineBorderTextField(
-                controller: c.fieldControllers[fieldDetails.label!],
-                textInputAction: TextInputAction.next,
-                textInputType: TextInputType.number,
-                validator: fieldDetails.required == 1
-                    ? fieldDetails.label == "Contact no."
-                        ? Validators.checkPhoneField
-                        : Validators.checkFieldEmpty
-                    : null,
+              child: InkWell(
+                child: CustomOutlineBorderTextField(
+                  controller: c.fieldControllers[fieldDetails.label!],
+                  textInputAction: TextInputAction.next,
+                  textInputType: TextInputType.number,
+                  validator: fieldDetails.required == 1
+                      ? fieldDetails.label == "Contact no."
+                          ? Validators.checkPhoneField
+                          : Validators.checkFieldEmpty
+                      : null,
+                ),
               ),
             ),
           ],
@@ -517,7 +549,9 @@ class CreateAdsPage extends StatelessWidget {
               height: 10,
             ),
             CustomOutlineBorderTextField(
+              controller: c.fieldControllers[fieldDetails.label!],
               onTap: () {
+                // print(c.fieldControllers[fieldDetails.label!]);
                 showModalBottomSheet(
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
@@ -530,7 +564,6 @@ class CreateAdsPage extends StatelessWidget {
               },
               textInputAction: TextInputAction.next,
               textInputType: TextInputType.none,
-              controller: c.fieldControllers[fieldDetails.label!],
               color: Colors.transparent,
               suffixIconPath: ImagePath.downArrowconPath,
               validator: fieldDetails.required == 1 ? Validators.checkFieldEmpty : null,

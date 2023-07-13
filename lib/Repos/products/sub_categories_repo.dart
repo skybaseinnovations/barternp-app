@@ -14,7 +14,6 @@ class SubCategoryRepo {
     required Function(String message) onError,
   }) async {
     try {
-      print(id);
       var parseUrl = Uri.parse(Api.subCategoryUrl + id);
 
       http.Response response = await BarterRequest.get(parseUrl);
@@ -23,7 +22,8 @@ class SubCategoryRepo {
       if (responseData["status"]) {
         List<CategoryDetails> categoryDetails =
             categorisefromJson(responseData['data']["subcategories"]);
-
+        print("object");
+        print(categoryDetails[0].fields);
         onSuccess(categoryDetails);
       } else {
         onError(responseData["message"]);

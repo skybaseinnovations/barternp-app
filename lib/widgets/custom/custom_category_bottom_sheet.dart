@@ -74,42 +74,45 @@ class CustomCategoryBottomSheet extends StatelessWidget {
                         itemCount: c.categoryDetails.length,
                         itemBuilder: (BuildContext context, int index) {
                           CategoryDetails categoryDetail = c.categoryDetails[index];
-                          return InkWell(
-                            onTap: () {
-                              c.categoryFieldController.text = categoryDetail.title!;
-                              c.catTitle.value = categoryDetail.title!;
-                              if (categoryDetail.hasSubcategory!) {
-                                c.hasSub = true;
+                          if (categoryDetail.hasSubcategory ?? true) {
+                            return InkWell(
+                              onTap: () {
+                                c.categoryFieldController.text = categoryDetail.title!;
+                                c.catTitle.value = categoryDetail.title!;
                                 c.catId.value = categoryDetail.id!;
-
-                                c.type = false;
-                                Navigator.pop(context);
-                              } else {
-                                c.hasSub = false;
-                                Navigator.pop(context);
-                              }
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CachedNetworkImage(
-                                    height: 50,
-                                    width: 50,
-                                    fit: BoxFit.cover,
-                                    errorWidget: (context, url, error) =>
-                                        Image.asset(ImagePath.placeHolderPath),
-                                    imageUrl: categoryDetail.thumbnail!,
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(categoryDetail.title!),
-                                ],
+                                if (categoryDetail.hasSubcategory!) {
+                                  c.hasSub.value = true;
+                                  c.catId.value = categoryDetail.id!;
+                                  Navigator.pop(context);
+                                } else {
+                                  c.hasSub.value = false;
+                                  Navigator.pop(context);
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 20.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    CachedNetworkImage(
+                                      height: 50,
+                                      width: 50,
+                                      fit: BoxFit.cover,
+                                      errorWidget: (context, url, error) =>
+                                          Image.asset(ImagePath.placeHolderPath),
+                                      imageUrl: categoryDetail.thumbnail!,
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(categoryDetail.title!),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          } else {
+                            return Container();
+                          }
                         },
                       ),
                     ))

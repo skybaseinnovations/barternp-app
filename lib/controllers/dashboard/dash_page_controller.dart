@@ -13,7 +13,6 @@ class DashPageController extends GetxController {
     ProfilePage(),
   ];
   void onItemTapped(int index) {
-    //   currentIndex.value = index;
     if (index <= 1) {
       currentIndex.value = index;
     } else if (index >= 3) {

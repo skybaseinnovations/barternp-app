@@ -28,9 +28,9 @@ class ProfilePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const BarterAppBar(
+              BarterAppBar(
                 hasLeading: false,
-                title: Text(
+                title: const Text(
                   "Profile",
                   style: TextStyle(
                     fontSize: 16,
@@ -160,36 +160,39 @@ class ProfileListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      highlightColor: Colors.transparent,
-      splashFactory: NoSplash.splashFactory,
-      onTap: action,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              SvgPicture.asset(icon),
-              const SizedBox(
-                width: 12,
-              ),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: isLogOut ? const Color(0xffF8385B) : AppColor.primaryTextColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      child: InkWell(
+        highlightColor: Colors.transparent,
+        splashFactory: NoSplash.splashFactory,
+        onTap: action,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                SvgPicture.asset(icon),
+                const SizedBox(
+                  width: 12,
                 ),
-              )
-            ],
-          ),
-          isLogOut
-              ? Container()
-              : const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: AppColor.secondaryTextColor,
-                ),
-        ],
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: isLogOut ? const Color(0xffF8385B) : AppColor.primaryTextColor,
+                  ),
+                )
+              ],
+            ),
+            isLogOut
+                ? Container()
+                : const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: AppColor.secondaryTextColor,
+                  ),
+          ],
+        ),
       ),
     );
   }

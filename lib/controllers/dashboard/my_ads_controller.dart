@@ -72,6 +72,7 @@ class MyAdsPageController extends GetxController with GetSingleTickerProviderSta
         url: nextPageurl,
         onSuccess: (adsList, url) {
           myActiveAds.addAll(adsList);
+          print(myActiveAds[0].description);
           activeAdsNextPageUrl.value = url;
           isActivePageLoading.value = false;
         },

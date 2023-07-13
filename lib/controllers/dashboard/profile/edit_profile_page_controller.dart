@@ -50,7 +50,6 @@ class EditProfilePageController extends GetxController {
     initialDateOfBirth = cc.currentUser.value!.dob!;
     initialGender = cc.currentUser.value!.gender!;
     initialImageUrl = cc.currentUser.value!.avatarUrl!;
-    print(initialImageUrl);
 
     nameController = TextEditingController(text: initialName);
     emailController = TextEditingController(text: initialEmail);
@@ -130,7 +129,6 @@ class EditProfilePageController extends GetxController {
       if (pickedImage != null) {
         imageFile.value = File(pickedImage.path);
         base64Image = base64Encode(await imageFile.value!.readAsBytes());
-        print(base64Image);
       }
     } catch (e) {
       log("====================>>>>>>> pick image error::: $e");

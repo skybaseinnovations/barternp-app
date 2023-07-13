@@ -35,6 +35,7 @@ class AdsRepo {
         isPreview
             ? adsList = adsModelfromJson(data["data"])
             : adsList = adsModelfromJson(data["data"]["data"]);
+
         var nextPageUrl = isPreview ? null : data["data"]["next_page_url"];
         onSuccess(adsList, nextPageUrl);
       } else {
@@ -354,6 +355,7 @@ class AdsRepo {
 
       if (data["status"]) {
         List<AdsDetail> activeAdsList = adsModelfromJson(data["data"]["data"]);
+
         var nextPageUrl = data["data"]["next_page_url"];
         onSuccess(activeAdsList, nextPageUrl);
       } else {

@@ -27,7 +27,7 @@ class LikedAds extends StatelessWidget {
           child: Column(
             // mainAxisSize: MainAxisSize.min,
             children: [
-              const BarterAppBar(
+              BarterAppBar(
                 hasLeading: true,
                 title: Text(
                   "Liked Ads",

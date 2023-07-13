@@ -54,18 +54,18 @@ class SimilarAdsWidget extends StatelessWidget {
               similarAds.title!,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                fontSize: 11,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
                 color: AppColor.primaryTextColor,
               ),
             ),
             const SizedBox(
-              height: 3,
+              height: 4,
             ),
             Text(
               "Rs ${similarAds.price}",
               style: const TextStyle(
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: FontWeight.w600,
                 color: AppColor.primaryColor,
               ),

@@ -23,10 +23,10 @@ class ChattingPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const BarterAppBar(
+            BarterAppBar(
               leadingWidth: 24,
               hasLeading: true,
-              title: Text(
+              title: const Text(
                 "Name",
                 style: TextStyle(
                   fontSize: 16,
@@ -219,7 +219,7 @@ class ChattingTile extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            constraints: BoxConstraints(maxWidth: Get.size.width / 2),
+            constraints: BoxConstraints(maxWidth: Get.size.width / 1.6),
             decoration: BoxDecoration(
               color: isSend ? AppColor.secondaryColor : AppColor.tertiaryTextColor,
               borderRadius: BorderRadius.circular(16),
@@ -228,7 +228,7 @@ class ChattingTile extends StatelessWidget {
               text,
               style: const TextStyle(
                 letterSpacing: 0.02,
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: FontWeight.w400,
                 color: Colors.white,
               ),

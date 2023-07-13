@@ -6,8 +6,8 @@ import '../../../Repos/home/ads_repo.dart';
 
 class SearchAdsController extends GetxController {
   ScrollController scrollController = ScrollController();
-  late TextEditingController searchController;
-  late String adsName;
+  TextEditingController searchController = TextEditingController();
+  String adsName = "";
   RxList<AdsDetail> searchedAds = RxList();
   var isSearchedAdsLoading = true.obs;
   Rx<String?> nextPageUrl = Rx(null);
@@ -17,8 +17,6 @@ class SearchAdsController extends GetxController {
     var argumentData = Get.arguments;
     if (argumentData != null && argumentData is Map<String, dynamic>) {
       adsName = argumentData["adsName"];
-    } else {
-      return null;
     }
 
     searchController = TextEditingController(text: adsName);

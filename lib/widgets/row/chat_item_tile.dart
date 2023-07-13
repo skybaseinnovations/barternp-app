@@ -64,12 +64,12 @@ class ChatTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: isRead
                               ? const TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                   color: AppColor.secondaryTextColor,
                                 )
                               : const TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: AppColor.primaryTextColor,
                                 ),
@@ -100,12 +100,12 @@ class ChatTile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: isRead
                         ? const TextStyle(
-                            fontSize: 11,
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
                             color: AppColor.secondaryTextColor,
                           )
                         : const TextStyle(
-                            fontSize: 11,
+                            fontSize: 12,
                             fontWeight: FontWeight.w600,
                             color: AppColor.secondaryTextColor,
                           ),

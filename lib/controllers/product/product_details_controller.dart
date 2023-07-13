@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/profile/like_ads_controller.dart';
+import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/models/ads_model.dart';
 import 'package:barter_app_2023/views/dashboard/chat/chatting_page.dart';
+import 'package:barter_app_2023/views/product/create_ads_page.dart';
 import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ import '../../Repos/home/ads_repo.dart';
 
 class ProductDetailPageController extends GetxController {
   var apc = Get.find<MyAdsPageController>();
+  // var cac = Get.find<CreateAdsController>();
   var isMyAds = false.obs;
   late String adId;
   Rxn<AdsDetail> adsDetail = Rxn<AdsDetail>();
@@ -94,7 +97,7 @@ class ProductDetailPageController extends GetxController {
   }
 
   onEditTap() {
-    log("================>>>> edit field is tapped");
+    Get.toNamed(CreateAdsPage.routeName, arguments: adsDetail.value);
   }
 
   onDeactivateTap() {
@@ -114,8 +117,6 @@ class ProductDetailPageController extends GetxController {
           apc.fetchActiveAdsData();
           apc.fetchExpiredAdsData();
           apc.fetchInactiveAdsData();
-
-          // print("hereeee ${}");
         },
         onError: (message) {
           BarterSnackBar.error(title: "Delete Ad", message: message);
@@ -123,10 +124,12 @@ class ProductDetailPageController extends GetxController {
   }
 
   void getSingleProductDetail() {
+    print("object");
     AdsRepo.getSingleAdsDetail(
       productId: adId,
       onSuccess: (adsDetails, similarAdsDetails) {
         adsDetail.value = adsDetails;
+
         similarAds = similarAdsDetails;
 
         // print(similarAdsDetails);

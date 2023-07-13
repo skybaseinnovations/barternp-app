@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Repos/home/view_all_page.dart';
+import '../../../Repos/products/sub_categories_repo.dart';
 
 class HomePageController extends GetxController {
   List<String> featuredImageUrl = [
@@ -49,6 +50,10 @@ class HomePageController extends GetxController {
   RxList<AdsDetail> nearByAds = RxList();
   var isFeaturedAdsLoading = true.obs;
   var isNearByAdsLoading = true.obs;
+  RxString categoryId = "".obs;
+  RxString subCategoryTitle = "".obs;
+  RxString categoryTitle = "".obs;
+
   @override
   void onInit() {
     fetchData();
@@ -130,13 +135,32 @@ class HomePageController extends GetxController {
     });
   }
 
+  RxList<CategoryDetails> subCategoryDetails = RxList();
+  var isSubCategoryLoading = true.obs;
+  var isSubCategoryEmpty = false.obs;
+  void fetchSubCategoryData() {
+    SubCategoryRepo.fetchSubCategoryData(
+      id: categoryId.value,
+      onSuccess: (fetchedSubCategory) {
+        subCategoryDetails.value = fetchedSubCategory;
+        isSubCategoryLoading.value = false;
+        if (subCategoryDetails.isEmpty) {
+          isSubCategoryEmpty.value = true;
+        }
+      },
+      onError: (message) {
+        BarterSnackBar.error(title: "Render Error", message: message);
+      },
+    );
+  }
+
   void fetchFeaturedAdsData() {
     AdsRepo.getFeaturedAdsDetail(
         isPreview: true,
         onSuccess: (featuredAdsList, nextPageUrl) {
           print("get featuredData success");
           featuredAds.value = featuredAdsList;
-          print(featuredAds);
+
           isFeaturedAdsLoading.value = false;
         },
         onError: (message) {

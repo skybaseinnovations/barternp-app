@@ -26,6 +26,8 @@ class PostAdsRepo {
       http.Response response =
           await BarterRequest.post(parseUrl, headers: headers, body: jsonEncode(body));
       dynamic data = jsonDecode(response.body);
+
+      log(json.encode(data));
       if (data["status"]) {
         onSuccess();
       } else {

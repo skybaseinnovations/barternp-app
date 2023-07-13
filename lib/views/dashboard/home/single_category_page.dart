@@ -23,13 +23,13 @@ class SingleCategory extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 20.0),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
                 child: BarterAppBar(
                   centerTitle: true,
                   hasLeading: true,
                   leadingWidth: 30,
-                  title: Text(
+                  title: const Text(
                     "Mobile",
                     style: TextStyle(color: AppColor.primaryTextColor),
                   ),

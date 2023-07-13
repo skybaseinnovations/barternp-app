@@ -204,9 +204,9 @@ class ProductDetailPage extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  c.adsDetail.value!.category?.title ?? "",
+                                  c.adsDetail.value!.adCategory?.title ?? "",
                                   style: const TextStyle(
-                                    fontSize: 11,
+                                    fontSize: 12.5,
                                     fontWeight: FontWeight.w400,
                                     color: AppColor.secondaryColor,
                                   ),
@@ -217,7 +217,7 @@ class ProductDetailPage extends StatelessWidget {
                                 Text(
                                   c.adsDetail.value!.subcategory?.title ?? "",
                                   style: const TextStyle(
-                                    fontSize: 11,
+                                    fontSize: 12.5,
                                     fontWeight: FontWeight.w400,
                                     color: AppColor.secondaryColor,
                                   ),
@@ -267,7 +267,7 @@ class ProductDetailPage extends StatelessWidget {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Row(
                               children: [
@@ -294,7 +294,7 @@ class ProductDetailPage extends StatelessWidget {
                                     Text(
                                       c.adsDetail.value!.seller!.name!,
                                       style: const TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w400,
                                         color: AppColor.primaryTextColor,
                                       ),
@@ -310,9 +310,12 @@ class ProductDetailPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            IconText(
-                                iconPath: ImagePath.locationIconPath,
-                                title: c.adsDetail.value!.seller!.location ?? ""),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 19.0),
+                              child: IconText(
+                                  iconPath: ImagePath.locationIconPath,
+                                  title: c.adsDetail.value!.location ?? ""),
+                            ),
                           ],
                         ),
                         const SizedBox(
@@ -332,7 +335,7 @@ class ProductDetailPage extends StatelessWidget {
                         Text(
                           c.adsDetail.value!.description!,
                           style: const TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.w400,
                             color: AppColor.secondaryTextColor,
                           ),
@@ -369,7 +372,6 @@ class ProductDetailPage extends StatelessWidget {
                                 shrinkWrap: true,
                                 itemCount: c.adsDetail.value!.comments?.length,
                                 itemBuilder: (context, index) {
-                                  print(c.adsDetail.value!.comments![index]);
                                   return CommentListTile(
                                     onLongTap: () {
                                       c.onDeleteComment(c.adsDetail.value!.comments![index].id!);
@@ -491,7 +493,7 @@ class IconText extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-            fontSize: 11,
+            fontSize: 13,
             fontWeight: FontWeight.w400,
             color: AppColor.secondaryColor,
           ),

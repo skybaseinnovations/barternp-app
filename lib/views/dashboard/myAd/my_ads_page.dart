@@ -1,6 +1,7 @@
 import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
+import 'package:barter_app_2023/views/product/create_ads_page.dart';
 import 'package:barter_app_2023/widgets/custom/custom_app_bar.dart';
 import 'package:barter_app_2023/widgets/error_page.dart';
 import 'package:flutter/material.dart';
@@ -34,9 +35,9 @@ class MyAdsPage extends StatelessWidget {
             child: Column(
               // mainAxisSize: MainAxisSize.min,
               children: [
-                const BarterAppBar(
+                BarterAppBar(
                   hasLeading: false,
-                  title: Text(
+                  title: const Text(
                     "My Ads",
                     style: TextStyle(
                       fontSize: 16,
@@ -144,7 +145,6 @@ class MyAdsPage extends StatelessWidget {
                                       }
                                       return CustomItemTile(
                                         adsModel: c.myActiveAds[index],
-                                        isMyAds: true,
                                         onTap: () => Get.toNamed(ProductDetailPage.routeName,
                                             arguments: {
                                               "isMyAds": true,

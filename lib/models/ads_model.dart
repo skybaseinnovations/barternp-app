@@ -1,5 +1,6 @@
 import 'package:barter_app_2023/models/categories.dart';
 import 'package:barter_app_2023/models/comment_model.dart';
+import 'package:barter_app_2023/models/post_ads_model.dart';
 import 'package:barter_app_2023/models/user_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -31,9 +32,10 @@ class AdsDetail {
   String? location;
   User? seller;
   User? buyer;
-  CategoryDetails? category;
+  CategoryDetails? adCategory;
   CategoryDetails? subcategory;
   List<CommentsModel>? comments;
+  List<Fields>? fields;
 
   AdsDetail({
     this.id,
@@ -58,9 +60,10 @@ class AdsDetail {
     this.location,
     this.seller,
     this.buyer,
-    this.category,
+    this.adCategory,
     this.subcategory,
     this.comments,
+    this.fields,
   });
 
   AdsDetail.fromJson(Map<String, dynamic> json) {
@@ -88,11 +91,17 @@ class AdsDetail {
     location = json['location'];
     seller = json['seller'] != null ? User.fromJson(json['seller']) : null;
     buyer = json['buyer'] != null ? User.fromJson(json['buyer']) : null;
-    category = json['category'] != null ? CategoryDetails.fromJson(json['category']) : null;
+    adCategory = json['category'] != null ? CategoryDetails.fromJson(json['category']) : null;
     subcategory =
         json['subcategory'] != null ? CategoryDetails.fromJson(json['subcategory']) : null;
     if (json['comments'] != null) {
       comments = commentModelfromJson(json['comments']);
+    }
+    if (json['fields'] != null) {
+      fields = <Fields>[];
+      json['fields'].forEach((v) {
+        fields!.add(Fields.fromJson(v));
+      });
     }
   }
 
@@ -124,14 +133,17 @@ class AdsDetail {
     if (buyer != null) {
       data['buyer'] = buyer!.toJson();
     }
-    if (category != null) {
-      data['category'] = category!.toJson();
+    if (adCategory != null) {
+      data['category'] = adCategory!.toJson();
     }
     if (subcategory != null) {
       data['subcategory'] = subcategory!.toJson();
     }
     if (comments != null) {
       data['comments'] = comments!.map((v) => v.toJson()).toList();
+    }
+    if (fields != null) {
+      data['fields'] = fields!.map((v) => v.toJson()).toList();
     }
 
     return data;

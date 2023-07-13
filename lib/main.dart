@@ -15,7 +15,7 @@ class BarterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return   GetMaterialApp(
       theme: ThemeData(
         fontFamily: "Libre Franklin",
       ),

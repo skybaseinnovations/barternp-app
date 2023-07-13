@@ -1,8 +1,6 @@
 import 'package:barter_app_2023/controllers/core_controller.dart';
 import 'package:barter_app_2023/views/auth/login_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
-import 'package:barter_app_2023/views/dashboard/home/home_page.dart';
-import 'package:barter_app_2023/views/dashboard/profile/profile_page.dart';
 import 'package:get/get.dart';
 
 class SplashPageController extends GetxController {

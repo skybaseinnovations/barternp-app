@@ -28,13 +28,13 @@ class SearchAdsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 20.0),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
                 child: BarterAppBar(
                   centerTitle: true,
                   hasLeading: true,
                   leadingWidth: 30,
-                  title: Text(
+                  title: const Text(
                     "Search",
                     style: TextStyle(color: AppColor.primaryTextColor),
                   ),

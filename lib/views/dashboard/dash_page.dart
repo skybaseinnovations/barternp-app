@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:barter_app_2023/utils/constants/image_paths.dart';
 
+import '../../controllers/product/create_ads_controller.dart';
+
 class DashPage extends StatelessWidget {
   static const String routeName = "/dashPage/";
   DashPage({super.key});
@@ -28,6 +30,7 @@ class DashPage extends StatelessWidget {
             // clipBehavior: Clip.antiAlias,
             backgroundColor: AppColor.primaryColor,
             onPressed: () {
+              Get.delete<CreateAdsController>();
               Get.toNamed(CreateAdsPage.routeName);
             },
             child: const Icon(

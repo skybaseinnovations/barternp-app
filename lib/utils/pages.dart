@@ -13,6 +13,8 @@ import 'package:barter_app_2023/controllers/dashboard/my_ads_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/chat/search_chat_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/profile/like_ads_controller.dart';
 import 'package:barter_app_2023/controllers/dashboard/profile/notification_controller.dart';
+import 'package:barter_app_2023/controllers/image_picker_controller.dart';
+import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/controllers/product/product_details_controller.dart';
 import 'package:barter_app_2023/controllers/splash_page_controller.dart';
 import 'package:barter_app_2023/views/auth/create_profile_page.dart';
@@ -22,6 +24,7 @@ import 'package:barter_app_2023/views/dashboard/chat/chatting_page.dart';
 import 'package:barter_app_2023/views/dashboard/chat/search_chat_page.dart';
 import 'package:barter_app_2023/views/dashboard/dash_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/categories_page.dart';
+import 'package:barter_app_2023/views/dashboard/myAd/my_ads_page.dart';
 import 'package:barter_app_2023/views/dashboard/profile/edit_profile_page.dart';
 import 'package:barter_app_2023/views/dashboard/home/sub_categories.dart';
 import 'package:barter_app_2023/views/dashboard/home/single_category_page.dart';
@@ -94,9 +97,11 @@ var getPages = [
     binding: BindingsBuilder(
       () {
         Get.lazyPut(() => ProductDetailPageController());
+        Get.lazyPut(() => CreateAdsController());
       },
     ),
   ),
+  GetPage(name: MyAdsPage.routeName, page: () => MyAdsPage(), arguments: Get.arguments),
   GetPage(
       name: SearchAdsPage.routeName,
       page: () => SearchAdsPage(),
@@ -159,9 +164,13 @@ var getPages = [
     ),
   ),
   GetPage(
-    name: CreateAdsPage.routeName,
-    page: () => CreateAdsPage(),
-  ),
+      name: CreateAdsPage.routeName,
+      page: () => CreateAdsPage(),
+      arguments: Get.arguments,
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => CreateAdsController());
+        Get.lazyPut(() => ImagePickerController());
+      })),
   GetPage(
     name: LikedAds.routeName,
     page: () => LikedAds(),

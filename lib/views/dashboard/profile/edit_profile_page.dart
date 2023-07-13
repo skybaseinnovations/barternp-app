@@ -34,9 +34,9 @@ class EditProfilePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const BarterAppBar(
+                  BarterAppBar(
                     leadingWidth: 24,
-                    title: Text(
+                    title: const Text(
                       "My Profile",
                       style: TextStyle(
                         fontSize: 16,

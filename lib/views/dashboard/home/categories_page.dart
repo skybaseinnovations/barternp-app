@@ -1,4 +1,3 @@
-import 'package:barter_app_2023/controllers/product/create_ads_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:barter_app_2023/views/dashboard/home/sub_categories.dart';
 import 'package:barter_app_2023/widgets/shimmer/barter_shimmer.dart';
@@ -16,8 +15,6 @@ class CategoriesPage extends StatelessWidget {
   static const String routeName = "/categoriesPage";
   final hpc = Get.find<HomePageController>();
 
-  final c = Get.put(CreateAdsController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,19 +27,19 @@ class CategoriesPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 20.0, bottom: 30),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0, bottom: 30),
                 child: BarterAppBar(
                   centerTitle: true,
                   hasLeading: true,
                   leadingWidth: 30,
-                  title: Text(
+                  title: const Text(
                     "Categories",
                     style: TextStyle(color: AppColor.primaryTextColor),
                   ),
                 ),
               ),
-              Obx(() => c.isCategoryLoading.value
+              Obx(() => hpc.isCategoryLoading.value
                   ? BarterShimmer.categoryShimmer()
                   : Container(
                       margin: const EdgeInsets.all(5),
@@ -51,12 +48,12 @@ class CategoriesPage extends StatelessWidget {
                         shrinkWrap: true,
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 29,
+                          crossAxisSpacing: 20,
                           mainAxisSpacing: 20,
                         ),
-                        itemCount: c.categoryDetails.length,
+                        itemCount: hpc.categoryDetails.length,
                         itemBuilder: (context, index) {
-                          CategoryDetails categoryDetail = c.categoryDetails[index];
+                          CategoryDetails categoryDetail = hpc.categoryDetails[index];
 
                           return InkWell(
                             onTap: () {
@@ -77,7 +74,7 @@ class CategoriesPage extends StatelessWidget {
                               width: 130,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: Colors.white,
+                                  color: AppColor.backgroundGreyColor,
                                   boxShadow: [
                                     BoxShadow(
                                         color: const Color(0xffA8A8A8).withOpacity(0.25),
@@ -89,20 +86,26 @@ class CategoriesPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(4),
-                                    child: CachedNetworkImage(
-                                      errorWidget: (context, url, error) =>
-                                          Image.asset(ImagePath.placeHolderPath),
-                                      imageUrl: categoryDetail.thumbnail!,
-                                      height: 110,
-                                      width: 110,
-                                      fit: BoxFit.fill,
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 9.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(4),
+                                      child: CachedNetworkImage(
+                                        errorWidget: (context, url, error) =>
+                                            Image.asset(ImagePath.placeHolderPath),
+                                        imageUrl: categoryDetail.thumbnail!,
+                                        height: 110,
+                                        width: 110,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    categoryDetail.title!,
-                                    style: const TextStyle(fontSize: 13),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 4.0),
+                                    child: Text(
+                                      categoryDetail.title!,
+                                      style: const TextStyle(fontSize: 13),
+                                    ),
                                   )
                                 ],
                               ),

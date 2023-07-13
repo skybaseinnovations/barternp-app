@@ -18,7 +18,7 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColor.backgroundGreyColor,
         body: Padding(
-          padding: const EdgeInsets.only(top: 10, left: 24, right: 24),
+          padding: const EdgeInsets.only(top: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -45,36 +45,39 @@ class ChatPage extends StatelessWidget {
               const SizedBox(
                 height: 34,
               ),
-              SizedBox(
-                width: Get.width / 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Obx(
-                      () => CustomTabBar(
-                        animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
-                            .animate(c.tabAnimationController.animationController),
-                        title: 'Buying',
-                        onTap: () {
-                          c.tabAnimationController.animationController.reverse();
-                          c.showFeaturedPage();
-                        },
-                        isActive: c.currentIndex.value == 0,
+              Padding(
+                padding: const EdgeInsets.only(left: 24, right: 24),
+                child: SizedBox(
+                  width: Get.width / 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Obx(
+                        () => CustomTabBar(
+                          animation: Tween<Offset>(begin: Offset.zero, end: const Offset(1, 0))
+                              .animate(c.tabAnimationController.animationController),
+                          title: 'Buying',
+                          onTap: () {
+                            c.tabAnimationController.animationController.reverse();
+                            c.showFeaturedPage();
+                          },
+                          isActive: c.currentIndex.value == 0,
+                        ),
                       ),
-                    ),
-                    Obx(
-                      () => CustomTabBar(
-                        animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
-                            .animate(c.tabAnimationController.animationController),
-                        title: 'Selling',
-                        onTap: () {
-                          c.tabAnimationController.animationController.forward();
-                          c.showNearbyAds();
-                        },
-                        isActive: c.currentIndex.value == 1,
+                      Obx(
+                        () => CustomTabBar(
+                          animation: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+                              .animate(c.tabAnimationController.animationController),
+                          title: 'Selling',
+                          onTap: () {
+                            c.tabAnimationController.animationController.forward();
+                            c.showNearbyAds();
+                          },
+                          isActive: c.currentIndex.value == 1,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(

@@ -7,7 +7,8 @@ import '../../utils/constants/colors.dart';
 class CustomFieldsBottomSheet extends StatelessWidget {
   final label;
   final options;
-  CustomFieldsBottomSheet({super.key, this.options, this.label});
+  final controller;
+  CustomFieldsBottomSheet({super.key, this.options, this.label, this.controller});
 
   final c = Get.put(CreateAdsController());
   @override
@@ -64,7 +65,7 @@ class CustomFieldsBottomSheet extends StatelessWidget {
                   String labelname = label;
                   String value = options[index];
                   c.labelDataMap[labelname] = value;
-                  c.fieldControllers[label] = TextEditingController(text: value);
+                  c.fieldControllers[label]?.text = value;
                   Navigator.pop(context);
                 },
                 child: Padding(

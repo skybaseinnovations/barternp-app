@@ -1,11 +1,13 @@
-import 'dart:developer';
-
+import 'package:barter_app_2023/controllers/dashboard/dash_page_controller.dart';
 import 'package:barter_app_2023/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../views/dashboard/home/home_page.dart';
+
 class BarterAppBar extends StatelessWidget {
-  const BarterAppBar({
+  final c = Get.put(DashPageController());
+  BarterAppBar({
     super.key,
     this.hasLeading = true,
     this.automaticallyImplyLeading = false,
