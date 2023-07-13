@@ -1,5 +1,6 @@
 import 'package:barter_app_2023/models/categories.dart';
 import 'package:barter_app_2023/models/comment_model.dart';
+import 'package:barter_app_2023/models/media_model.dart';
 import 'package:barter_app_2023/models/post_ads_model.dart';
 import 'package:barter_app_2023/models/user_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -36,6 +37,7 @@ class AdsDetail {
   CategoryDetails? subcategory;
   List<CommentsModel>? comments;
   List<Fields>? fields;
+  List<MediaDetails>? media;
 
   AdsDetail({
     this.id,
@@ -64,6 +66,7 @@ class AdsDetail {
     this.subcategory,
     this.comments,
     this.fields,
+    this.media,
   });
 
   AdsDetail.fromJson(Map<String, dynamic> json) {
@@ -101,6 +104,12 @@ class AdsDetail {
       fields = <Fields>[];
       json['fields'].forEach((v) {
         fields!.add(Fields.fromJson(v));
+      });
+    }
+    if (json['media'] != null) {
+      media = <MediaDetails>[];
+      json['media'].forEach((v) {
+        media!.add(MediaDetails.fromJson(v));
       });
     }
   }
@@ -144,6 +153,9 @@ class AdsDetail {
     }
     if (fields != null) {
       data['fields'] = fields!.map((v) => v.toJson()).toList();
+    }
+    if (media != null) {
+      data['media'] = media!.map((v) => v.toJson()).toList();
     }
 
     return data;

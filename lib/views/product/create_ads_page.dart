@@ -87,8 +87,8 @@ class CreateAdsPage extends StatelessWidget {
                         } else if (c.currentStep.value == 2) {
                           if (c.onNext()) {
                             c.isLoading.value = true;
-                            c.getLocation();
-                            c.postAds(context);
+                            c.getLocation(context);
+                           
 
                             // c.currentStep.value++;
                           }

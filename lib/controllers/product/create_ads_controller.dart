@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:http/http.dart';
 import '../../Repos/products/categories_repo.dart';
 import '../../Repos/products/sub_categories_repo.dart';
 import 'package:barter_app_2023/widgets/custom/custom_snackbar.dart';
@@ -68,7 +69,6 @@ class CreateAdsController extends GetxController {
     titleFieldController.text = adsDetail.value!.title!;
     descriptionFieldController.text = adsDetail.value!.description!;
     priceFieldController.text = (adsDetail.value!.price!).toString();
-    // priceFieldController.text = adsDetail.value!.price! as String;
     categoryFieldController.text = adsDetail.value!.adCategory!.title!;
     catId.value = adsDetail.value!.categoryId!;
     catTitle.value = adsDetail.value!.adCategory!.title!;
@@ -78,9 +78,13 @@ class CreateAdsController extends GetxController {
       subCategoryFieldController.text = adsDetail.value!.subcategory!.title!;
       catSubTitle.value = adsDetail.value!.subcategory;
     }
-    ipc.editImages.value = adsDetail.value!.images!;
-    ipc.isEdit.value = true;
 
+    for (int i = 0; i < adsDetail.value!.media!.length; i++) {
+      ipc.editImages.add(adsDetail.value!.media![i].originalUrl);
+    }
+
+    ipc.media.value = adsDetail.value!.media!;
+    ipc.isEdit.value = true;
     if (adsDetail.value != null && adsDetail.value!.fields != null) {
       for (int i = 0; i < adsDetail.value!.fields!.length; i++) {
         String? label = adsDetail.value!.fields![i].label;
@@ -89,10 +93,6 @@ class CreateAdsController extends GetxController {
         fieldControllers[label!] = TextEditingController(text: value);
       }
     }
-    fieldControllers.forEach((label, controller) {
-      print('Label: $label');
-      print('Value: ${controller.text}');
-    });
   }
 
   void categoryData() {
@@ -131,9 +131,7 @@ class CreateAdsController extends GetxController {
         // print(subCategoryDetails[0].fields![1].id);
 
         isSubCategoryLoading.value = false;
-        if (subCategoryDetails.isEmpty) {
-         
-        }
+        if (subCategoryDetails.isEmpty) {}
       },
       onError: (message) {
         BarterSnackBar.error(title: "Render Error", message: message);
@@ -164,9 +162,7 @@ class CreateAdsController extends GetxController {
             }
           }
           isSubCategoryLoading.value = false;
-          if (subCategoryDetails.isEmpty) {
-      
-          }
+          if (subCategoryDetails.isEmpty) {}
         },
         onError: (message) {
           BarterSnackBar.error(title: "Render Error", message: message);
@@ -186,7 +182,7 @@ class CreateAdsController extends GetxController {
   String? positionName;
   double? adsLongitude;
   double? adsLatitude;
-  Future<void> getLocation() async {
+  Future<void> getLocation(BuildContext context) async {
     await Geolocator.checkPermission();
     await Geolocator.requestPermission();
     var position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -194,12 +190,19 @@ class CreateAdsController extends GetxController {
         .placemarkFromCoordinates(position.latitude, position.longitude);
     placemark = place;
     adsLatitude = position.latitude;
-    adsLatitude = position.latitude;
+    adsLongitude = position.longitude;
     positionName = placemark![0].locality.toString();
+
+    if (adsLatitude != null && adsLongitude != null) {
+      postAds(context);
+    } else {
+      getLocation(context);
+    }
   }
 
   void postAds(BuildContext context) {
-    print(fieldControllers.toString());
+    // Removed image url id
+    // ipc.removedIds;
     PostAdsModel myModel = PostAdsModel(
       categoryId: catId.value,
       // subcategoryId: subCatId.value,
@@ -223,6 +226,7 @@ class CreateAdsController extends GetxController {
                 value: entry.value.text,
               ))
           .toList(),
+      removedImageId: ipc.removedIds,
       images: ipc.images,
     );
 

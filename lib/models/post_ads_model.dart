@@ -10,6 +10,7 @@ class PostAdsModel {
   int? price;
   List<dynamic>? fields;
   List<dynamic>? images;
+  List<dynamic>? removedImageId;
   PostAdsModel(
       {this.categoryId,
       this.subcategoryId,
@@ -21,7 +22,8 @@ class PostAdsModel {
       this.isFeatured,
       this.price,
       this.fields,
-      this.images});
+      this.images,
+      this.removedImageId});
 
   PostAdsModel.fromJson(Map<String, dynamic> json) {
     categoryId = json['category_id'];
@@ -40,6 +42,7 @@ class PostAdsModel {
       });
     }
     images = json['images'].cast<String>();
+    removedImageId = json['removedImageId'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -58,7 +61,9 @@ class PostAdsModel {
     if (fields != null) {
       data['fields'] = fields!.map((v) => v.toJson()).toList();
     }
+    data['removedImageId'] = removedImageId;
     data['images'] = images;
+
     return data;
   }
 }
